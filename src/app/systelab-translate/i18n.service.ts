@@ -107,8 +107,8 @@ export class I18nService {
 				stringDateFormat = 'MM/DD/YY';
 				break;
 			case 'en':
-				stringDateFormat = 'MM/DD/YYYY';
-				break;
+			// stringDateFormat = 'MM/DD/YYYY';
+			// break;
 			case 'it':
 			case 'ar':
 			case 'es':
@@ -211,7 +211,7 @@ export class I18nService {
 		return d;
 	}
 
-	public getDateMidDay(date: Date) {
+	public getDateMidDay(date) {
 		let d: Date = setHours(date, 12);
 		d = setMinutes(d, 0);
 		d = setSeconds(d, 0);
@@ -342,8 +342,9 @@ export class I18nService {
 				minimumFractionDigits = sNumber.split('.')[1].length;
 			}
 			return Number(sNumber)
-				.toLocaleString(locale, { 'minimumFractionDigits': minimumFractionDigits });
+				.toLocaleString(locale, {'minimumFractionDigits': minimumFractionDigits});
 		}
 		return sNumber;
 	}
 }
+
