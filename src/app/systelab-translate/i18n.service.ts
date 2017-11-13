@@ -211,7 +211,7 @@ export class I18nService {
 		return d;
 	}
 
-	public getDateMidDay(date) {
+	public getDateMidDay(date: Date) {
 		let d: Date = setHours(date, 12);
 		d = setMinutes(d, 0);
 		d = setSeconds(d, 0);
