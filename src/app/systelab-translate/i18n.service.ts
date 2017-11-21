@@ -9,6 +9,7 @@ declare var DecimalFormat: any;
 export class I18nService {
 
 	protected language: string;
+	protected staticBundles: any = {};
 
 	constructor(protected translateService: TranslateService) {
 		this.translateService.setDefaultLang('en');
@@ -34,14 +35,37 @@ export class I18nService {
 	}
 
 	public get(bundle: string | string[]): Observable<any> {
+		if (typeof bundle === 'string' && this.staticBundles[bundle]) {
+			return Observable.of(this.staticBundles[bundle]);
+		}
 		return this.translateService.get(bundle);
 	}
 
-	public instant(key: string | Array<string>, interpolateParams?: Object): string | any {
+	public instant(key: string | Array<string>, interpolateParams?: any): string | any {
+		if (typeof key === 'string' && this.staticBundles[key]) {
+			let bundleValue: string = '';
+			if (typeof interpolateParams === 'object') {
+				Object.keys(interpolateParams)
+					.forEach((paramKey: string) => {
+						bundleValue = this.staticBundles[key].replace('{{' + paramKey + '}}', interpolateParams[paramKey]);
+					});
+				return bundleValue;
+			} else if (this.staticBundles[key].indexOf('{') > -1 && !interpolateParams) {
+				let regEx = /{{([^]*)}}/g;
+				return this.staticBundles[key].replace(regEx, '');
+			}
+			return this.staticBundles[key];
+		}
 		return this.translateService.instant(key, interpolateParams);
 	}
 
 	// END WRAPPER FUNCTIONS
+
+	public setStaticBundles(staticBundles: any): void {
+		if (staticBundles) {
+			this.staticBundles = staticBundles;
+		}
+	}
 
 	public getCountryFromCodeForTranslation(code: string): string {
 
