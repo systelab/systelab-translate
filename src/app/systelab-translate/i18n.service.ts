@@ -131,8 +131,6 @@ export class I18nService {
 				stringDateFormat = 'MM/DD/YY';
 				break;
 			case 'en':
-			// stringDateFormat = 'MM/DD/YYYY';
-			// break;
 			case 'it':
 			case 'ar':
 			case 'es':
@@ -156,7 +154,7 @@ export class I18nService {
 			case 'fr':
 			case 'gl':
 			case 'ca':
-				stringDateFormat = 'DD/MM/YYYY';
+				stringDateFormat = 'DD/MM/YY';
 				break;
 			case 'pl':
 			case 'lt':
