@@ -128,7 +128,7 @@ export class I18nService {
 		let stringDateFormat = '';
 		switch (this.translateService.currentLang) {
 			case 'us':
-				stringDateFormat = 'MM/DD/YY';
+				stringDateFormat = 'mm/dd/yy';
 				break;
 			case 'en':
 			case 'it':
@@ -154,34 +154,34 @@ export class I18nService {
 			case 'fr':
 			case 'gl':
 			case 'ca':
-				stringDateFormat = 'DD/MM/YY';
+				stringDateFormat = 'dd/mm/yy';
 				break;
 			case 'pl':
 			case 'lt':
-				stringDateFormat = 'YY-MM-DD';
+				stringDateFormat = 'yy-mm-dd';
 				break;
 			case 'pt':
 			case 'nl':
-				stringDateFormat = 'DD-MM-YY';
+				stringDateFormat = 'dd-mm-yy';
 				break;
 			case 'sk':
 			case 'ru':
-				stringDateFormat = 'D.M.YY';
+				stringDateFormat = 'd.m.yy';
 				break;
 			case 'zh':
-				stringDateFormat = 'YY-M-D';
+				stringDateFormat = 'yy-m-d';
 				break;
 			case 'de':
-				stringDateFormat = 'DD.MM.YY';
+				stringDateFormat = 'dd.mm.yy';
 				break;
 			case 'th':
-				stringDateFormat = 'D/M/YY';
+				stringDateFormat = 'd/m/yy';
 				break;
 			case 'ja':
-				stringDateFormat = 'YY/MM/DD';
+				stringDateFormat = 'yy/mm/dd';
 				break;
 			default:
-				stringDateFormat = 'DD/MM/YY';
+				stringDateFormat = 'dd/mm/yy';
 				break;
 		}
 		if (isFullYear) {
