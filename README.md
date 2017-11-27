@@ -31,8 +31,8 @@ You can translate a key in tour templates by using the translate pipe:
 <p> {{ 'COMMON_CODE' | translate | async }} </p>
 ```
 
-## Provide the translartion files
-In order to provide the translation files, you must include properties files in the /i18n/language and /i18n/error folders.
+## Provide the translation files
+In order to provide the translation files, you must include several properties files in the /i18n/language and /i18n/error folders.
 
 For the basic bundles, include a MessageBundle_xx_XX.json file for each language and country (not mandatory). 
 
