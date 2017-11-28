@@ -128,7 +128,7 @@ export class I18nService {
 		let stringDateFormat = '';
 		switch (this.translateService.currentLang) {
 			case 'us':
-				stringDateFormat = 'mm/dd/yy';
+				stringDateFormat = 'M/D/YY';
 				break;
 			case 'en':
 			case 'it':
@@ -154,38 +154,45 @@ export class I18nService {
 			case 'fr':
 			case 'gl':
 			case 'ca':
-				stringDateFormat = 'dd/mm/yy';
+				stringDateFormat = 'DD/MM/YY';
+				break;
+			case 'ko':
+				stringDateFormat = 'YY. M. D';
 				break;
 			case 'pl':
 			case 'lt':
-				stringDateFormat = 'yy-mm-dd';
+				stringDateFormat = 'YY-MM-DD';
 				break;
 			case 'pt':
 			case 'nl':
-				stringDateFormat = 'dd-mm-yy';
+				stringDateFormat = 'DD-MM-YY';
 				break;
 			case 'sk':
 			case 'ru':
-				stringDateFormat = 'd.m.yy';
+				stringDateFormat = 'D.M.YY';
 				break;
 			case 'zh':
-				stringDateFormat = 'yy-m-d';
+				stringDateFormat = 'YY-M-D';
 				break;
 			case 'de':
-				stringDateFormat = 'dd.mm.yy';
+				stringDateFormat = 'DD.MM.YY';
 				break;
 			case 'th':
-				stringDateFormat = 'd/m/yy';
+				stringDateFormat = 'D/M/YY';
 				break;
 			case 'ja':
-				stringDateFormat = 'yy/mm/dd';
+				stringDateFormat = 'YY/MM/DD';
 				break;
 			default:
-				stringDateFormat = 'dd/mm/yy';
+				stringDateFormat = 'DD/MM/YY';
 				break;
 		}
 		if (isFullYear) {
 			stringDateFormat = stringDateFormat.replace('YY', 'YYYY');
+			if (this.translateService.currentLang === 'us') {
+				stringDateFormat = stringDateFormat.replace('M', 'MM');
+				stringDateFormat = stringDateFormat.replace('D', 'DD');
+			}
 		}
 		return stringDateFormat;
 	}
