@@ -61,7 +61,7 @@ Sample files names are: MessageBundle_es.json, MessageBundle_en.json, MessageBun
 
 There are two special cases 'us' and 'br'. In this case the files will be MessageBundle_en_US.json and MessageBundle_pt_BR.json
 
-For Latinoamerican contries, despite the languange you use, 'es' will be considered.
+For Latinoamerican countries, despite the language you use, 'es' will be considered.
 
 Inside each file include a single line for each key and translation. For example:
 ```html
