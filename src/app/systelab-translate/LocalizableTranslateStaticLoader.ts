@@ -4,40 +4,32 @@ import { HttpClient } from '@angular/common/http';
 
 export class LocalizableTranslateStaticLoader implements TranslateLoader {
 
-	protected static prefix = 'i18n';
-
 	constructor(private http: HttpClient) {
-
-		if (window.location.pathname !== '/') {
-			LocalizableTranslateStaticLoader.prefix = window.location.pathname + '/' + LocalizableTranslateStaticLoader.prefix;
-		}
 	}
-
-	/**
-	 * Gets the base translation overriden by the localizations if corresponds
-	 */
 
 	public getTranslation(locale: string): Observable<any> {
 		const language: string = locale.split('_')[0];
 		return Observable.forkJoin(
-			this.http.get(`${LocalizableTranslateStaticLoader.prefix}/language/MessagesBundle_${language}.json`),
-			this.http.get(`${LocalizableTranslateStaticLoader.prefix}/language/MessagesBundle_${locale}.json`),
-			this.http.get(`${LocalizableTranslateStaticLoader.prefix}/error/ErrorsBundle_${language}.json`),
-			this.http.get(`${LocalizableTranslateStaticLoader.prefix}/error/ErrorsBundle_${locale}.json`))
+			this.http.get(`/i18n/language/MessagesBundle_${language}.json`),
+			this.http.get(`/i18n/language/MessagesBundle_${locale}.json`),
+			this.http.get(`/i18n/error/ErrorsBundle_${language}.json`),
+			this.http.get(`/i18n/error/ErrorsBundle_${locale}.json`))
 			.map((translations: any[]) => {
-				const bundles: any[] = this.mergeRecursive(
-					this.mergeRecursive(
-						this.mergeRecursive(translations[0], translations[1]),
-						translations[2]),
-					translations[3]);
 
-				return bundles;
-
+				if (translations.length > 0) {
+					let bundles = translations[0];
+					for (let i = 1; i < translations.length; i++) {
+						bundles = this.mergeRecursive(bundles, translations[i]);
+					}
+					return bundles;
+				} else {
+					return Observable.of(undefined);
+				}
 			});
 	}
 
 	private mergeRecursive(obj1: any, obj2: any) {
-		for (let p in obj2) {
+		for (const p in obj2) {
 			try {
 				// Property in destination object set; update its value.
 				if (obj2[p].constructor === Object) {
@@ -50,7 +42,6 @@ export class LocalizableTranslateStaticLoader implements TranslateLoader {
 				obj1[p] = obj2[p];
 			}
 		}
-
 		return obj1;
 	}
 
