@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { addDays, format, setHours, setMinutes, setSeconds, setMilliseconds } from 'date-fns';
+import { addDays, format, setHours, setMilliseconds, setMinutes, setSeconds } from 'date-fns';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs/Observable';
 
@@ -15,8 +15,6 @@ export class I18nService {
 		this.translateService.setDefaultLang('en');
 	}
 
-	// WRAPPER FUNCTIONS
-
 	public use(lang: string): Observable<any> {
 
 		let translateLanguage: string = this.getLanguageFromCodeForTranslation(lang);
@@ -25,13 +23,24 @@ export class I18nService {
 		if (country) {
 			translateLanguage += '_' + country;
 		}
-
 		return this.translateService.use(translateLanguage);
 
 	}
 
 	public getCurrentLanguage() {
 		return this.translateService.currentLang;
+	}
+
+	public getBrowserLang(): string | undefined {
+		return this.translateService.getBrowserLang();
+	}
+
+	public setTranslation(lang: string, translations: Object) {
+		this.translateService.setTranslation(this.getLanguageFromCodeForTranslation(lang), translations, false);
+	}
+
+	public appendTranslation(lang: string, translations: Object) {
+		this.translateService.setTranslation(this.getLanguageFromCodeForTranslation(lang), translations, true);
 	}
 
 	public get(bundle: string | string[]): Observable<any> {
@@ -43,7 +52,7 @@ export class I18nService {
 
 	public instant(key: string | Array<string>, interpolateParams?: any): string | any {
 		if (typeof key === 'string' && this.staticBundles[key]) {
-			let bundleValue: string = '';
+			let bundleValue = '';
 			if (typeof interpolateParams === 'object') {
 				Object.keys(interpolateParams)
 					.forEach((paramKey: string) => {
@@ -51,15 +60,13 @@ export class I18nService {
 					});
 				return bundleValue;
 			} else if (this.staticBundles[key].indexOf('{') > -1 && !interpolateParams) {
-				let regEx = /{{([^]*)}}/g;
+				const regEx = /{{([^]*)}}/g;
 				return this.staticBundles[key].replace(regEx, '');
 			}
 			return this.staticBundles[key];
 		}
 		return this.translateService.instant(key, interpolateParams);
 	}
-
-	// END WRAPPER FUNCTIONS
 
 	public setStaticBundles(staticBundles: any): void {
 		if (staticBundles) {

@@ -8,8 +8,17 @@
       "root": "src",
       "outDir": "dist",
       "assets": [
-        "assets",
-        "favicon.ico"
+        "favicon.ico",
+        {
+          "glob": "**/*",
+          "input": "./i18n/error",
+          "output": "./i18n/error"
+        },
+        {
+          "glob": "**/*",
+          "input": "./i18n/language",
+          "output": "./i18n/language"
+        }
       ],
       "index": "index.html",
       "main": "main.ts",
