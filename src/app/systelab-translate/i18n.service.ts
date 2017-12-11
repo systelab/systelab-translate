@@ -135,6 +135,7 @@ export class I18nService {
 		let stringDateFormat = '';
 		switch (this.translateService.currentLang) {
 			case 'us':
+			case 'en_US':
 				stringDateFormat = 'M/D/YY';
 				break;
 			case 'en':
@@ -171,6 +172,7 @@ export class I18nService {
 				stringDateFormat = 'YY-MM-DD';
 				break;
 			case 'pt':
+			case 'pt_BR':
 			case 'nl':
 				stringDateFormat = 'DD-MM-YY';
 				break;
@@ -196,7 +198,7 @@ export class I18nService {
 		}
 		if (isFullYear) {
 			stringDateFormat = stringDateFormat.replace('YY', 'YYYY');
-			if (this.translateService.currentLang === 'us') {
+			if (this.translateService.currentLang === 'us' || this.translateService.currentLang === 'en_US') {
 				stringDateFormat = stringDateFormat.replace('M', 'MM');
 				stringDateFormat = stringDateFormat.replace('D', 'DD');
 			}
@@ -264,6 +266,7 @@ export class I18nService {
 
 		switch (language) {
 			case 'us':
+			case 'en_US':
 				auxArray = currentDateValue.split('/');
 				if (auxArray.indexOf('') > -1) {
 					return undefined;
@@ -271,12 +274,6 @@ export class I18nService {
 				auxDate = currentDateValue;
 				break;
 			case 'en':
-				auxArray = currentDateValue.split('/');
-				if (auxArray.indexOf('') > -1) {
-					return undefined;
-				}
-				auxDate = currentDateValue;
-				break;
 			case 'it':
 			case 'ar':
 			case 'es':
@@ -315,6 +312,7 @@ export class I18nService {
 				auxDate = auxArray.join('/');
 				break;
 			case 'pt':
+			case 'pt_BR':
 			case 'nl':
 				auxArray = currentDateValue.split('-');
 				if (auxArray.indexOf('') > -1) {
@@ -383,4 +381,3 @@ export class I18nService {
 		return sNumber;
 	}
 }
-
