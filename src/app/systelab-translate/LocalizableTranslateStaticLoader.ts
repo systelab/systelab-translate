@@ -4,16 +4,22 @@ import { HttpClient } from '@angular/common/http';
 
 export class LocalizableTranslateStaticLoader implements TranslateLoader {
 
+	protected prefix = '';
+
 	constructor(private http: HttpClient) {
+
+		if (!(window.location.pathname === '/' || window.location.pathname === '/context.html')) {
+			this.prefix = window.location.pathname + '/';
+		}
 	}
 
 	public getTranslation(locale: string): Observable<any> {
 		const language: string = locale.split('_')[0];
 		return Observable.forkJoin(
-			this.http.get(`/i18n/language/MessagesBundle_${language}.json`),
-			this.http.get(`/i18n/language/MessagesBundle_${locale}.json`),
-			this.http.get(`/i18n/error/ErrorsBundle_${language}.json`),
-			this.http.get(`/i18n/error/ErrorsBundle_${locale}.json`))
+			this.http.get(`${this.prefix}i18n/language/MessagesBundle_${language}.json`),
+			this.http.get(`${this.prefix}i18n/language/MessagesBundle_${locale}.json`),
+			this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${language}.json`),
+			this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${locale}.json`))
 			.map((translations: any[]) => {
 
 				if (translations.length > 0) {
