@@ -108,4 +108,12 @@ describe('Translate Service', () => {
 	});
 
 
+	it('Check a simple pattern', (done) => {
+		service.use('en')
+			.subscribe(() => {
+				expect(service.formatNumber(12,'#.00'))
+					.toBe('12.00');
+				done();
+			})
+	});
 });

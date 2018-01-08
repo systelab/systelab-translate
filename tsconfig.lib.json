@@ -9,6 +9,7 @@
         "removeComments": false,
         "noImplicitAny": true,
         "declaration": true,
+        "allowJs": true,
         "outDir": "./lib",
         "stripInternal": true,
         "lib": [
