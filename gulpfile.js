@@ -25,3 +25,10 @@ gulp.task('inline-build-templates', () => {
         .pipe(gulp.dest('./build'));
 
 });
+
+gulp.task('copyDecimalFormat', function() {
+	gulp.src([
+		'./src/app/systelab-translate/decimal-format/DecimalFormat.js'])
+		.pipe(gulp.dest('./lib/decimal-format'));
+
+});

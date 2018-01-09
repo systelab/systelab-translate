@@ -1,6 +1,4 @@
 
-exports.default = DecimalFormat;
-
 /**
  * @class DecimalFormat
  * @constructor
@@ -263,3 +261,5 @@ DecimalFormat.prototype.getNumericString = function(str){
     }
     return str;
 }
+
+exports.DecimalFormat = DecimalFormat;

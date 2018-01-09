@@ -1,7 +1,7 @@
 {
   "name": "systelab-translate",
   "homepage": "https://github.com/systelab/systelab-translate.git",
-  "version": "1.4.0",
+  "version": "1.4.2",
   "license": "MIT",
   "keywords": [
     "Angular",
@@ -20,8 +20,9 @@
     "e2e": "ng e2e",
     "cleardown": "rimraf build lib",
     "inline-build-templates": "gulp inline-build-templates",
+    "copyDecimalFormat": "gulp copyDecimalFormat",
     "ngc-build": "ngc -p ./tsconfig.lib.json",
-    "prepare": "npm run cleardown && npm run inline-build-templates && npm run ngc-build"
+    "prepublish": "npm run cleardown && npm run inline-build-templates && npm run ngc-build && npm run copyDecimalFormat"
   },
   "files": [
     "lib"

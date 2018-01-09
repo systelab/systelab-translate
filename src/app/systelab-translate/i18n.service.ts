@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { addDays, format, setHours, setMilliseconds, setMinutes, setSeconds } from 'date-fns';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs/Observable';
-import DecimalFormat from '../decimal-format/DecimalFormat';
 
+
+import {DecimalFormat} from './decimal-format/DecimalFormat'
 
 @Injectable()
 export class I18nService {
