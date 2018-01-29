@@ -9,6 +9,62 @@ export class DateUtil {
 		this.locale = lang;
 	}
 
+	public getTimeFormat(withSeconds = false): string {
+		return (withSeconds) ? 'HH:mm:ss' : 'HH:mm';
+	}
+
+	// DATE TIME FUNCTIONS
+
+	public formatDate(date: Date): string {
+		return format(date, this.getDateFormat());
+
+	}
+
+	public formatDateFullYear(date: Date): string {
+		return format(date, this.getDateFormat(true));
+
+	}
+
+	public formatTime(date: Date, withSeconds?: boolean): string {
+		return format(date, this.getTimeFormat(withSeconds));
+	}
+
+	public formatDateTime(date: Date, fullYear?: boolean, withSeconds?: boolean): string {
+		const formatedDate = (fullYear) ? this.formatDateFullYear(date) : this.formatDate(date);
+		const formatedHour = (withSeconds) ? this.formatTime(date, true) : this.formatTime(date);
+		return formatedDate + ' ' + formatedHour;
+	}
+
+	public getDateFrom(date: Date) {
+		let d: Date = setHours(date, 0);
+		d = setMinutes(d, 0);
+		d = setSeconds(d, 0);
+		d = setMilliseconds(d, 0);
+		return d;
+	}
+
+	public getDateTo(date: Date) {
+		let d: Date = setHours(date, 0);
+		d = setMinutes(d, 0);
+		d = setSeconds(d, 0);
+		d = setMilliseconds(d, 0);
+		d = addDays(d, 1);
+		return d;
+	}
+
+	public getDateMidDay(date: Date) {
+		let d: Date = setHours(date, 12);
+		d = setMinutes(d, 0);
+		d = setSeconds(d, 0);
+		d = setMilliseconds(d, 0);
+		return d;
+	}
+
+	public formatMonthAndYear(date: Date) {
+		return format(date, 'MMMM, YYYY', {locale: this.locale});
+	}
+
+
 	public getDateFormat(isFullYear = false): string {
 		let stringDateFormat = '';
 		switch (this.locale) {
@@ -81,57 +137,6 @@ export class DateUtil {
 			}
 		}
 		return stringDateFormat;
-	}
-
-	public getTimeFormat(withSeconds = false): string {
-		return (withSeconds) ? 'HH:mm:ss' : 'HH:mm';
-	}
-
-	// DATE TIME FUNCTIONS
-
-	public formatDate(date: Date): string {
-		return format(date, this.getDateFormat());
-
-	}
-
-	public formatDateFullYear(date: Date): string {
-		return format(date, this.getDateFormat(true));
-
-	}
-
-	public formatTime(date: Date, withSeconds?: boolean): string {
-		return format(date, this.getTimeFormat(withSeconds));
-	}
-
-	public formatDateTime(date: Date, fullYear?: boolean, withSeconds?: boolean): string {
-		const formatedDate = (fullYear) ? this.formatDateFullYear(date) : this.formatDate(date);
-		const formatedHour = (withSeconds) ? this.formatTime(date, true) : this.formatTime(date);
-		return formatedDate + ' ' + formatedHour;
-	}
-
-	public getDateFrom(date: Date) {
-		let d: Date = setHours(date, 0);
-		d = setMinutes(d, 0);
-		d = setSeconds(d, 0);
-		d = setMilliseconds(d, 0);
-		return d;
-	}
-
-	public getDateTo(date: Date) {
-		let d: Date = setHours(date, 0);
-		d = setMinutes(d, 0);
-		d = setSeconds(d, 0);
-		d = setMilliseconds(d, 0);
-		d = addDays(d, 1);
-		return d;
-	}
-
-	public getDateMidDay(date: Date) {
-		let d: Date = setHours(date, 12);
-		d = setMinutes(d, 0);
-		d = setSeconds(d, 0);
-		d = setMilliseconds(d, 0);
-		return d;
 	}
 
 	// TODO: Review.
@@ -241,10 +246,6 @@ export class DateUtil {
 				auxDate = auxArray[1] + '/' + auxArray[0] + '/' + auxArray[2];
 		}
 		return new Date(auxDate);
-	}
-
-	public formatMonthAndYear(date: Date) {
-		return format(date, 'MMMM, YYYY', {locale: this.locale});
 	}
 
 }
