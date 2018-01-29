@@ -2,72 +2,71 @@ import { addDays, format, setHours, setMilliseconds, setMinutes, setSeconds } fr
 
 export class DateUtil {
 
-	constructor(protected language: string) {
+	constructor(protected locale: string) {
 	}
 
-	public setLanguage(lang: string) {
-		this.language = lang;
+	public setLocale(lang: string) {
+		this.locale = lang;
 	}
 
 	public getDateFormat(isFullYear = false): string {
 		let stringDateFormat = '';
-		switch (this.language) {
-			case 'us':
-			case 'en_US':
+		switch (this.locale) {
+			case 'en-US':
 				stringDateFormat = 'M/D/YY';
 				break;
-			case 'en':
-			case 'it':
-			case 'ar':
-			case 'es':
-			case 'bo':
-			case 'cl':
-			case 'co':
-			case 'cr':
-			case 'do':
-			case 'ec':
-			case 'gt':
-			case 'hn':
-			case 'mx':
-			case 'ni':
-			case 'pa':
-			case 'pe':
-			case 'pr':
-			case 'py':
-			case 'sv':
-			case 'ur':
-			case 've':
-			case 'fr':
-			case 'gl':
-			case 'ca':
+			case 'en-GB':
+			case 'it-IT':
+			case 'es-AR':
+			case 'es-ES':
+			case 'es-BO':
+			case 'es-CL':
+			case 'es-CO':
+			case 'es-CR':
+			case 'es-DO':
+			case 'es-EC':
+			case 'es-GT':
+			case 'es-HN':
+			case 'es-MX':
+			case 'es-NI':
+			case 'es-PA':
+			case 'es-PE':
+			case 'es-PR':
+			case 'es-PY':
+			case 'es-SV':
+			case 'es-UR':
+			case 'es-VE':
+			case 'fr-FR':
+			case 'gl-GL':
+			case 'ca-CA':
 				stringDateFormat = 'DD/MM/YY';
 				break;
-			case 'ko':
+			case 'ko-KO':
 				stringDateFormat = 'YY. M. D';
 				break;
-			case 'pl':
-			case 'lt':
+			case 'pl-PL':
+			case 'lt-LT':
 				stringDateFormat = 'YY-MM-DD';
 				break;
-			case 'pt':
-			case 'pt_BR':
-			case 'nl':
+			case 'pt-PT':
+			case 'pt-BR':
+			case 'nl-NL':
 				stringDateFormat = 'DD-MM-YY';
 				break;
-			case 'sk':
-			case 'ru':
+			case 'sk-SK':
+			case 'ru-RU':
 				stringDateFormat = 'D.M.YY';
 				break;
-			case 'zh':
+			case 'zh-ZH':
 				stringDateFormat = 'YY-M-D';
 				break;
-			case 'de':
+			case 'de-DE':
 				stringDateFormat = 'DD.MM.YY';
 				break;
-			case 'th':
+			case 'th-TH':
 				stringDateFormat = 'D/M/YY';
 				break;
-			case 'ja':
+			case 'ja-JA':
 				stringDateFormat = 'YY/MM/DD';
 				break;
 			default:
@@ -76,7 +75,7 @@ export class DateUtil {
 		}
 		if (isFullYear) {
 			stringDateFormat = stringDateFormat.replace('YY', 'YYYY');
-			if (this.language === 'us' || this.language === 'en_US') {
+			if (this.locale === 'en-US') {
 				stringDateFormat = stringDateFormat.replace('M', 'MM');
 				stringDateFormat = stringDateFormat.replace('D', 'DD');
 			}
@@ -136,99 +135,98 @@ export class DateUtil {
 	}
 
 	// TODO: Review.
-	public convertStringDateToDateFormat(currentDateValue: string, language: string): Date {
+	public convertStringDateToDateFormat(currentDateValue: string, locale: string): Date {
 		let auxDate: string, auxArray: Array<string>;
 
 		if (!currentDateValue) {
 			currentDateValue = '';
 		}
 
-		switch (language) {
-			case 'us':
-			case 'en_US':
+		switch (locale) {
+			case 'en-US':
 				auxArray = currentDateValue.split('/');
 				if (auxArray.indexOf('') > -1) {
 					return undefined;
 				}
 				auxDate = currentDateValue;
 				break;
-			case 'en':
-			case 'it':
-			case 'ar':
-			case 'es':
-			case 'bo':
-			case 'cl':
-			case 'co':
-			case 'cr':
-			case 'do':
-			case 'ec':
-			case 'gt':
-			case 'hn':
-			case 'mx':
-			case 'ni':
-			case 'pa':
-			case 'pe':
-			case 'pr':
-			case 'py':
-			case 'sv':
-			case 'ur':
-			case 've':
-			case 'fr':
-			case 'gl':
-			case 'ca':
+			case 'en-GB':
+			case 'it-IT':
+			case 'es-AR':
+			case 'es-ES':
+			case 'es-BO':
+			case 'es-CL':
+			case 'es-CO':
+			case 'es-CR':
+			case 'es-DO':
+			case 'es-EC':
+			case 'es-GT':
+			case 'es-HN':
+			case 'es-MX':
+			case 'es-NI':
+			case 'es-PA':
+			case 'es-PE':
+			case 'es-PR':
+			case 'es-PY':
+			case 'es-SV':
+			case 'es-UR':
+			case 'es-VE':
+			case 'fr-FR':
+			case 'gl-GL':
+			case 'ca-CA':
 				auxArray = currentDateValue.split('/');
 				if (auxArray.indexOf('') > -1) {
 					return undefined;
 				}
 				auxDate = auxArray[1] + '/' + auxArray[0] + '/' + auxArray[2];
 				break;
-			case 'pl':
-			case 'lt':
+			case 'pl-PL':
+			case 'lt-LT':
 				auxArray = currentDateValue.split('-');
 				if (auxArray.indexOf('') > -1) {
 					return undefined;
 				}
 				auxDate = auxArray.join('/');
 				break;
-			case 'pt':
-			case 'pt_BR':
-			case 'nl':
+			case 'pt-PT':
+			case 'pt-BR':
+			case 'nl-NL':
 				auxArray = currentDateValue.split('-');
 				if (auxArray.indexOf('') > -1) {
 					return undefined;
 				}
 				auxDate = auxArray[1] + '/' + auxArray[0] + '/' + auxArray[2];
 				break;
-			case 'sk':
-			case 'ru':
+			case 'sk-SK':
+			case 'ru-RU':
 				auxArray = currentDateValue.split('.');
 				if (auxArray.indexOf('') > -1) {
 					return undefined;
 				}
 				auxDate = auxArray[1] + '/' + auxArray[0] + '/' + auxArray[2];
 				break;
-			case 'zh':
+			case 'zh-ZH':
 				auxArray = currentDateValue.split('/');
 				if (auxArray.indexOf('') > -1) {
 					return undefined;
 				}
 				auxDate = currentDateValue;
 				break;
-			case 'de':
+			case 'de-DE':
 				auxArray = currentDateValue.split('.');
 				if (auxArray.indexOf('') > -1) {
 					return undefined;
 				}
 				auxDate = auxArray[1] + '/' + auxArray[0] + '/' + auxArray[2];
 				break;
-			case 'th':
+			case 'th-TH':
 				auxArray = currentDateValue.split('/');
 				if (auxArray.indexOf('') > -1) {
 					return undefined;
 				}
 				auxDate = auxArray[1] + '/' + auxArray[0] + '/' + auxArray[2];
 				break;
-			case 'ja':
+			case 'ja-JA':
 				auxArray = currentDateValue.split('/');
 				if (auxArray.indexOf('') > -1) {
 					return undefined;
@@ -243,6 +241,10 @@ export class DateUtil {
 				auxDate = auxArray[1] + '/' + auxArray[0] + '/' + auxArray[2];
 		}
 		return new Date(auxDate);
+	}
+
+	public formatMonthAndYear(date: Date) {
+		return format(date, 'MMMM, YYYY', {locale: this.locale});
 	}
 
 }

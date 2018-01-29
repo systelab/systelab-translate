@@ -14,12 +14,16 @@ export class LocalizableTranslateStaticLoader implements TranslateLoader {
 	}
 
 	public getTranslation(locale: string): Observable<any> {
-		const language: string = locale.split('_')[0];
-		return Observable.forkJoin(
-			this.http.get(`${this.prefix}i18n/language/MessagesBundle_${language}.json`),
-			this.http.get(`${this.prefix}i18n/language/MessagesBundle_${locale}.json`),
-			this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${language}.json`),
-			this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${locale}.json`))
+		const language: string = locale.split('-')[0];
+		const country: string = locale.split('-')[1];
+
+		const languageAndCountry: string = language + '_' + country;
+
+		return Observable.forkJoin (
+			this.http.get(`${this.prefix}i18n/language/MessagesBundle_${language}.json`).catch(e => Observable.of('')),
+			this.http.get(`${this.prefix}i18n/language/MessagesBundle_${languageAndCountry}.json`).catch(e => Observable.of('')),
+			this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${language}.json`).catch(e =>  Observable.of('')),
+			this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${languageAndCountry}.json`).catch(e => Observable.of('')))
 			.map((translations: any[]) => {
 
 				if (translations.length > 0) {
@@ -33,6 +37,7 @@ export class LocalizableTranslateStaticLoader implements TranslateLoader {
 				}
 			});
 	}
+
 
 	private mergeRecursive(obj1: any, obj2: any) {
 		for (const p in obj2) {

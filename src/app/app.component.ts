@@ -9,7 +9,7 @@ export class AppComponent {
 	public day = '';
 
 	constructor(i18nService: I18nService) {
-		i18nService.use('en')
+		i18nService.use('en-US')
 			.subscribe(
 				() => {
 					console.log('Language set to english');

@@ -9,26 +9,19 @@ import { DateUtil } from './date-util/date-util-service';
 @Injectable()
 export class I18nService {
 
-	protected language: string;
+	protected locale: string;
 	protected staticBundles: any = {};
 	protected dateUtil: DateUtil;
 
 	constructor(protected translateService: TranslateService) {
-		this.translateService.setDefaultLang('en');
-		this.dateUtil = new DateUtil('en');
+		this.translateService.setDefaultLang('en-US');
+		this.dateUtil = new DateUtil('en-US');
 	}
 
-	public use(lang: string): Observable<any> {
-
-		let translateLanguage: string = this.getLanguageFromCodeForTranslation(lang);
-		this.language = lang;
-		const country: string = this.getCountryFromCodeForTranslation(lang);
-		if (country) {
-			translateLanguage += '_' + country;
-		}
-		this.dateUtil.setLanguage(translateLanguage);
-		return this.translateService.use(translateLanguage);
-
+	public use(locale: string): Observable<any> {
+		this.locale = locale;
+		this.dateUtil.setLocale(locale);
+		return this.translateService.use(locale);
 	}
 
 	public getCurrentLanguage() {
@@ -39,12 +32,12 @@ export class I18nService {
 		return this.translateService.getBrowserLang();
 	}
 
-	public setTranslation(lang: string, translations: Object) {
-		this.translateService.setTranslation(this.getLanguageFromCodeForTranslation(lang), translations, false);
+	public setTranslation(locale: string, translations: Object) {
+		this.translateService.setTranslation(locale, translations, false);
 	}
 
-	public appendTranslation(lang: string, translations: Object) {
-		this.translateService.setTranslation(this.getLanguageFromCodeForTranslation(lang), translations, true);
+	public appendTranslation(locale: string, translations: Object) {
+		this.translateService.setTranslation(locale, translations, true);
 	}
 
 	public get(bundle: string | string[]): Observable<any> {
@@ -78,63 +71,6 @@ export class I18nService {
 		}
 	}
 
-	public getCountryFromCodeForTranslation(code: string): string {
-
-		if ('us' === code) {
-			return 'US';
-		}
-		if ('br' === code) {
-			return 'BR';
-		}
-		return undefined;
-	}
-
-	public getLanguageFromCodeForTranslation(code: string) {
-		if ('mx' === code) {
-			return 'es';
-		} else if ('ur' === code) {
-			return 'es';
-		} else if ('cl' === code) {
-			return 'es';
-		} else if ('ar' === code) {
-			return 'es';
-		} else if ('bo' === code) {
-			return 'es';
-		} else if ('co' === code) {
-			return 'es';
-		} else if ('cr' === code) {
-			return 'es';
-		} else if ('do' === code) {
-			return 'es';
-		} else if ('ec' === code) {
-			return 'es';
-		} else if ('sv' === code) {
-			return 'es';
-		} else if ('gt' === code) {
-			return 'es';
-		} else if ('hn' === code) {
-			return 'es';
-		} else if ('ni' === code) {
-			return 'es';
-		} else if ('pa' === code) {
-			return 'es';
-		} else if ('py' === code) {
-			return 'es';
-		} else if ('pe' === code) {
-			return 'es';
-		} else if ('pr' === code) {
-			return 'es';
-		} else if ('ve' === code) {
-			return 'es';
-		} else if ('us' === code) {
-			return 'en';
-		} else if ('br' === code) {
-			return 'pt';
-		} else {
-			return code;
-		}
-	}
-
 	public getDateFormat(isFullYear = false): string {
 		return this.dateUtil.getDateFormat(isFullYear);
 	}
@@ -159,6 +95,10 @@ export class I18nService {
 		return this.dateUtil.formatDateTime(date, fullYear, withSeconds);
 	}
 
+	public formatMonthAndYear(date: Date): string {
+		return this.dateUtil.formatMonthAndYear(date);
+	}
+
 	public getDateFrom(date: Date) {
 		return this.dateUtil.getDateFrom(date);
 	}
@@ -171,13 +111,12 @@ export class I18nService {
 		return this.dateUtil.getDateMidDay(date);
 	}
 
-	public convertStringDateToDateFormat(currentDateValue: string, language: string): Date {
-		return this.dateUtil.convertStringDateToDateFormat(currentDateValue, language);
+	public convertStringDateToDateFormat(currentDateValue: string, locale: string): Date {
+		return this.dateUtil.convertStringDateToDateFormat(currentDateValue, locale);
 	}
 
 	public formatNumber(numberToFormat: number, decimalFormat: string, applyLocale?: boolean): string {
 		const df: any = new DecimalFormat(decimalFormat);
-		const locale: string = this.getLanguageFromCodeForTranslation(this.language) + '-' + this.language.toUpperCase();
 		const sNumber: string = df.format(numberToFormat, decimalFormat);
 		if (applyLocale) {
 			let minimumFractionDigits = 0;
@@ -185,7 +124,7 @@ export class I18nService {
 				minimumFractionDigits = sNumber.split('.')[1].length;
 			}
 			return Number(sNumber)
-				.toLocaleString(locale, {'minimumFractionDigits': minimumFractionDigits});
+				.toLocaleString(this.locale, {'minimumFractionDigits': minimumFractionDigits});
 		}
 		return sNumber;
 	}

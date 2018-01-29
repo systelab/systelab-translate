@@ -11,9 +11,9 @@ npm install systelab-translate --save
 ## How to use the library
 In order to use this library you must import the module SystelabTranslateModule. Remember to import SystelabTranslateModule.forRoot() in your application module.
 
-In you main component, you can inject a I18NService and setup the initial language calling the method use:
+In you main component, you can inject a I18NService and setup the initial locale calling the method use:
 ```javascript
- this.i18nService.use('en').subscribe(() => console.log('Language set to english.'));
+ this.i18nService.use('en-US').subscribe(() => console.log('Locale set to english in USA.'));
 ```
 
 If you want to get the current language, call the method:
@@ -26,11 +26,11 @@ If you want to get the browser language, call the method:
 this.i18nService.getBrowserLang()
 ```
 
-There are two convenient methods to set or append new keys to an specific language:
+There are two convenient methods to set or append new keys to an specific locale:
 
 ```javascript
-public setTranslation(lang: string, translations: Object)
-public appendTranslation(lang: string, translations: Object)
+public setTranslation(locale: string, translations: Object)
+public appendTranslation(locale: string, translations: Object)
 ```
 
 In order to translate a key, you can call to the instant method:

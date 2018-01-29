@@ -32,7 +32,7 @@ describe('Translate Service', () => {
 	});
 
 	it('Check the translation of a key in english', (done) => {
-		service.use('en')
+		service.use('en-US')
 			.subscribe(() => {
 					expect(service.instant('COMMON_DAY'))
 						.toBe('Day');
@@ -43,7 +43,7 @@ describe('Translate Service', () => {
 	});
 
 	it('Check the translation of a key in spanish', (done) => {
-		service.use('es')
+		service.use('es-ES')
 			.subscribe(() => {
 				expect(service.instant('COMMON_DAY'))
 					.toBe('Día');
@@ -52,7 +52,7 @@ describe('Translate Service', () => {
 	});
 
 	it('Check the translation of an undefined key returns the key', (done) => {
-		service.use('es')
+		service.use('es-ES')
 			.subscribe(() => {
 				expect(service.instant('COMMON_QUARTER'))
 					.toBe('COMMON_QUARTER');
@@ -61,7 +61,7 @@ describe('Translate Service', () => {
 	});
 
 	it('Check the translation of a key that is defined in the errors json file', (done) => {
-		service.use('es')
+		service.use('es-ES')
 			.subscribe(() => {
 				expect(service.instant('COMMON_ERROR_CODE1'))
 					.toBe('Código error 1');
@@ -70,7 +70,7 @@ describe('Translate Service', () => {
 	});
 
 	it('Check the translation of a key that is not specific for a country takes the default one', (done) => {
-		service.use('us')
+		service.use('en-US')
 			.subscribe(() => {
 				expect(service.instant('COMMON_DAY'))
 					.toBe('Day');
@@ -79,7 +79,7 @@ describe('Translate Service', () => {
 	});
 
 	it('Check the translation of a key that is specific for a country', (done) => {
-		service.use('us')
+		service.use('en-US')
 			.subscribe(() => {
 				expect(service.instant('COMMON_CENTER'))
 					.toBe('Center');
@@ -88,9 +88,9 @@ describe('Translate Service', () => {
 	});
 
 	it('Check that a translation could be added on the fly', (done) => {
-		service.use('us')
+		service.use('en-US')
 			.subscribe(() => {
-				service.appendTranslation('us', {'COMMON_USER': 'User'})
+				service.appendTranslation('en-US', {'COMMON_USER': 'User'})
 				expect(service.instant('COMMON_USER'))
 					.toBe('User');
 				done();
@@ -98,9 +98,9 @@ describe('Translate Service', () => {
 	});
 
 	it('Check that a translation could be added on the fly and overrides the current one', (done) => {
-		service.use('en')
+		service.use('en-GB')
 			.subscribe(() => {
-				service.appendTranslation('en', {'COMMON_DAY': 'Beautiful Day'})
+				service.appendTranslation('en-GB', {'COMMON_DAY': 'Beautiful Day'})
 				expect(service.instant('COMMON_DAY'))
 					.toBe('Beautiful Day');
 				done();
@@ -109,7 +109,7 @@ describe('Translate Service', () => {
 
 
 	it('Check a simple pattern', (done) => {
-		service.use('en')
+		service.use('en-GB')
 			.subscribe(() => {
 				expect(service.formatNumber(12,'#.00'))
 					.toBe('12.00');
