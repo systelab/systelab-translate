@@ -12,16 +12,19 @@ npm install systelab-translate --save
 In order to use this library you must import the module SystelabTranslateModule. Remember to import SystelabTranslateModule.forRoot() in your application module.
 
 In you main component, you can inject a I18NService and setup the initial locale calling the method use:
+
 ```javascript
  this.i18nService.use('en-US').subscribe(() => console.log('Locale set to english in USA.'));
 ```
 
 If you want to get the current language, call the method:
+
 ```javascript
 this.i18nService.getCurrentLanguage()
 ```
 
 If you want to get the browser language, call the method:
+
 ```javascript
 this.i18nService.getBrowserLang()
 ```
@@ -36,16 +39,19 @@ public appendTranslation(locale: string, translations: Object)
 ```
 
 In order to translate a key, you can call to the instant method:
+
 ```javascript
 this.i18nService.instant('COMMON_CODE')
 ```
 
 In order to async translate a key, returning an Observable, you can call to the get method:
+
 ```javascript
 this.i18nService.get('COMMON_CODE')
 ```
 
 You can translate a key in tour templates by using the translate pipe:
+
 ```html
 <p> {{ 'COMMON_CODE' | translate | async }} </p>
 ```
@@ -66,6 +72,7 @@ There are two special cases 'us' and 'br'. In this case the files will be Messag
 For Latinoamerican countries, despite the language you use, 'es' will be considered.
 
 Inside each file include a single line for each key and translation. For example:
+
 ```html
 "COMMON_ABOUT": "About",
 "COMMON_CODE": "Code to display",
@@ -113,12 +120,12 @@ Returns the month in text and the year.
 ```javascript
 public getDateFrom(date: Date)
 ```
-Returns the date at the beginning of the day
+Returns the date at the beginning of the day.
 
 ```javascript
 public getDateTo(date: Date)
 ```
-Returns the date at the end of the day
+Returns the date at the end of the day.
 
 ```javascript
 public getDateMidDay(date: Date)
@@ -139,7 +146,7 @@ See the source code to get more information.
 
 ### Working with numbers
 
-Use the method formatNumber to format a Number
+Use the method formatNumber to format a Number using the Java DecimalFormat.
 
 ```javascript
 public formatNumber(numberToFormat: number, decimalFormat: string, applyLocale?: boolean): string
