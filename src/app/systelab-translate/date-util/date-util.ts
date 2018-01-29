@@ -113,7 +113,7 @@ export class DateUtil {
 			case 'ru-RU':
 				stringDateFormat = 'D.M.YY';
 				break;
-			case 'zh-ZH':
+			case 'zh-CN':
 				stringDateFormat = 'YY-M-D';
 				break;
 			case 'de-DE':
@@ -137,6 +137,20 @@ export class DateUtil {
 			}
 		}
 		return stringDateFormat;
+	}
+
+
+
+	private getFirstDayOfWeek(): number {
+		switch (this.locale) {
+			case 'en-US':
+			case 'zh-CN':
+			case 'th-TH':
+			case 'ja-JA':
+				return 0; // Sunday
+			default:
+				return 1; // Monday
+		}
 	}
 
 	// TODO: Review.
@@ -210,7 +224,7 @@ export class DateUtil {
 				}
 				auxDate = auxArray[1] + '/' + auxArray[0] + '/' + auxArray[2];
 				break;
-			case 'zh-ZH':
+			case 'zh-CN':
 				auxArray = currentDateValue.split('/');
 				if (auxArray.indexOf('') > -1) {
 					return undefined;
@@ -247,5 +261,4 @@ export class DateUtil {
 		}
 		return new Date(auxDate);
 	}
-
 }
