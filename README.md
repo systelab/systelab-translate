@@ -26,6 +26,8 @@ If you want to get the browser language, call the method:
 this.i18nService.getBrowserLang()
 ```
 
+### Translate
+
 There are two convenient methods to set or append new keys to an specific locale:
 
 ```javascript
@@ -48,7 +50,7 @@ You can translate a key in tour templates by using the translate pipe:
 <p> {{ 'COMMON_CODE' | translate | async }} </p>
 ```
 
-## Provide the translation files
+#### Provide the translation files
 In order to provide the translation files, you must include several properties files in the /i18n/language and /i18n/error folders.
 
 For the basic bundles, include a MessagesBundle_xx_XX.json file for each language and country (not mandatory).
@@ -68,7 +70,80 @@ Inside each file include a single line for each key and translation. For example
 "COMMON_ABOUT": "About",
 "COMMON_CODE": "Code to display",
 ```
-The are other convenient method to work with dates, like getDateFormat, getTimeFormat, formatDate, formatDateFullYear, formatTime, formatDateTime, getDateFrom, getDateTo, getDateMidDay, convertStringDateToDateFormat and formatNumber. See the source code to get more information.
+
+### Working with dates
+
+The are some convenient methods to work with dates:
+
+```javascript
+public getDateFormat(isFullYear = false): string
+```
+Returns the Date Format depending on the locale. If full year, the year will have 4 digits.
+
+```javascript
+public getTimeFormat(withSeconds = false): string
+```
+Returns the Time Format depending on the locale. If with seconds, seconds will be added.
+
+```javascript
+public formatDate(date: Date): string
+```
+Formats a Date depending on the locale.
+
+```javascript
+public formatDateFullYear(date: Date): string
+```
+Formats a Date will the year in 4 digits depending on the locale.
+
+```javascript
+public formatTime(date: Date, withSeconds?: boolean): string
+```
+Formats a Time depending on the locale.
+
+```javascript
+public formatDateTime(date: Date, fullYear?: boolean, withSeconds?: boolean): string
+```
+Formats a Date Time depending on the locale.
+
+```javascript
+public formatMonthAndYear(date: Date): string
+```
+Returns the month in text and the year.
+
+```javascript
+public getDateFrom(date: Date)
+```
+Returns the date at the beginning of the day
+
+```javascript
+public getDateTo(date: Date)
+```
+Returns the date at the end of the day
+
+```javascript
+public getDateMidDay(date: Date)
+```
+Returns the date at noon.
+
+```javascript
+public getFirstDayOfWeek()
+```
+Returns a 0 if the first day of the week for the locale is Sunday. Returs 1 if is Monday.
+
+```javascript
+public convertStringDateToDateFormat(currentDateValue: string, locale: string): Date
+```
+Returns a Date from currentDateValue applying the Date Format of the locale.
+
+See the source code to get more information.
+
+### Working with numbers
+
+Use the method formatNumber to format a Number
+
+```javascript
+public formatNumber(numberToFormat: number, decimalFormat: string, applyLocale?: boolean): string
+```
 
 ## Working with the repo
 
