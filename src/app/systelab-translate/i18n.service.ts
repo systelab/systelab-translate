@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs/Observable';
 
 import { DecimalFormat } from './decimal-format/DecimalFormat'
-import { DateUtil } from './date-util/date-util-service';
+import { DateUtil } from './date-util/date-util';
 
 @Injectable()
 export class I18nService {
