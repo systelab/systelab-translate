@@ -111,6 +111,10 @@ export class I18nService {
 		return this.dateUtil.getDateMidDay(date);
 	}
 
+	public getFirstDayOfWeek() {
+		return this.dateUtil.getFirstDayOfWeek();
+	}
+
 	public convertStringDateToDateFormat(currentDateValue: string, locale: string): Date {
 		return this.dateUtil.convertStringDateToDateFormat(currentDateValue, locale);
 	}

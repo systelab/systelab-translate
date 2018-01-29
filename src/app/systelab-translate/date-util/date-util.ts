@@ -64,7 +64,6 @@ export class DateUtil {
 		return format(date, 'MMMM, YYYY', {locale: this.locale});
 	}
 
-
 	public getDateFormat(isFullYear = false): string {
 		let stringDateFormat = '';
 		switch (this.locale) {
@@ -139,9 +138,7 @@ export class DateUtil {
 		return stringDateFormat;
 	}
 
-
-
-	private getFirstDayOfWeek(): number {
+	public getFirstDayOfWeek(): number {
 		switch (this.locale) {
 			case 'en-US':
 			case 'zh-CN':
