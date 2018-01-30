@@ -20,10 +20,10 @@ export class LocalizableTranslateStaticLoader implements TranslateLoader {
 		const languageAndCountry: string = language + '_' + country;
 
 		return Observable.forkJoin (
-			this.http.get(`${this.prefix}i18n/language/MessagesBundle_${language}.json`).catch(e => Observable.of('')),
-			this.http.get(`${this.prefix}i18n/language/MessagesBundle_${languageAndCountry}.json`).catch(e => Observable.of('')),
-			this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${language}.json`).catch(e =>  Observable.of('')),
-			this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${languageAndCountry}.json`).catch(e => Observable.of('')))
+			this.http.get(`${this.prefix}i18n/language/MessagesBundle_${language}.json`).catch(e => Observable.of({})),
+			this.http.get(`${this.prefix}i18n/language/MessagesBundle_${languageAndCountry}.json`).catch(e => Observable.of({})),
+			this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${language}.json`).catch(e =>  Observable.of({})),
+			this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${languageAndCountry}.json`).catch(e => Observable.of({})))
 			.map((translations: any[]) => {
 
 				if (translations.length > 0) {
