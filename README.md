@@ -11,10 +11,10 @@ npm install systelab-translate --save
 ## How to use the library
 In order to use this library you must import the module SystelabTranslateModule. Remember to import SystelabTranslateModule.forRoot() in your application module.
 
-In you main component, you can inject a I18NService and setup the initial locale calling the method use:
+Once done this, you can inject a I18NService and setup the initial locale calling the method 'use':
 
 ```javascript
- this.i18nService.use('en-US').subscribe(() => console.log('Locale set to english in USA.'));
+ this.i18nService.use('en-US').subscribe(() => console.log('Locale set to American English.'));
 ```
 
 If you want to get the current language, call the method:
@@ -50,13 +50,14 @@ In order to async translate a key, returning an Observable, you can call to the 
 this.i18nService.get('COMMON_CODE')
 ```
 
-You can translate a key in tour templates by using the translate pipe:
+You can translate a key in your templates by using the 'translate' pipe:
 
 ```html
 <p> {{ 'COMMON_CODE' | translate | async }} </p>
 ```
 
 #### Provide the translation files
+
 In order to provide the translation files, you must include several properties files in the /i18n/language and /i18n/error folders.
 
 For the basic bundles, include a MessagesBundle_xx_XX.json file for each language and country (not mandatory).
@@ -65,11 +66,7 @@ For the error bundles, include a ErrorsBundle_xx_XX.json file for each language 
 
 This two files are mandatory if you are going to use the language.
 
-Sample files names are: MessageBundle_es.json, MessageBundle_en.json, MessageBundle_en_US.json.
-
-There are two special cases 'us' and 'br'. In this case the files will be MessageBundle_en_US.json and MessageBundle_pt_BR.json
-
-For Latinoamerican countries, despite the language you use, 'es' will be considered.
+Sample files names are: MessageBundle_es.json, MessageBundle_en.json, MessageBundle_en_US.json or MessageBundle_pt_BR.json
 
 Inside each file include a single line for each key and translation. For example:
 
@@ -90,7 +87,7 @@ Returns the Date Format depending on the locale. If full year, the year will hav
 ```javascript
 public getTimeFormat(withSeconds = false): string
 ```
-Returns the Time Format depending on the locale. If with seconds, seconds will be added.
+Returns the Time Format depending on the locale. If specified, seconds will be added.
 
 ```javascript
 public formatDate(date: Date): string
@@ -100,7 +97,7 @@ Formats a Date depending on the locale.
 ```javascript
 public formatDateFullYear(date: Date): string
 ```
-Formats a Date will the year in 4 digits depending on the locale.
+Formats a Date with the year in 4 digits depending on the locale.
 
 ```javascript
 public formatTime(date: Date, withSeconds?: boolean): string
