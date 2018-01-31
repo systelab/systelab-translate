@@ -75,6 +75,10 @@ export class I18nService {
 		return this.dateUtil.getDateFormat(isFullYear);
 	}
 
+	public getDateFormatForDatePicker(isFullYear = false): string {
+		return this.dateUtil.getDateFormatForDatePicker(isFullYear);
+	}
+
 	public getTimeFormat(withSeconds = false): string {
 		return this.dateUtil.getTimeFormat(withSeconds);
 	}

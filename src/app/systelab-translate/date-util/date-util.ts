@@ -68,6 +68,80 @@ export class DateUtil {
 		let stringDateFormat = '';
 		switch (this.locale) {
 			case 'en-US':
+				stringDateFormat = 'M/D/YY';
+				break;
+			case 'en-GB':
+			case 'it-IT':
+			case 'es-AR':
+			case 'es-ES':
+			case 'es-BO':
+			case 'es-CL':
+			case 'es-CO':
+			case 'es-CR':
+			case 'es-DO':
+			case 'es-EC':
+			case 'es-GT':
+			case 'es-HN':
+			case 'es-MX':
+			case 'es-NI':
+			case 'es-PA':
+			case 'es-PE':
+			case 'es-PR':
+			case 'es-PY':
+			case 'es-SV':
+			case 'es-UR':
+			case 'es-VE':
+			case 'fr-FR':
+			case 'gl-GL':
+			case 'ca-CA':
+				stringDateFormat = 'DD/MM/YY';
+				break;
+			case 'ko-KO':
+				stringDateFormat = 'YY. M. D';
+				break;
+			case 'pl-PL':
+			case 'lt-LT':
+				stringDateFormat = 'YY-MM-DD';
+				break;
+			case 'pt-PT':
+			case 'pt-BR':
+			case 'nl-NL':
+				stringDateFormat = 'DD-MM-YY';
+				break;
+			case 'sk-SK':
+			case 'ru-RU':
+				stringDateFormat = 'D.M.YY';
+				break;
+			case 'zh-ZH':
+				stringDateFormat = 'YY-M-D';
+				break;
+			case 'de-DE':
+				stringDateFormat = 'DD.MM.YY';
+				break;
+			case 'th-TH':
+				stringDateFormat = 'D/M/YY';
+				break;
+			case 'ja-JA':
+				stringDateFormat = 'YY/MM/DD';
+				break;
+			default:
+				stringDateFormat = 'DD/MM/YY';
+				break;
+		}
+		if (isFullYear) {
+			stringDateFormat = stringDateFormat.replace('YY', 'YYYY');
+			if (this.locale === 'en-US') {
+				stringDateFormat = stringDateFormat.replace('M', 'MM');
+				stringDateFormat = stringDateFormat.replace('D', 'DD');
+			}
+		}
+		return stringDateFormat;
+	}
+
+	public getDateFormatForDatePicker(isFullYear = false): string {
+		let stringDateFormat = '';
+		switch (this.locale) {
+			case 'en-US':
 				stringDateFormat = 'm/d/y';
 				break;
 			case 'en-GB':
