@@ -8,7 +8,7 @@ export class LocalizableTranslateStaticLoader implements TranslateLoader {
 
 	constructor(private http: HttpClient) {
 
-		if (!(window.location.pathname === '/' || window.location.pathname === '/context.html')) {
+		if (!(window.location.pathname === '/' || window.location.pathname === '/context.html' || window.location.pathname === '/index.html')) {
 			this.prefix = window.location.pathname + '/';
 		}
 	}
