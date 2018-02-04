@@ -8,8 +8,15 @@ export class LocalizableTranslateStaticLoader implements TranslateLoader {
 
 	constructor(private http: HttpClient) {
 
-		if (!(window.location.pathname === '/' || window.location.pathname === '/context.html' || window.location.pathname === '/index.html')) {
-			this.prefix = window.location.pathname + '/';
+		console.log('------------');
+		console.log(window.location.pathname);
+		if (!(window.location.pathname === '/' || window.location.pathname === '/context.html')) {
+			if (window.location.pathname.endsWith('index.html')) {
+				// That's the case of Electron when starting from local file.
+				this.prefix = window.location.pathname.replace('index.html', '');
+			} else {
+				this.prefix = window.location.pathname + '/';
+			}
 		}
 	}
 
@@ -19,11 +26,15 @@ export class LocalizableTranslateStaticLoader implements TranslateLoader {
 
 		const languageAndCountry: string = language + '_' + country;
 
-		return Observable.forkJoin (
-			this.http.get(`${this.prefix}i18n/language/MessagesBundle_${language}.json`).catch(e => Observable.of({})),
-			this.http.get(`${this.prefix}i18n/language/MessagesBundle_${languageAndCountry}.json`).catch(e => Observable.of({})),
-			this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${language}.json`).catch(e =>  Observable.of({})),
-			this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${languageAndCountry}.json`).catch(e => Observable.of({})))
+		return Observable.forkJoin(
+			this.http.get(`${this.prefix}i18n/language/MessagesBundle_${language}.json`)
+				.catch(e => Observable.of({})),
+			this.http.get(`${this.prefix}i18n/language/MessagesBundle_${languageAndCountry}.json`)
+				.catch(e => Observable.of({})),
+			this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${language}.json`)
+				.catch(e => Observable.of({})),
+			this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${languageAndCountry}.json`)
+				.catch(e => Observable.of({})))
 			.map((translations: any[]) => {
 
 				if (translations.length > 0) {
@@ -37,7 +48,6 @@ export class LocalizableTranslateStaticLoader implements TranslateLoader {
 				}
 			});
 	}
-
 
 	private mergeRecursive(obj1: any, obj2: any) {
 		for (const p in obj2) {
