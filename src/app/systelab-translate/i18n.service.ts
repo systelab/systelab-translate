@@ -119,9 +119,10 @@ export class I18nService {
 		return this.dateUtil.getFirstDayOfWeek();
 	}
 
-	public convertStringDateToDateFormat(currentDateValue: string, locale: string): Date {
-		return this.dateUtil.convertStringDateToDateFormat(currentDateValue, locale);
+	public parseDate(currentDateValue: string, locale?: string): Date {
+		return this.dateUtil.parseDate(currentDateValue, locale);
 	}
+
 
 	public formatNumber(numberToFormat: number, decimalFormat: string, applyLocale?: boolean): string {
 		const df: any = new DecimalFormat(decimalFormat);

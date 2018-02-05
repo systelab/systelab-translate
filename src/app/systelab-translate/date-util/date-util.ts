@@ -224,13 +224,17 @@ export class DateUtil {
 		}
 	}
 
-	// TODO: Review.
-	public convertStringDateToDateFormat(currentDateValue: string, locale: string): Date {
+	public parseDate(currentDateValue: string, locale?: string): Date {
 		let auxDate: string, auxArray: Array<string>;
 
 		if (!currentDateValue) {
 			currentDateValue = '';
 		}
+
+		if (!locale) {
+			locale = this.locale;
+		}
+
 
 		switch (locale) {
 			case 'en-US':
