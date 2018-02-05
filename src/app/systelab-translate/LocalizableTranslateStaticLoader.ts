@@ -8,8 +8,6 @@ export class LocalizableTranslateStaticLoader implements TranslateLoader {
 
 	constructor(private http: HttpClient) {
 
-		console.log('------------');
-		console.log(window.location.pathname);
 		if (!(window.location.pathname === '/' || window.location.pathname === '/context.html')) {
 			if (window.location.pathname.endsWith('index.html')) {
 				// That's the case of Electron when starting from local file.
