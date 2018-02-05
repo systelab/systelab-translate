@@ -135,7 +135,7 @@ public getFirstDayOfWeek()
 Returns a 0 if the first day of the week for the locale is Sunday. Returs 1 if is Monday.
 
 ```javascript
-public convertStringDateToDateFormat(currentDateValue: string, locale: string): Date
+public parseDate(currentDateValue: string, locale?: string): Date
 ```
 Returns a Date from currentDateValue applying the Date Format of the locale.
 
