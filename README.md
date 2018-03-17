@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/systelab/systelab-translate.svg?branch=master)](https://travis-ci.org/systelab/systelab-translate)
+
 # systelab-translate
 
 Library with I18N tools to speed up our Angular developments
