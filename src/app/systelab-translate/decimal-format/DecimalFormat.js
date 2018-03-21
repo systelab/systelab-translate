@@ -101,7 +101,8 @@ DecimalFormat.prototype.format = function(numStr) { // 1223.06 --> $1,223.06
       return numStr;
     
     //scientific numbers
-    if (i = numberStr.indexOf("e") != -1) {
+    var positione= numberStr.indexOf("e");
+    if (positione != -1) {
       var n = Number(numberStr);
       if (n=="Infinity" || n=="-Infinity") return numberStr;
       numberStr = n+"";
