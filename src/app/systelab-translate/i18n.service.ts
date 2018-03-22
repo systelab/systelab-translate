@@ -23,6 +23,10 @@ export class I18nService {
 		return this.translateService.use(locale);
 	}
 
+	public getLocale(): string {
+		return this.locale;
+	}
+
 	public getCurrentLanguage() {
 		return this.translateService.currentLang;
 	}
@@ -121,7 +125,6 @@ export class I18nService {
 	public parseDate(currentDateValue: string, locale?: string): Date {
 		return this.dateUtil.parseDate(currentDateValue, locale);
 	}
-
 
 	public formatNumber(numberToFormat: number, decimalFormat: string, applyLocale?: boolean): string {
 		const df: any = new DecimalFormat(decimalFormat);
