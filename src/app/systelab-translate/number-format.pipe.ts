@@ -15,15 +15,20 @@ export class NumberFormatPipe implements PipeTransform {
 			if (!precision) {
 				precision = '1.0-2';
 			}
-			let roundedValue = this.decimalPipe.transform(value, precision, this.i18nService.getLocale());
+			try {
+				let roundedValue = this.decimalPipe.transform(value, precision, this.i18nService.getLocale());
 
-			if (units) {
-				roundedValue = roundedValue + units;
+				if (units) {
+					roundedValue = roundedValue + units;
+				}
+				if (priorSymbol) {
+					roundedValue = priorSymbol + ' ' + roundedValue;
+				}
+				return roundedValue;
+			} catch (error) {
+				console.error(error);
 			}
-			if (priorSymbol) {
-				roundedValue = priorSymbol + ' ' + roundedValue;
-			}
-			return roundedValue;
+			return '';
 		} else {
 			if (defaultSymbolWhenNull) {
 				return defaultSymbolWhenNull;

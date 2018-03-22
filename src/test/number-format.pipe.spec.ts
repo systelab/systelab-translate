@@ -6,7 +6,7 @@ import { NumberFormatPipe } from '../app/systelab-translate/number-format.pipe';
 import { I18nService } from '../app/systelab-translate/i18n.service';
 import { DecimalPipe } from '@angular/common';
 
-describe('Pipe: Default', () => {
+describe('Pipe: NumberFormatPipe', () => {
 	let pipe: NumberFormatPipe;
 	let i18nService: I18nService;
 	let decimalPipe: DecimalPipe;
@@ -73,6 +73,11 @@ describe('Pipe: Default', () => {
 	it('check number format - rounding, units and priorSymbol', () => {
 		expect(pipe.transform(3.3323335, '1.0-2', '%', '<'))
 			.toBe('< 3.33%');
+	});
+
+	it('check number format - invalid rounding', () => {
+		expect(pipe.transform(3.3323335, '1dsfas3333423422', '%', '<'))
+			.toBe('');
 	});
 });
 
