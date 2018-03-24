@@ -12,14 +12,14 @@ module.exports = function(config) {
 			require('karma-coverage-istanbul-reporter'),
 			require('@angular/cli/plugins/karma')
 		],
-		proxies: {
+		proxies:                  {
 			'/i18n/': '/base/i18n/'
 		},
 		client:                   {
 			clearContext: false // leave Jasmine Spec Runner output visible in browser
 		},
 		coverageIstanbulReporter: {
-			reports:               ['html', 'lcovonly'],
+			reports:               ['html', 'lcovonly', 'json'],
 			fixWebpackSourcePaths: true
 		},
 		angularCli:               {
