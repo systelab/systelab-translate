@@ -152,6 +152,26 @@ Use the method formatNumber to format a Number using the Java DecimalFormat.
 public formatNumber(numberToFormat: number, decimalFormat: string, applyLocale?: boolean): string
 ```
 
+### Working with numbers (using numberformat Pipe)
+
+Use the pipe numberformat to get a value with a defined precision taking into accound the locale, units, priorSymbol and default symbol when undefined.
+
+```html
+<label>{{value | numberformat : '1.0-5':'%'}</label>
+```
+Returns the value rounded to 5 decimals and with units. For example: an output may be 5.23455%
+
+```html
+<label>{{value | numberformat : '1.0-2':'%':'<'':'-'}}</label>
+```
+Returns the value rounded to 2 decimals, % as units and < as the previous symbol. For example: an output may be < 3.44% or just - in case the value is undefined.
+
+```javascript
+public transform(value: number, precision?: string, units?: string, priorSymbol?: string, defaultSymbolWhenNull?): string
+```
+This pipe can be used from the Component through the method transform.
+
+
 ## Working with the repo
 
 
