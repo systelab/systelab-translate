@@ -17,9 +17,8 @@ before_install:
   - sh -e /etc/init.d/xvfb start
 
 before_script:
-  - npm install -g angular-cli
   - npm install -g karma
-  - npm install codecov -g
+  - npm install -g codecov
   - npm install
   - ng build
 
@@ -27,4 +26,4 @@ script:
   - karma start karma.conf.js --single-run --cc
 
 after_success:
-  - cat coverage/lcov.info | codecov
+  - cat coverage/lcov.info | codecov -t 2b1d7f78-2aa5-4cff-bbf4-e6ff70650d92
