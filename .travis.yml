@@ -23,7 +23,7 @@ before_script:
   - ng build
 
 script: 
-  - karma start karma.conf.js --single-run --cc
+  - ng test --cc
 
 after_success:
   - cat coverage/lcov.info | codecov -t 2b1d7f78-2aa5-4cff-bbf4-e6ff70650d92
