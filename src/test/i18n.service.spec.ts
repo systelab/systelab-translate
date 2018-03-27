@@ -125,47 +125,4 @@ describe('Translate Service', () => {
 			})
 	});
 
-	it('Format a date', (done) => {
-		service.use('es-ES')
-			.subscribe(() => {
-				let date = new Date();
-				date.setFullYear(2016, 0, 28);
-				expect(service.formatDate(date))
-					.toBe('28/01/16');
-				expect(service.formatDateFullYear(date))
-					.toBe('28/01/2016');
-				done();
-			})
-	});
-
-	it('Format a  time and a date and time', (done) => {
-		service.use('es-ES')
-			.subscribe(() => {
-				let date = new Date();
-				date.setFullYear(2016, 0, 28);
-				date.setHours(21);
-				date.setMinutes(0,0,0);
-				expect(service.formatTime(date))
-					.toBe('21:00');
-				expect(service.formatDateTime(date))
-					.toBe('28/01/16 21:00');
-				done();
-			})
-	});
-
-	it('Get dates ant the begging of the day, at the end and at noon', (done) => {
-		service.use('es-ES')
-			.subscribe(() => {
-				let date = new Date();
-				date.setFullYear(2016, 0, 28);
-				date.setHours(21);
-				expect(service.formatDateTime(service.getDateFrom(date)))
-					.toBe('28/01/16 00:00');
-				expect(service.formatDateTime(service.getDateTo(date)))
-					.toBe('29/01/16 00:00');
-				expect(service.formatDateTime(service.getDateMidDay(date)))
-					.toBe('28/01/16 12:00');
-				done();
-			})
-	});
 });
