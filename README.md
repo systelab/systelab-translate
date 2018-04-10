@@ -51,7 +51,7 @@ this.i18nService.instant('COMMON_CODE')
 
 This method has an optional parameter interpolateParams that will allow you to provide some parameters. For example:
 
-Provided  the key "USER_AGE_AND_GENDER": "User age is {{USER_AGE}} and gender is {{USER_GENDER}}",
+Provided the key "USER_AGE_AND_GENDER": "User age is {{USER_AGE}} and gender is {{USER_GENDER}}" you can set the parameters with the following call
 
 
 ```javascript
