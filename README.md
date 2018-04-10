@@ -49,6 +49,16 @@ In order to translate a key, you can call to the instant method:
 this.i18nService.instant('COMMON_CODE')
 ```
 
+This method has an optional parameter interpolateParams that will allow you to provide some parameters. For example:
+
+Provided  the key "USER_AGE_AND_GENDER": "User age is {{USER_AGE}} and gender is {{USER_GENDER}}",
+
+
+```javascript
+this.i18nService.instant('USER_AGE_AND_GENDER', {USER_AGE: 24, USER_GENDER: 'Male'})
+```
+
+
 In order to async translate a key, returning an Observable, you can call to the get method:
 
 ```javascript

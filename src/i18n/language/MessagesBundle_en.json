@@ -2,5 +2,8 @@
   "COMMON_DAY": "Day",
   "COMMON_WEEK": "Week",
   "COMMON_YEAR": "Year",
-  "COMMON_CENTER": "Centre"
+  "COMMON_CENTER": "Centre",
+  "USER_AGE_AND_GENDER": "User age is {{USER_AGE}} and gender is {{USER_GENDER}}",
+  "USER_GENDER": "User gender is {{USER_GENDER}}"
+
 }

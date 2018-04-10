@@ -125,4 +125,32 @@ describe('Translate Service', () => {
 			})
 	});
 
+	it('Check a key with one parameters', (done) => {
+		service.use('es-ES')
+			.subscribe(() => {
+				expect(service.instant('USER_GENDER', {USER_GENDER: 'Male'}))
+					.toBe('User gender is Male');
+				done();
+			})
+	});
+
+	it('Check a key with multiple named parameters', (done) => {
+		service.use('es-ES')
+			.subscribe(() => {
+				expect(service.instant('USER_AGE_AND_GENDER', {USER_AGE: 24, USER_GENDER: 'Male'}))
+					.toBe('User age is 24 and gender is Male');
+				done();
+			})
+	});
+
+	it('Check a key with multiple named not sorted parameters', (done) => {
+		service.use('es-ES')
+			.subscribe(() => {
+				expect(service.instant('USER_AGE_AND_GENDER', {USER_GENDER: 'Male', USER_AGE: 24}))
+					.toBe('User age is 24 and gender is Male');
+				done();
+			})
+	});
+
+
 });
