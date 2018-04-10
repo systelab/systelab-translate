@@ -173,6 +173,13 @@ public transform(value: number, precision?: string, units?: string, priorSymbol?
 ```
 This pipe can be used from the Component through the method transform.
 
+### Replacing strings
+
+Use this method to replace a string with a dynamic value. You can replace a string or a set of strings.
+
+```javascript
+public replaceVariableInString(key: string, replaceKey: string | Array<string>, replaceValue: string | Array<string>): string
+```
 
 ## Working with the repo
 
