@@ -139,4 +139,12 @@ export class I18nService {
 		}
 		return sNumber;
 	}
+
+	public replaceVariableInString(key: string, replaceKey: Array<any>): string {
+		let value = this.instant(key);
+			 for (let i = 0; i < replaceKey.length; i++) {
+				value = value.replace(new RegExp(replaceKey[i].key, 'g'), replaceKey[i].value);
+			 }
+		return value;
+	}
 }
