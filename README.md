@@ -180,6 +180,11 @@ Use this method to replace a string with a dynamic value. You can replace a stri
 ```javascript
 public replaceVariableInString(key: string, replaceKey: Array<any>): string
 ```
+The array will be formed by a key and value:
+
+```javascript
+[{key: '%s', value: 'Wednesday'}, {key: '%i', value: '7'}, {key: '%f', value: '14'}];
+```
 
 ## Working with the repo
 
