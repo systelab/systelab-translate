@@ -4,6 +4,8 @@ import { I18nService } from './i18n.service';
 import { GeneralTranslatePipe } from './translate.pipe';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
+import { NumberFormatPipe } from './number-format.pipe';
+import { DecimalPipe } from '@angular/common';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -21,18 +23,22 @@ export function HttpLoaderFactory(http: HttpClient) {
 		})
 	],
 	declarations: [
-		GeneralTranslatePipe
+		GeneralTranslatePipe,
+		NumberFormatPipe
 	],
 	exports:      [
-		GeneralTranslatePipe]
-
+		GeneralTranslatePipe,
+		NumberFormatPipe],
+	providers:    [
+		DecimalPipe]
 })
 export class SystelabTranslateModule {
 	public static forRoot(entryComponents?: Array<Type<any> | any[]>): ModuleWithProviders {
 		return {
 			ngModule:  SystelabTranslateModule,
 			providers: [
-				{provide: I18nService, useClass: I18nService}
+				{provide: I18nService, useClass: I18nService},
+				{provide: NumberFormatPipe, useClass: NumberFormatPipe}
 			]
 		};
 	}

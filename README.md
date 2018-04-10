@@ -1,5 +1,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/904bf3dbdb5f4fed90ce79d9ac487ebc)](https://app.codacy.com/app/alfonsserra/systelab-translate?utm_source=github.com&utm_medium=referral&utm_content=systelab/systelab-translate&utm_campaign=badger)
 [![Build Status](https://travis-ci.org/systelab/systelab-translate.svg?branch=master)](https://travis-ci.org/systelab/systelab-translate)
+[![codecov](https://codecov.io/gh/systelab/systelab-translate/branch/master/graph/badge.svg)](https://codecov.io/gh/systelab/systelab-translate)
+[![npm version](https://badge.fury.io/js/systelab-translate.svg)](https://badge.fury.io/js/systelab-translate)
 
 # systelab-translate
 
@@ -151,6 +153,26 @@ Use the method formatNumber to format a Number using the Java DecimalFormat.
 ```javascript
 public formatNumber(numberToFormat: number, decimalFormat: string, applyLocale?: boolean): string
 ```
+
+### Working with numbers (using numberformat Pipe)
+
+Use the pipe numberformat to get a value with a defined precision taking into accound the locale, units, priorSymbol and default symbol when undefined.
+
+```html
+<label>{{value | numberformat : '1.0-5':'%'}</label>
+```
+Returns the value rounded to 5 decimals and with units. For example: an output may be 5.23455%
+
+```html
+<label>{{value | numberformat : '1.0-2':'%':'<'':'-'}}</label>
+```
+Returns the value rounded to 2 decimals, % as units and < as the previous symbol. For example: an output may be < 3.44% or just - in case the value is undefined.
+
+```javascript
+public transform(value: number, precision?: string, units?: string, priorSymbol?: string, defaultSymbolWhenNull?): string
+```
+This pipe can be used from the Component through the method transform.
+
 
 ## Working with the repo
 
