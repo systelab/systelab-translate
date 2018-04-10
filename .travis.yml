@@ -27,4 +27,4 @@ script:
 
 after_success:
   - cat coverage/lcov.info | codecov -t 2b1d7f78-2aa5-4cff-bbf4-e6ff70650d92
-  - cat coverage/lcov.info | codacy-coverage
+  - cat coverage/lcov.info | codacy-coverage --accountToken a56328c9eaf148ff950960814e904fa5 --username systelab --projectName systelab-translate
