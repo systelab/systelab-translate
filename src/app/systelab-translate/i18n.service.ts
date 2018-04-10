@@ -140,24 +140,11 @@ export class I18nService {
 		return sNumber;
 	}
 
-	public replaceVariableInString(key: string, replaceKey: string | Array<string>, replaceValue: string | Array<string>): string {
+	public replaceVariableInString(key: string, replaceKey: Array<any>): string {
 		let value = this.instant(key);
-		if (replaceKey instanceof Array) {
 			 for (let i = 0; i < replaceKey.length; i++) {
-				if (replaceValue instanceof Array) {
-					if (replaceValue[i]) {
-						value = value.replace(new RegExp(replaceKey[i], 'g'), replaceValue[i]);
-					}
-				}
-				else {
-					value = value.replace(new RegExp(replaceKey[i], 'g'), replaceValue);
-				}
+				value = value.replace(new RegExp(replaceKey[i].key, 'g'), replaceKey[i].value);
 			 }
-		}
-		else {
-			value = value.replace(new RegExp(replaceKey, 'g'), replaceValue);
-		}
-		
 		return value;
 	}
 }

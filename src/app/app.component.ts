@@ -14,13 +14,11 @@ export class AppComponent {
 			.subscribe(
 				() => {
 					console.log('Language set to english');
-					const replaceKeys = [];
-					const replaceValues = [];
+					const replaceKeys = [{key: '%s', value: 'Wednesday'}, {key: '%i', value: '7'}, {key: '%f', value: '14'}];
+					const replaceKey = [{key: '%s', value: 'Wednesday'}];
 					this.day = i18nService.instant('COMMON_DAY');
-					this.rep = i18nService.replaceVariableInString('COMMON_REPLACEMENT', '%replace%', 'Wednesday');
-					replaceKeys.push('%s', '%i', '%f');
-					replaceValues.push('Wednesday', '7', '14');
-					this.repArray = i18nService.replaceVariableInString('COMMON_REPLACEMENT_ARRAY', replaceKeys, replaceValues);
+					this.rep = i18nService.replaceVariableInString('COMMON_REPLACEMENT', replaceKey);
+					this.repArray = i18nService.replaceVariableInString('COMMON_REPLACEMENT_ARRAY', replaceKeys);
 				}
 			)
 	}
