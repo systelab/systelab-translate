@@ -3,5 +3,6 @@
   "COMMON_WEEK": "Week",
   "COMMON_YEAR": "Year",
   "COMMON_CENTER": "Centre",
-  "COMMON_REPLACEMENT": "Today is %replace% and after 7 days will be %replace%."
+  "COMMON_REPLACEMENT": "Today is %replace% and after 7 days will be %replace%.",
+  "COMMON_REPLACEMENT_ARRAY": "Today is %s day %i and after %i days will be %s day %f."
 }
