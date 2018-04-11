@@ -2,6 +2,7 @@
 [![Build Status](https://travis-ci.org/systelab/systelab-translate.svg?branch=master)](https://travis-ci.org/systelab/systelab-translate)
 [![codecov](https://codecov.io/gh/systelab/systelab-translate/branch/master/graph/badge.svg)](https://codecov.io/gh/systelab/systelab-translate)
 [![npm version](https://badge.fury.io/js/systelab-translate.svg)](https://badge.fury.io/js/systelab-translate)
+[![Known Vulnerabilities](https://snyk.io/test/github/systelab/systelab-translate/badge.svg?targetFile=package.json)](https://snyk.io/test/github/systelab/systelab-translate?targetFile=package.json)
 
 # systelab-translate
 
