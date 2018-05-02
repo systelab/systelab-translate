@@ -155,7 +155,13 @@ public parseDate(currentDateValue: string, locale?: string): Date
 ```
 Returns a Date from currentDateValue applying the Date Format of the locale.
 
+```javascript
+public isWithinRange(pBeginDate1: Date, pEndDate1: Date, pBeginDate2: Date, pEndDate2: Date): boolean
+```
+Returns true if the first bundle of dates are included in the second bundle of dates (and vice versa).
+
 See the source code to get more information.
+
 
 ### Working with numbers
 

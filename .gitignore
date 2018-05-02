@@ -7,3 +7,4 @@ css
 html
 sass
 .idea
+.vscode/launch.json
