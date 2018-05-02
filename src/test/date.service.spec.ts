@@ -10,13 +10,13 @@ describe('Date Service', () => {
 	beforeEach(() => {
 
 		TestBed.configureTestingModule({
-			imports:   [
+			imports: [
 				HttpClientModule,
 				TranslateModule.forRoot({
 					loader: {
-						provide:    TranslateLoader,
+						provide: TranslateLoader,
 						useFactory: HttpLoaderFactory,
-						deps:       [HttpClient]
+						deps: [HttpClient]
 					}
 				})
 			],
@@ -86,7 +86,7 @@ describe('Date Service', () => {
 				let date = new Date();
 				date.setFullYear(2016, 0, 28);
 				date.setHours(21);
-				date.setMinutes(0,0,0);
+				date.setMinutes(0, 0, 0);
 				expect(service.formatTime(date))
 					.toBe('21:00');
 				expect(service.formatDateTime(date))
@@ -102,7 +102,7 @@ describe('Date Service', () => {
 				let date = new Date();
 				date.setFullYear(2016, 0, 28);
 				date.setHours(21);
-				date.setMinutes(0,0,0);
+				date.setMinutes(0, 0, 0);
 				expect(service.formatTime(date))
 					.toBe('21:00');
 				expect(service.formatDateTime(date))
@@ -125,5 +125,70 @@ describe('Date Service', () => {
 					.toBe('28/01/16 12:00');
 				done();
 			})
+	});
+
+	it('isWithinRange - First bundle of dates are included in the second bundle of dates', (done) => {
+		service.use('es-ES').subscribe(() => {
+			let pBeginDate1 = new Date('2017-08-01');
+			let pEndDate1 = new Date('2017-08-03');
+			let pBeginDate2 = new Date('2017-07-01');
+			let pEndDate2 = new Date('2017-09-01');
+
+			expect(service.isWithinRange(pBeginDate1, pEndDate1, pBeginDate2, pEndDate2)).toBeTruthy();
+
+			done();
+		})
+	});
+
+	it('isWithinRange - BeginDate1 is included in the second bundle of dates', (done) => {
+		service.use('es-ES').subscribe(() => {
+			let pBeginDate1 = new Date('2017-08-01');
+			let pEndDate1 = new Date('2017-10-03');
+			let pBeginDate2 = new Date('2017-07-01');
+			let pEndDate2 = new Date('2017-09-01');
+
+			expect(service.isWithinRange(pBeginDate1, pEndDate1, pBeginDate2, pEndDate2)).toBeTruthy();
+
+			done();
+		})
+	});
+
+	it('isWithinRange - EndDate1 is included in the second bundle of dates', (done) => {
+		service.use('es-ES').subscribe(() => {
+			let pBeginDate1 = new Date('2017-01-01');
+			let pEndDate1 = new Date('2017-08-03');
+			let pBeginDate2 = new Date('2017-07-01');
+			let pEndDate2 = new Date('2017-09-01');
+
+			expect(service.isWithinRange(pBeginDate1, pEndDate1, pBeginDate2, pEndDate2)).toBeTruthy();
+
+			done();
+		})
+	});
+
+	it('isWithinRange - First bundle of dates are NOT included in the second bundle of dates (before the second)', (done) => {
+		service.use('es-ES').subscribe(() => {
+			let pBeginDate1 = new Date('2017-01-01');
+			let pEndDate1 = new Date('2017-02-03');
+			let pBeginDate2 = new Date('2017-07-01');
+			let pEndDate2 = new Date('2017-09-01');
+
+			expect(service.isWithinRange(pBeginDate1, pEndDate1, pBeginDate2, pEndDate2)).toBeFalsy();
+
+			done();
+		})
+	});
+
+	it('isWithinRange - First bundle of dates are NOT included in the second bundle of dates (past the second)', (done) => {
+		service.use('es-ES').subscribe(() => {
+			let pBeginDate1 = new Date('2017-09-02');
+			let pEndDate1 = new Date('2017-10-03');
+			let pBeginDate2 = new Date('2017-07-01');
+			let pEndDate2 = new Date('2017-09-01');
+
+			expect(service.isWithinRange(pBeginDate1, pEndDate1, pBeginDate2, pEndDate2)).toBeFalsy();
+
+			done();
+		})
 	});
 });

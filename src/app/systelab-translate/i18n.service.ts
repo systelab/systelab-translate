@@ -135,8 +135,12 @@ export class I18nService {
 				minimumFractionDigits = sNumber.split('.')[1].length;
 			}
 			return Number(sNumber)
-				.toLocaleString(this.locale, {'minimumFractionDigits': minimumFractionDigits});
+				.toLocaleString(this.locale, { 'minimumFractionDigits': minimumFractionDigits });
 		}
 		return sNumber;
+	}
+
+	public isWithinRange(pBeginDate1: Date, pEndDate1: Date, pBeginDate2: Date, pEndDate2: Date): boolean {
+		return this.dateUtil.isWithinRange(pBeginDate1, pEndDate1, pBeginDate2, pEndDate2);
 	}
 }

@@ -61,7 +61,7 @@ export class DateUtil {
 	}
 
 	public formatMonthAndYear(date: Date) {
-		return format(date, 'MMMM, YYYY', {locale: this.locale});
+		return format(date, 'MMMM, YYYY', { locale: this.locale });
 	}
 
 	public getDateFormat(isFullYear = false): string {
@@ -335,5 +335,13 @@ export class DateUtil {
 				auxDate = auxArray[1] + '/' + auxArray[0] + '/' + auxArray[2];
 		}
 		return new Date(auxDate);
+	}
+	public isWithinRange(pBeginDate1: Date, pEndDate1: Date, pBeginDate2: Date, pEndDate2: Date): boolean {
+		// ( ( start1 >= start2 and start1 <= end2 ) or
+		// ( end1 >= start2 and end1 <= end2 ) or
+		// ( start1 <= start2 and end1 >= end2 ) )
+		return (pBeginDate1.getTime() >= pBeginDate2.getTime() && pBeginDate1.getTime() <= pEndDate2.getTime())
+			|| (pEndDate1.getTime() >= pBeginDate2.getTime() && pEndDate1.getTime() <= pEndDate2.getTime())
+			|| ((pBeginDate1.getTime() < pBeginDate2.getTime() || pEndDate1.getTime() === pBeginDate2.getTime()) && pEndDate1.getTime() >= pEndDate2.getTime());
 	}
 }
