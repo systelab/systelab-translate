@@ -2,7 +2,7 @@ import { I18nService } from '../app/systelab-translate/i18n.service';
 import { TestBed } from '@angular/core/testing';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { HttpLoaderFactory } from '../app/systelab-translate/systelab-translate.module';
+import { httpLoaderFactory } from '../app/systelab-translate/systelab-translate.module';
 
 describe('Translate Service', () => {
 	let service: I18nService;
@@ -15,7 +15,7 @@ describe('Translate Service', () => {
 				TranslateModule.forRoot({
 					loader: {
 						provide:    TranslateLoader,
-						useFactory: HttpLoaderFactory,
+						useFactory: httpLoaderFactory,
 						deps:       [HttpClient]
 					}
 				})

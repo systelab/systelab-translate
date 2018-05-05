@@ -1,6 +1,7 @@
+
+import {of as observableOf,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs/Observable';
 
 import { DecimalFormat } from './decimal-format/DecimalFormat'
 import { DateUtil } from './date-util/date-util';
@@ -79,7 +80,7 @@ export class I18nService {
 
 	public get(bundle: string | string[]): Observable<any> {
 		if (typeof bundle === 'string' && this.staticBundles[bundle]) {
-			return Observable.of(this.staticBundles[bundle]);
+			return observableOf(this.staticBundles[bundle]);
 		}
 		return this.translateService.get(bundle);
 	}

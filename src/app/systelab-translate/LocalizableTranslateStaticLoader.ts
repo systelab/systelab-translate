@@ -1,3 +1,7 @@
+
+import {of as observableOf, forkJoin as observableForkJoin} from 'rxjs';
+
+import {catchError, map} from 'rxjs/operators';
 import { Observable } from 'rxjs/Rx';
 import { TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
@@ -24,16 +28,16 @@ export class LocalizableTranslateStaticLoader implements TranslateLoader {
 
 		const languageAndCountry: string = language + '_' + country;
 
-		return Observable.forkJoin(
-			this.http.get(`${this.prefix}i18n/language/MessagesBundle_${language}.json`)
-				.catch(e => Observable.of({})),
-			this.http.get(`${this.prefix}i18n/language/MessagesBundle_${languageAndCountry}.json`)
-				.catch(e => Observable.of({})),
-			this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${language}.json`)
-				.catch(e => Observable.of({})),
-			this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${languageAndCountry}.json`)
-				.catch(e => Observable.of({})))
-			.map((translations: any[]) => {
+		return observableForkJoin(
+			this.http.get(`${this.prefix}i18n/language/MessagesBundle_${language}.json`).pipe(
+				catchError(e => observableOf({}))),
+			this.http.get(`${this.prefix}i18n/language/MessagesBundle_${languageAndCountry}.json`).pipe(
+				catchError(e => observableOf({}))),
+			this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${language}.json`).pipe(
+				catchError(e => observableOf({}))),
+			this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${languageAndCountry}.json`).pipe(
+				catchError(e => observableOf({})))).pipe(
+			map((translations: any[]) => {
 
 				if (translations.length > 0) {
 					let bundles = translations[0];
@@ -42,9 +46,9 @@ export class LocalizableTranslateStaticLoader implements TranslateLoader {
 					}
 					return bundles;
 				} else {
-					return Observable.of(undefined);
+					return observableOf(undefined);
 				}
-			});
+			}));
 	}
 
 	private mergeRecursive(obj1: any, obj2: any) {

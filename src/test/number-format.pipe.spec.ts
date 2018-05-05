@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { HttpLoaderFactory } from '../app/systelab-translate/systelab-translate.module';
+import { httpLoaderFactory } from '../app/systelab-translate/systelab-translate.module';
 import { NumberFormatPipe } from '../app/systelab-translate/number-format.pipe';
 import { I18nService } from '../app/systelab-translate/i18n.service';
 import { DecimalPipe } from '@angular/common';
@@ -18,7 +18,7 @@ describe('Pipe: NumberFormatPipe', () => {
 				TranslateModule.forRoot({
 					loader: {
 						provide:    TranslateLoader,
-						useFactory: HttpLoaderFactory,
+						useFactory: httpLoaderFactory,
 						deps:       [HttpClient]
 					}
 				})
