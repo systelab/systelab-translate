@@ -13,15 +13,7 @@ export function httpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-	imports:      [
-		TranslateModule.forRoot({
-			loader: {
-				provide:    TranslateLoader,
-				useFactory: (httpLoaderFactory),
-				deps:       [HttpClient]
-			}
-		})
-	],
+	imports:      [],
 	declarations: [
 		GeneralTranslatePipe,
 		NumberFormatPipe
@@ -34,14 +26,17 @@ export function httpLoaderFactory(http: HttpClient) {
 })
 export class SystelabTranslateModule {
 	public static forRoot(entryComponents?: Array<Type<any> | any[]>): ModuleWithProviders {
-		return {
-			ngModule:  SystelabTranslateModule,
-			providers: [
-				{provide: I18nService, useClass: I18nService},
-				{provide: NumberFormatPipe, useClass: NumberFormatPipe}
-			]
-		};
+		let module = TranslateModule.forRoot({
+			loader: {
+				provide:    TranslateLoader,
+				useFactory: (httpLoaderFactory),
+				deps:       [HttpClient]
+			}
+		});
+		module.ngModule = SystelabTranslateModule;
+		module.providers.push({provide: I18nService, useClass: I18nService});
+		module.providers.push({provide: NumberFormatPipe, useClass: NumberFormatPipe});
+		return module;
 	}
-
 }
 
