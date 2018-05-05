@@ -8,7 +8,7 @@ import { NumberFormatPipe } from './number-format.pipe';
 import { DecimalPipe } from '@angular/common';
 
 // AoT requires an exported function for factories
-export function HttpLoaderFactory(http: HttpClient) {
+export function httpLoaderFactory(http: HttpClient) {
 	return new LocalizableTranslateStaticLoader(http);
 }
 
@@ -17,7 +17,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		TranslateModule.forRoot({
 			loader: {
 				provide:    TranslateLoader,
-				useFactory: HttpLoaderFactory,
+				useFactory: (httpLoaderFactory),
 				deps:       [HttpClient]
 			}
 		})
