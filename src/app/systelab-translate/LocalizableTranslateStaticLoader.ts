@@ -1,8 +1,6 @@
 
-import {of as observableOf, forkJoin as observableForkJoin} from 'rxjs';
-
+import {Observable, of as observableOf, forkJoin as observableForkJoin} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
-import { Observable } from 'rxjs/Rx';
 import { TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 
