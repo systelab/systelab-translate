@@ -12,8 +12,18 @@ export function httpLoaderFactory(http: HttpClient) {
 	return new LocalizableTranslateStaticLoader(http);
 }
 
+export const translateModuleForRoot = TranslateModule.forRoot({
+	loader: {
+		provide:    TranslateLoader,
+		useFactory: (httpLoaderFactory),
+		deps:       [HttpClient]
+	}
+});
+
 @NgModule({
-	imports:      [],
+	imports:      [
+		translateModuleForRoot
+	],
 	declarations: [
 		GeneralTranslatePipe,
 		NumberFormatPipe
@@ -24,19 +34,17 @@ export function httpLoaderFactory(http: HttpClient) {
 	providers:    [
 		DecimalPipe]
 })
+
 export class SystelabTranslateModule {
 	public static forRoot(entryComponents?: Array<Type<any> | any[]>): ModuleWithProviders {
-		let module = TranslateModule.forRoot({
-			loader: {
-				provide:    TranslateLoader,
-				useFactory: (httpLoaderFactory),
-				deps:       [HttpClient]
-			}
-		});
-		module.ngModule = SystelabTranslateModule;
-		module.providers.push({provide: I18nService, useClass: I18nService});
-		module.providers.push({provide: NumberFormatPipe, useClass: NumberFormatPipe});
-		return module;
+		return {
+			ngModule:  SystelabTranslateModule,
+			providers: [
+				{provide: I18nService, useClass: I18nService},
+				{provide: NumberFormatPipe, useClass: NumberFormatPipe}
+			]
+		};
 	}
+
 }
 
