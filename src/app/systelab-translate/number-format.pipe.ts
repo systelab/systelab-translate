@@ -11,7 +11,7 @@ export class NumberFormatPipe implements PipeTransform {
 
 	public transform(value: number, precision?: string, units?: string, priorSymbol?: string, defaultSymbolWhenNull?: string, ...args: string[]): string {
 
-		if (value) {
+		if (value || value == 0) {
 			if (!precision) {
 				precision = '1.0-2';
 			}

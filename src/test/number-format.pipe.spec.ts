@@ -79,5 +79,10 @@ describe('Pipe: NumberFormatPipe', () => {
 		expect(pipe.transform(3.3323335, '1dsfas3333423422', '%', '<'))
 			.toBe('');
 	});
+
+	it('check number format with 0.0', () => {
+		expect(pipe.transform(0.0, '1.0-2', '', ''))
+			.toBe('0');
+	});
 });
 
