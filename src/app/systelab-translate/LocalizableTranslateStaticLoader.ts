@@ -3,20 +3,30 @@ import {Observable, of as observableOf, forkJoin as observableForkJoin} from 'rx
 import {catchError, map} from 'rxjs/operators';
 import { TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
+import { Location } from '@angular/common';
 
 export class LocalizableTranslateStaticLoader implements TranslateLoader {
 
 	protected prefix = '';
 
-	constructor(private http: HttpClient) {
+	constructor(private http: HttpClient,
+				private location: Location) {
 
 		if (!(window.location.pathname === '/' || window.location.pathname === '/context.html')) {
-			if (window.location.pathname.endsWith('index.html')) {
+			this.prefix = window.location.pathname;
+			if (this.prefix.endsWith('index.html')) {
 				// That's the case of Electron when starting from local file.
-				this.prefix = window.location.pathname.replace('index.html', '');
-			} else {
-				this.prefix = window.location.pathname + '/';
+				this.prefix = this.prefix.substr(0, this.prefix.length - 10);
 			}
+			if (this.prefix.endsWith('/')) {
+				this.prefix = this.prefix.substr(0, this.prefix.length - 1);
+			}
+			if (this.prefix.endsWith(this.location.path())) {
+				// When starting from an Angular application route
+				this.prefix = this.prefix.substr(0, this.prefix.length - this.location.path().length);
+			}
+
+			this.prefix = (this.prefix !== '') ? this.prefix + '/' : '';
 		}
 	}
 
