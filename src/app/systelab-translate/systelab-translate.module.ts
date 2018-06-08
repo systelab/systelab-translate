@@ -9,7 +9,7 @@ import { DecimalPipe } from '@angular/common';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 // AoT requires an exported function for factories
-export function HttpLoaderFactory(http: HttpClient, location: Location) {
+export function httpLoaderFactory(http: HttpClient, location: Location) {
 	return new LocalizableTranslateStaticLoader(http, location);
 }
 
