@@ -1,9 +1,27 @@
+
+import {of as observableOf,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs/Observable';
 
 import { DecimalFormat } from './decimal-format/DecimalFormat'
 import { DateUtil } from './date-util/date-util';
+import { registerLocaleData } from '@angular/common';
+import localeCa from '@angular/common/locales/ca';
+import localeDe from '@angular/common/locales/de';
+import localeEn from '@angular/common/locales/en';
+import localeEs from '@angular/common/locales/es';
+import localeFr from '@angular/common/locales/fr';
+import localeGl from '@angular/common/locales/gl';
+import localeIt from '@angular/common/locales/it';
+import localeJa from '@angular/common/locales/ja';
+import localeKo from '@angular/common/locales/ko';
+import localeLt from '@angular/common/locales/lt';
+import localeNl from '@angular/common/locales/nl';
+import localePt from '@angular/common/locales/pt';
+import localeRu from '@angular/common/locales/ru';
+import localeSk from '@angular/common/locales/sk';
+import localeTh from '@angular/common/locales/th';
+import localeZh from '@angular/common/locales/zh';
 
 @Injectable()
 export class I18nService {
@@ -13,6 +31,23 @@ export class I18nService {
 	protected dateUtil: DateUtil;
 
 	constructor(protected translateService: TranslateService) {
+		//By default, Angular5 only contains locale data for en-US.
+		registerLocaleData(localeCa);
+		registerLocaleData(localeDe);
+		registerLocaleData(localeEn);
+		registerLocaleData(localeEs);
+		registerLocaleData(localeFr);
+		registerLocaleData(localeGl);
+		registerLocaleData(localeIt);
+		registerLocaleData(localeJa);
+		registerLocaleData(localeKo);
+		registerLocaleData(localeLt);
+		registerLocaleData(localeNl);
+		registerLocaleData(localePt);
+		registerLocaleData(localeRu);
+		registerLocaleData(localeSk);
+		registerLocaleData(localeTh);
+		registerLocaleData(localeZh);
 		this.translateService.setDefaultLang('en-US');
 		this.dateUtil = new DateUtil('en-US');
 	}
@@ -45,7 +80,7 @@ export class I18nService {
 
 	public get(bundle: string | string[]): Observable<any> {
 		if (typeof bundle === 'string' && this.staticBundles[bundle]) {
-			return Observable.of(this.staticBundles[bundle]);
+			return observableOf(this.staticBundles[bundle]);
 		}
 		return this.translateService.get(bundle);
 	}

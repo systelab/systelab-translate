@@ -13,15 +13,17 @@ export function HttpLoaderFactory(http: HttpClient, location: Location) {
 	return new LocalizableTranslateStaticLoader(http, location);
 }
 
+export const translateModuleForRoot = TranslateModule.forRoot({
+	loader: {
+		provide:    TranslateLoader,
+		useFactory: (httpLoaderFactory),
+		deps:       [HttpClient, Location]
+	}
+});
+
 @NgModule({
 	imports:      [
-		TranslateModule.forRoot({
-			loader: {
-				provide:    TranslateLoader,
-				useFactory: HttpLoaderFactory,
-				deps:       [HttpClient, Location]
-			}
-		})
+		translateModuleForRoot
 	],
 	declarations: [
 		GeneralTranslatePipe,
@@ -36,6 +38,7 @@ export function HttpLoaderFactory(http: HttpClient, location: Location) {
 		{provide: LocationStrategy, useClass: PathLocationStrategy}
 	]
 })
+
 export class SystelabTranslateModule {
 	public static forRoot(entryComponents?: Array<Type<any> | any[]>): ModuleWithProviders {
 		return {
