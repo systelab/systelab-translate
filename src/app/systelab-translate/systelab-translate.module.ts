@@ -6,10 +6,11 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { NumberFormatPipe } from './number-format.pipe';
 import { DecimalPipe } from '@angular/common';
+import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 // AoT requires an exported function for factories
-export function HttpLoaderFactory(http: HttpClient) {
-	return new LocalizableTranslateStaticLoader(http);
+export function HttpLoaderFactory(http: HttpClient, location: Location) {
+	return new LocalizableTranslateStaticLoader(http, location);
 }
 
 @NgModule({
@@ -18,7 +19,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 			loader: {
 				provide:    TranslateLoader,
 				useFactory: HttpLoaderFactory,
-				deps:       [HttpClient]
+				deps:       [HttpClient, Location]
 			}
 		})
 	],
@@ -30,7 +31,10 @@ export function HttpLoaderFactory(http: HttpClient) {
 		GeneralTranslatePipe,
 		NumberFormatPipe],
 	providers:    [
-		DecimalPipe]
+		DecimalPipe,
+		Location,
+		{provide: LocationStrategy, useClass: PathLocationStrategy}
+	]
 })
 export class SystelabTranslateModule {
 	public static forRoot(entryComponents?: Array<Type<any> | any[]>): ModuleWithProviders {
