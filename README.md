@@ -4,7 +4,7 @@
 [![npm version](https://badge.fury.io/js/systelab-translate.svg)](https://badge.fury.io/js/systelab-translate)
 [![Known Vulnerabilities](https://snyk.io/test/github/systelab/systelab-translate/badge.svg?targetFile=package.json)](https://snyk.io/test/github/systelab/systelab-translate?targetFile=package.json)
 
-# systelab-translate
+# systelab-translate 2
 
 Library with I18N tools to speed up our Angular developments
 
