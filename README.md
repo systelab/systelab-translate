@@ -182,7 +182,7 @@ Returns the value rounded to 2 decimals, % as units and < as the previous symbol
 ```javascript
 public transform(value: number, precision?: string, units?: string, priorSymbol?: string, defaultSymbolWhenNull?): string
 ```
-This pipe can be used from the Component through the method transform.
+This pipe can be used from any component through the method transform.
 
 
 ## Working with the repo
