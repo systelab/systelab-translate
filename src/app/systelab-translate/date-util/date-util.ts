@@ -44,11 +44,10 @@ export class DateUtil {
 	}
 
 	public getDateTo(date: Date) {
-		let d: Date = setHours(date, 0);
-		d = setMinutes(d, 0);
-		d = setSeconds(d, 0);
-		d = setMilliseconds(d, 0);
-		d = addDays(d, 1);
+		let d: Date = setHours(date, 23);
+		d = setMinutes(d, 59);
+		d = setSeconds(d, 59);
+		d = setMilliseconds(d, 999);
 		return d;
 	}
 
@@ -234,7 +233,6 @@ export class DateUtil {
 		if (!locale) {
 			locale = this.locale;
 		}
-
 
 		switch (locale) {
 			case 'en-US':
