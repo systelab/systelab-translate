@@ -1,7 +1,7 @@
 {
   "name": "systelab-translate",
   "homepage": "https://github.com/systelab/systelab-translate.git",
-  "version": "4.2.3",
+  "version": "4.2.5",
   "license": "MIT",
   "keywords": [
     "Angular",
@@ -41,7 +41,7 @@
   "peerDependencies": {},
   "devDependencies": {
     "@angular/animations": "6.0.0",
-    "@angular/cli": "^6.0.0",
+    "@angular/cli": "6.0.0",
     "@angular/common": "6.0.0",
     "@angular/compiler": "6.0.0",
     "@angular/compiler-cli": "6.0.0",
