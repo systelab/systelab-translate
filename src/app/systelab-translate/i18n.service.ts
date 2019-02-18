@@ -23,7 +23,7 @@ import localeSk from '@angular/common/locales/sk';
 import localeTh from '@angular/common/locales/th';
 import localeZh from '@angular/common/locales/zh';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class I18nService {
 
 	protected locale: string;
