@@ -1,12 +1,10 @@
 import { ModuleWithProviders, NgModule, Type } from '@angular/core';
 import { LocalizableTranslateStaticLoader } from './LocalizableTranslateStaticLoader';
-import { I18nService } from './i18n.service';
 import { GeneralTranslatePipe } from './translate.pipe';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { NumberFormatPipe } from './number-format.pipe';
-import { DecimalPipe } from '@angular/common';
-import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { DecimalPipe, Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 // AoT requires an exported function for factories
 export function httpLoaderFactory(http: HttpClient, location: Location) {
@@ -44,8 +42,8 @@ export class SystelabTranslateModule {
 		return {
 			ngModule:  SystelabTranslateModule,
 			providers: [
-				{provide: I18nService, useClass: I18nService},
-				{provide: NumberFormatPipe, useClass: NumberFormatPipe}
+				{provide: NumberFormatPipe, useClass: NumberFormatPipe},
+				{provide: GeneralTranslatePipe, useClass: GeneralTranslatePipe}
 			]
 		};
 	}
