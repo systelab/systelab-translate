@@ -80,6 +80,17 @@ describe('Date Service', () => {
 			})
 	});
 
+	it('Parse a date in PT', (done) => {
+		service.use('pt-PT')
+			.subscribe(() => {
+				expect(service.formatDate(service.parseDate('28-1-16')))
+					.toBe('28-01-16');
+				expect(service.formatDateFullYear(service.parseDate('28-1-2016')))
+					.toBe('28-01-2016');
+				done();
+			})
+	});
+
 	it('Format a time and a date and time', (done) => {
 		service.use('es-ES')
 			.subscribe(() => {

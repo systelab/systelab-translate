@@ -1,4 +1,4 @@
-import { addDays, format, setHours, setMilliseconds, setMinutes, setSeconds } from 'date-fns';
+import { format, setHours, setMilliseconds, setMinutes, setSeconds } from 'date-fns';
 
 export class DateUtil {
 
@@ -12,8 +12,6 @@ export class DateUtil {
 	public getTimeFormat(withSeconds = false): string {
 		return (withSeconds) ? 'HH:mm:ss' : 'HH:mm';
 	}
-
-	// DATE TIME FUNCTIONS
 
 	public formatDate(date: Date): string {
 		return format(date, this.getDateFormat());
@@ -69,32 +67,6 @@ export class DateUtil {
 			case 'en-US':
 				stringDateFormat = 'M/D/YY';
 				break;
-			case 'en-GB':
-			case 'it-IT':
-			case 'es-AR':
-			case 'es-ES':
-			case 'es-BO':
-			case 'es-CL':
-			case 'es-CO':
-			case 'es-CR':
-			case 'es-DO':
-			case 'es-EC':
-			case 'es-GT':
-			case 'es-HN':
-			case 'es-MX':
-			case 'es-NI':
-			case 'es-PA':
-			case 'es-PE':
-			case 'es-PR':
-			case 'es-PY':
-			case 'es-SV':
-			case 'es-UR':
-			case 'es-VE':
-			case 'fr-FR':
-			case 'gl-GL':
-			case 'ca-CA':
-				stringDateFormat = 'DD/MM/YY';
-				break;
 			case 'ko-KO':
 				stringDateFormat = 'YY. M. D';
 				break;
@@ -123,26 +95,6 @@ export class DateUtil {
 			case 'ja-JA':
 				stringDateFormat = 'YY/MM/DD';
 				break;
-			default:
-				stringDateFormat = 'DD/MM/YY';
-				break;
-		}
-		if (isFullYear) {
-			stringDateFormat = stringDateFormat.replace('YY', 'YYYY');
-			if (this.locale === 'en-US') {
-				stringDateFormat = stringDateFormat.replace('M', 'MM');
-				stringDateFormat = stringDateFormat.replace('D', 'DD');
-			}
-		}
-		return stringDateFormat;
-	}
-
-	public getDateFormatForDatePicker(isFullYear = false): string {
-		let stringDateFormat = '';
-		switch (this.locale) {
-			case 'en-US':
-				stringDateFormat = 'm/d/y';
-				break;
 			case 'en-GB':
 			case 'it-IT':
 			case 'es-AR':
@@ -167,7 +119,25 @@ export class DateUtil {
 			case 'fr-FR':
 			case 'gl-GL':
 			case 'ca-CA':
-				stringDateFormat = 'dd/mm/y';
+			default:
+				stringDateFormat = 'DD/MM/YY';
+				break;
+		}
+		if (isFullYear) {
+			stringDateFormat = stringDateFormat.replace('YY', 'YYYY');
+			if (this.locale === 'en-US') {
+				stringDateFormat = stringDateFormat.replace('M', 'MM');
+				stringDateFormat = stringDateFormat.replace('D', 'DD');
+			}
+		}
+		return stringDateFormat;
+	}
+
+	public getDateFormatForDatePicker(isFullYear = false): string {
+		let stringDateFormat = '';
+		switch (this.locale) {
+			case 'en-US':
+				stringDateFormat = 'm/d/y';
 				break;
 			case 'ko-KO':
 				stringDateFormat = 'y. m. d';
@@ -197,6 +167,30 @@ export class DateUtil {
 			case 'ja-JA':
 				stringDateFormat = 'y/mm/dd';
 				break;
+			case 'en-GB':
+			case 'it-IT':
+			case 'es-AR':
+			case 'es-ES':
+			case 'es-BO':
+			case 'es-CL':
+			case 'es-CO':
+			case 'es-CR':
+			case 'es-DO':
+			case 'es-EC':
+			case 'es-GT':
+			case 'es-HN':
+			case 'es-MX':
+			case 'es-NI':
+			case 'es-PA':
+			case 'es-PE':
+			case 'es-PR':
+			case 'es-PY':
+			case 'es-SV':
+			case 'es-UR':
+			case 'es-VE':
+			case 'fr-FR':
+			case 'gl-GL':
+			case 'ca-CA':
 			default:
 				stringDateFormat = 'dd/mm/y';
 				break;
@@ -224,7 +218,7 @@ export class DateUtil {
 	}
 
 	public parseDate(currentDateValue: string, locale?: string): Date {
-		let auxDate: string, auxArray: Array<string>;
+		let auxArray: Array<string>;
 
 		if (!currentDateValue) {
 			currentDateValue = '';
@@ -236,12 +230,24 @@ export class DateUtil {
 
 		switch (locale) {
 			case 'en-US':
+			case 'zh-CN':
+			case 'ja-JA':
 				auxArray = currentDateValue.split('/');
-				if (auxArray.indexOf('') > -1) {
-					return undefined;
-				}
-				auxDate = currentDateValue;
-				break;
+				return this.isArrayEmpty(auxArray) ? undefined : new Date(currentDateValue);
+			case 'pl-PL':
+			case 'lt-LT':
+				auxArray = currentDateValue.split('-');
+				return this.isArrayEmpty(auxArray) ? undefined : new Date(auxArray.join('/'));
+			case 'pt-PT':
+			case 'pt-BR':
+			case 'nl-NL':
+				auxArray = currentDateValue.split('-');
+				return this.isArrayEmpty(auxArray) ? undefined : new Date(auxArray[1] + '/' + auxArray[0] + '/' + auxArray[2]);
+			case 'sk-SK':
+			case 'ru-RU':
+			case 'de-DE':
+				auxArray = currentDateValue.split('.');
+				return this.isArrayEmpty(auxArray) ? undefined : new Date(auxArray[1] + '/' + auxArray[0] + '/' + auxArray[2]);
 			case 'en-GB':
 			case 'it-IT':
 			case 'es-AR':
@@ -266,72 +272,14 @@ export class DateUtil {
 			case 'fr-FR':
 			case 'gl-GL':
 			case 'ca-CA':
-				auxArray = currentDateValue.split('/');
-				if (auxArray.indexOf('') > -1) {
-					return undefined;
-				}
-				auxDate = auxArray[1] + '/' + auxArray[0] + '/' + auxArray[2];
-				break;
-			case 'pl-PL':
-			case 'lt-LT':
-				auxArray = currentDateValue.split('-');
-				if (auxArray.indexOf('') > -1) {
-					return undefined;
-				}
-				auxDate = auxArray.join('/');
-				break;
-			case 'pt-PT':
-			case 'pt-BR':
-			case 'nl-NL':
-				auxArray = currentDateValue.split('-');
-				if (auxArray.indexOf('') > -1) {
-					return undefined;
-				}
-				auxDate = auxArray[1] + '/' + auxArray[0] + '/' + auxArray[2];
-				break;
-			case 'sk-SK':
-			case 'ru-RU':
-				auxArray = currentDateValue.split('.');
-				if (auxArray.indexOf('') > -1) {
-					return undefined;
-				}
-				auxDate = auxArray[1] + '/' + auxArray[0] + '/' + auxArray[2];
-				break;
-			case 'zh-CN':
-				auxArray = currentDateValue.split('/');
-				if (auxArray.indexOf('') > -1) {
-					return undefined;
-				}
-				auxDate = currentDateValue;
-				break;
-			case 'de-DE':
-				auxArray = currentDateValue.split('.');
-				if (auxArray.indexOf('') > -1) {
-					return undefined;
-				}
-				auxDate = auxArray[1] + '/' + auxArray[0] + '/' + auxArray[2];
-				break;
 			case 'th-TH':
-				auxArray = currentDateValue.split('/');
-				if (auxArray.indexOf('') > -1) {
-					return undefined;
-				}
-				auxDate = auxArray[1] + '/' + auxArray[0] + '/' + auxArray[2];
-				break;
-			case 'ja-JA':
-				auxArray = currentDateValue.split('/');
-				if (auxArray.indexOf('') > -1) {
-					return undefined;
-				}
-				auxDate = currentDateValue;
-				break;
 			default:
 				auxArray = currentDateValue.split('/');
-				if (auxArray.indexOf('') > -1) {
-					return undefined;
-				}
-				auxDate = auxArray[1] + '/' + auxArray[0] + '/' + auxArray[2];
+				return this.isArrayEmpty(auxArray) ? undefined : new Date(auxArray[1] + '/' + auxArray[0] + '/' + auxArray[2]);
 		}
-		return new Date(auxDate);
+	}
+
+	private isArrayEmpty(auxArray: Array<string>) {
+		return auxArray.indexOf('') > -1
 	}
 }
