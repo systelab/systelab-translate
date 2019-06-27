@@ -24,7 +24,6 @@ describe('Pipe: NumberFormatPipe', () => {
 				})
 			],
 			providers: [
-				I18nService,
 				DecimalPipe,
 				NumberFormatPipe
 			]

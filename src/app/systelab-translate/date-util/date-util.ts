@@ -44,8 +44,7 @@ export class DateUtil {
 	}
 
 	public getDateTo(date: Date) {
-		let d: Date = setHours(date, 0);
-		d = setHours(d, 23);
+		let d: Date = setHours(date, 23);
 		d = setMinutes(d, 59);
 		d = setSeconds(d, 59);
 		d = setMilliseconds(d, 999);
