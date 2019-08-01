@@ -30,12 +30,6 @@ module.exports = function(config) {
 		logLevel:                 config.LOG_INFO,
 		autoWatch:                true,
 		browsers:                 ['Chrome'],
-		singleRun:                false,
-		files:                    [
-			{pattern: './src/i18n/**/**.*', watched: false, included: false, served: true}
-		],
-		proxies:                  {
-			"/i18n/": "/base/src/i18n/"
-		}
+		singleRun:                false
 	});
 };
