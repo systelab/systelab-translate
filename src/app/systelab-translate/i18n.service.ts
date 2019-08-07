@@ -128,8 +128,8 @@ export class I18nService {
         return this.dateUtil.formatDateFullYear(date);
     }
 
-    public formatTime(date: Date, withSeconds?: boolean): string {
-        return this.dateUtil.formatTime(date, withSeconds);
+    public formatTime(date: Date, withSeconds?: boolean, withAMPM?: boolean): string {
+        return this.dateUtil.formatTime(date, withSeconds, withAMPM);
     }
 
     public formatDateTime(date: Date, fullYear?: boolean, withSeconds?: boolean, withAMPM?: boolean): string {

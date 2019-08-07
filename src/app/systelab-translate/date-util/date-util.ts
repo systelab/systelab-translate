@@ -33,17 +33,8 @@ export class DateUtil {
 
     public formatDateTime(date: Date, fullYear?: boolean, withSeconds?: boolean, withAMPM?: boolean): string {
         const formatedDate = (fullYear) ? this.formatDateFullYear(date) : this.formatDate(date);
-        let formatedHour;
-       if (withSeconds && withAMPM) {
-           formatedHour = this.formatTime(date, true, true);
-       } else if (!withSeconds && withAMPM) {
-           formatedHour = this.formatTime(date, false, true);
-       } else if (withSeconds && !withAMPM) {
-           formatedHour = this.formatTime(date, true, false);
-       } else {
-           formatedHour = this.formatTime(date);
-       }
-       return formatedDate + ' ' + formatedHour;
+        const formatedHour = this.formatTime(date, withSeconds, withAMPM);
+        return formatedDate + ' ' + formatedHour;
     }
 
     public getDateFrom(date: Date) {
