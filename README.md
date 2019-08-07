@@ -121,7 +121,7 @@ public formatTime(date: Date, withSeconds?: boolean): string
 Formats a Time depending on the locale.
 
 ```javascript
-public formatDateTime(date: Date, fullYear?: boolean, withSeconds?: boolean): string
+public formatDateTime(date: Date, fullYear?: boolean, withSeconds?: boolean, withAMPM?: boolean): string
 ```
 Formats a Date Time depending on the locale.
 
