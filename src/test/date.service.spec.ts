@@ -104,9 +104,9 @@ describe('Date Service', () => {
                 date.setHours(21);
                 date.setMinutes(0, 0, 0);
                 expect(service.formatTime(date))
-                    .toBe('21:00');
+                    .toBe('21:00 pm');
                 expect(service.formatDateTime(date))
-                    .toBe('1/28/16 21:00');
+                    .toBe('1/28/16 21:00 pm');
                 done();
             });
     });
@@ -136,10 +136,10 @@ describe('Date Service', () => {
                 date.setMinutes(0, 0, 0);
                 expect(service.formatTime(date))
                     .toBe('21:00');
-                expect(service.formatDateTime(date, false, false, true))
-                    .toBe('28/01/16 21:00 pm');
-                expect(service.formatDateTime(date, false, true, true))
-                    .toBe('28/01/16 21:00:00 pm');
+                expect(service.formatDateTime(date))
+                    .toBe('28/01/16 21:00');
+                expect(service.formatDateTime(date, false, true))
+                    .toBe('28/01/16 21:00:00');
                 done();
             });
     });
@@ -153,10 +153,10 @@ describe('Date Service', () => {
                 date.setHours(21);
                 date.setMinutes(0, 0, 0);
                 expect(service.formatTime(date))
-                    .toBe('21:00');
-                expect(service.formatDateTime(date, false, false, true))
+                    .toBe('21:00 pm');
+                expect(service.formatDateTime(date))
                     .toBe('1/28/16 21:00 pm');
-                expect(service.formatDateTime(date, false, true, true))
+                expect(service.formatDateTime(date, false, true))
                     .toBe('1/28/16 21:00:00 pm');
                 done();
             });

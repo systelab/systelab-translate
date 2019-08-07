@@ -116,8 +116,8 @@ export class I18nService {
         return this.dateUtil.getDateFormatForDatePicker(isFullYear);
     }
 
-    public getTimeFormat(withSeconds = false, withAMPM = false): string {
-        return this.dateUtil.getTimeFormat(withSeconds, withAMPM);
+    public getTimeFormat(withSeconds = false): string {
+        return this.dateUtil.getTimeFormat(withSeconds);
     }
 
     public formatDate(date: Date): string {
@@ -128,12 +128,12 @@ export class I18nService {
         return this.dateUtil.formatDateFullYear(date);
     }
 
-    public formatTime(date: Date, withSeconds?: boolean, withAMPM?: boolean): string {
-        return this.dateUtil.formatTime(date, withSeconds, withAMPM);
+    public formatTime(date: Date, withSeconds?: boolean): string {
+        return this.dateUtil.formatTime(date, withSeconds);
     }
 
-    public formatDateTime(date: Date, fullYear?: boolean, withSeconds?: boolean, withAMPM?: boolean): string {
-        return this.dateUtil.formatDateTime(date, fullYear, withSeconds, withAMPM);
+    public formatDateTime(date: Date, fullYear?: boolean, withSeconds?: boolean): string {
+        return this.dateUtil.formatDateTime(date, fullYear, withSeconds);
     }
 
     public formatMonthAndYear(date: Date): string {

@@ -1,4 +1,4 @@
-import {addDays, format, setHours, setMilliseconds, setMinutes, setSeconds} from 'date-fns';
+import {format, setHours, setMilliseconds, setMinutes, setSeconds} from 'date-fns';
 
 export class DateUtil {
 
@@ -9,9 +9,9 @@ export class DateUtil {
         this.locale = lang;
     }
 
-    public getTimeFormat(withSeconds = false, withAMPM = false): string {
+    public getTimeFormat(withSeconds = false): string {
         const time = (withSeconds) ? 'HH:mm:ss' : 'HH:mm';
-        const marker = (withAMPM) ? ' a' : '';
+        const marker = (this.locale === 'en-US') ? ' a' : '';
         return time + marker;
     }
 
@@ -27,13 +27,13 @@ export class DateUtil {
 
     }
 
-    public formatTime(date: Date, withSeconds?: boolean, withAMPM?: boolean): string {
-        return format(date, this.getTimeFormat(withSeconds, withAMPM));
+    public formatTime(date: Date, withSeconds?: boolean): string {
+        return format(date, this.getTimeFormat(withSeconds));
     }
 
-    public formatDateTime(date: Date, fullYear?: boolean, withSeconds?: boolean, withAMPM?: boolean): string {
+    public formatDateTime(date: Date, fullYear?: boolean, withSeconds?: boolean): string {
         const formatedDate = (fullYear) ? this.formatDateFullYear(date) : this.formatDate(date);
-        const formatedHour = this.formatTime(date, withSeconds, withAMPM);
+        const formatedHour = this.formatTime(date, withSeconds);
         return formatedDate + ' ' + formatedHour;
     }
 
