@@ -10,9 +10,9 @@ export class DateUtil {
     }
 
     public getTimeFormat(withSeconds = false): string {
-        const time = (withSeconds) ? 'HH:mm:ss' : 'HH:mm';
-        const marker = (this.locale === 'en-US') ? ' a' : '';
-        return time + marker;
+        const time = (withSeconds) ? (this.locale === 'en-US') ? 'hh:mm:ss a' : 'HH:mm:ss' :
+            (this.locale === 'en-US') ? 'hh:mm a' : 'HH:mm' ;
+        return time;
     }
 
     // DATE TIME FUNCTIONS

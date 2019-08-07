@@ -104,9 +104,9 @@ describe('Date Service', () => {
                 date.setHours(21);
                 date.setMinutes(0, 0, 0);
                 expect(service.formatTime(date))
-                    .toBe('21:00 pm');
+                    .toBe('09:00 pm');
                 expect(service.formatDateTime(date))
-                    .toBe('1/28/16 21:00 pm');
+                    .toBe('1/28/16 09:00 pm');
                 done();
             });
     });
@@ -153,11 +153,11 @@ describe('Date Service', () => {
                 date.setHours(21);
                 date.setMinutes(0, 0, 0);
                 expect(service.formatTime(date))
-                    .toBe('21:00 pm');
+                    .toBe('09:00 pm');
                 expect(service.formatDateTime(date))
-                    .toBe('1/28/16 21:00 pm');
+                    .toBe('1/28/16 09:00 pm');
                 expect(service.formatDateTime(date, false, true))
-                    .toBe('1/28/16 21:00:00 pm');
+                    .toBe('1/28/16 09:00:00 pm');
                 done();
             });
     });
