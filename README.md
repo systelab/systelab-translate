@@ -101,9 +101,9 @@ public getDateFormat(isFullYear = false): string
 Returns the Date Format depending on the locale. If full year, the year will have 4 digits.
 
 ```javascript
-public getTimeFormat(withSeconds = false, withAMPM = false): string
+public getTimeFormat(withSeconds = false): string
 ```
-Returns the Time Format depending on the locale. If specified, seconds will be added or time with AM/PM format.
+Returns the Time Format depending on the locale. If specified, seconds will be added.
 
 ```javascript
 public formatDate(date: Date): string
@@ -121,7 +121,7 @@ public formatTime(date: Date, withSeconds?: boolean): string
 Formats a Time depending on the locale.
 
 ```javascript
-public formatDateTime(date: Date, fullYear?: boolean, withSeconds?: boolean, withAMPM?: boolean): string
+public formatDateTime(date: Date, fullYear?: boolean, withSeconds?: boolean): string
 ```
 Formats a Date Time depending on the locale.
 
