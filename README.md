@@ -106,7 +106,7 @@ public getTimeFormat(withSeconds = false, withAMPM = false): string
 Returns the Time Format depending on the locale. If specified, seconds will be added or time with AM/PM format.
 
 ```javascript
-public formatDate(date: Date): stringnpm
+public formatDate(date: Date): string
 ```
 Formats a Date depending on the locale.
 
