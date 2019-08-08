@@ -124,6 +124,41 @@ describe('Date Service', () => {
 				expect(service.formatDateTime(service.getDateMidDay(date)))
 					.toBe('28/01/16 12:00');
 				done();
-			})
+            });
+    });
+
+    it('Format a date and time with AM/PM', (done) => {
+        service.use('es-ES')
+            .subscribe(() => {
+                const date = new Date();
+                date.setFullYear(2016, 0, 28);
+                date.setHours(21);
+                date.setMinutes(0, 0, 0);
+                expect(service.formatTime(date))
+                    .toBe('21:00');
+                expect(service.formatDateTime(date))
+                    .toBe('28/01/16 21:00');
+                expect(service.formatDateTime(date, false, true))
+                    .toBe('28/01/16 21:00:00');
+                done();
+            });
+    });
+
+
+    it('Format a date and time in USA with AM/PM', (done) => {
+        service.use('en-US')
+            .subscribe(() => {
+                const date = new Date();
+                date.setFullYear(2016, 0, 28);
+                date.setHours(21);
+                date.setMinutes(0, 0, 0);
+                expect(service.formatTime(date))
+                    .toBe('09:00 pm');
+                expect(service.formatDateTime(date))
+                    .toBe('1/28/16 09:00 pm');
+                expect(service.formatDateTime(date, false, true))
+                    .toBe('1/28/16 09:00:00 pm');
+                done();
+            });
 	});
 });
