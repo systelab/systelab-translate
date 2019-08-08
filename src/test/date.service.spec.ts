@@ -104,11 +104,11 @@ describe('Date Service', () => {
 				date.setHours(21);
 				date.setMinutes(0, 0, 0);
 				expect(service.formatTime(date))
-					.toBe('21:00');
+                    .toBe('09:00 pm');
 				expect(service.formatDateTime(date))
-					.toBe('1/28/16 21:00');
+                    .toBe('1/28/16 09:00 pm');
 				done();
-			})
+            });
 	});
 
 	it('Get dates at the begging of the day, at the end and at noon', (done) => {
