@@ -19,9 +19,6 @@ describe('Date Service', () => {
 						deps:       [HttpClient]
 					}
 				})
-			],
-			providers: [
-				I18nService
 			]
 		});
 		service = TestBed.get(I18nService);

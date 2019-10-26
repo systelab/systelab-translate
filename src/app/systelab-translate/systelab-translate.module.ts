@@ -40,11 +40,7 @@ export const translateModuleForRoot = TranslateModule.forRoot({
 export class SystelabTranslateModule {
 	public static forRoot(entryComponents?: Array<Type<any> | any[]>): ModuleWithProviders {
 		return {
-			ngModule:  SystelabTranslateModule,
-			providers: [
-				{provide: NumberFormatPipe, useClass: NumberFormatPipe},
-				{provide: GeneralTranslatePipe, useClass: GeneralTranslatePipe}
-			]
+			ngModule:  SystelabTranslateModule
 		};
 	}
 
