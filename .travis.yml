@@ -7,9 +7,6 @@ addons:
   apt:
     sources:
       - google-chrome
-    packages:
-      - google-chrome-stable
-      - google-chrome-beta
 
 before_install:
   - npm i -g makeshift && makeshift -s @systelab-technologies -r https://registry.npmjs.org
