@@ -38,11 +38,5 @@ export const translateModuleForRoot = TranslateModule.forRoot({
 })
 
 export class SystelabTranslateModule {
-	public static forRoot(entryComponents?: Array<Type<any> | any[]>): ModuleWithProviders {
-		return {
-			ngModule:  SystelabTranslateModule
-		};
-	}
-
 }
 
