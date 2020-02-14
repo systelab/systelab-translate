@@ -22,7 +22,8 @@
     "inline-build-templates": "gulp inline-build-templates",
     "copyDecimalFormat": "gulp copyDecimalFormat",
     "ngc-build": "ngc -p ./tsconfig.lib.json",
-    "prepublish": "npm run cleardown && npm run inline-build-templates && npm run ngc-build && npm run copyDecimalFormat"
+    "prepublish": "npm run cleardown && npm run inline-build-templates && npm run ngc-build && npm run copyDecimalFormat",
+    "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points"
   },
   "files": [
     "lib"
@@ -34,7 +35,7 @@
     "url": "https://github.com/systelab/systelab-translate.git"
   },
   "dependencies": {
-    "@ngx-translate/core": "^12.0.0",
+    "@ngx-translate/core": "^12.1.1",
     "@ngx-translate/http-loader": "^4.0.0",
     "date-fns": "^1.29.0",
     "tslib": "^1.9.0"
