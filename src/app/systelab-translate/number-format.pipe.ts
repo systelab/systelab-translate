@@ -1,9 +1,12 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Injectable, Pipe, PipeTransform } from '@angular/core';
 import { I18nService } from './i18n.service';
 import { DecimalPipe } from '@angular/common';
 
 @Pipe({
 	name: 'numberformat'
+})
+@Injectable({
+	providedIn: 'root'
 })
 export class NumberFormatPipe implements PipeTransform {
 	constructor(protected i18nService: I18nService, protected decimalPipe: DecimalPipe) {
@@ -27,13 +30,10 @@ export class NumberFormatPipe implements PipeTransform {
 				return roundedValue;
 			} catch (error) {
 				console.error(error);
+				return '';
 			}
-			return '';
 		} else {
-			if (defaultSymbolWhenNull) {
-				return defaultSymbolWhenNull;
-			}
-			return '';
+			return defaultSymbolWhenNull ? defaultSymbolWhenNull : '';
 		}
 	}
 }

@@ -19,9 +19,6 @@ describe('Translate Service', () => {
 						deps:       [HttpClient]
 					}
 				})
-			],
-			providers: [
-				I18nService
 			]
 		});
 		service = TestBed.get(I18nService);

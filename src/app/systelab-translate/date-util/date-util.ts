@@ -10,9 +10,9 @@ export class DateUtil {
 	}
 
 	public getTimeFormat(withSeconds = false): string {
-        const time = (withSeconds) ? (this.locale === 'en-US') ? 'hh:mm:ss a' : 'HH:mm:ss' :
-            (this.locale === 'en-US') ? 'hh:mm a' : 'HH:mm' ;
-        return time;
+		const time = (withSeconds) ? (this.locale === 'en-US') ? 'hh:mm:ss a' : 'HH:mm:ss' :
+			(this.locale === 'en-US') ? 'hh:mm a' : 'HH:mm' ;
+		return time;
 	}
 
 	// DATE TIME FUNCTIONS
@@ -33,7 +33,7 @@ export class DateUtil {
 
 	public formatDateTime(date: Date, fullYear?: boolean, withSeconds?: boolean): string {
 		const formatedDate = (fullYear) ? this.formatDateFullYear(date) : this.formatDate(date);
-        const formatedHour = this.formatTime(date, withSeconds);
+		const formatedHour = this.formatTime(date, withSeconds);
 		return formatedDate + ' ' + formatedHour;
 	}
 

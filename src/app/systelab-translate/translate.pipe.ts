@@ -1,9 +1,12 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Injectable, Pipe, PipeTransform } from '@angular/core';
 
 import { I18nService } from './i18n.service';
 
 @Pipe({
 	name: 'translate'
+})
+@Injectable({
+	providedIn: 'root'
 })
 export class GeneralTranslatePipe implements PipeTransform {
 	constructor(protected i18nService: I18nService) {

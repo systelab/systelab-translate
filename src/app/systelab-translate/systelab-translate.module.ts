@@ -11,17 +11,15 @@ export function httpLoaderFactory(http: HttpClient, location: Location) {
 	return new LocalizableTranslateStaticLoader(http, location);
 }
 
-export const translateModuleForRoot = TranslateModule.forRoot({
-	loader: {
-		provide:    TranslateLoader,
-		useFactory: (httpLoaderFactory),
-		deps:       [HttpClient, Location]
-	}
-});
-
 @NgModule({
 	imports:      [
-		translateModuleForRoot
+		TranslateModule.forRoot({
+			loader: {
+				provide:    TranslateLoader,
+				useFactory: (httpLoaderFactory),
+				deps:       [HttpClient, Location]
+			}
+		})
 	],
 	declarations: [
 		GeneralTranslatePipe,
@@ -38,15 +36,5 @@ export const translateModuleForRoot = TranslateModule.forRoot({
 })
 
 export class SystelabTranslateModule {
-	public static forRoot(entryComponents?: Array<Type<any> | any[]>): ModuleWithProviders {
-		return {
-			ngModule:  SystelabTranslateModule,
-			providers: [
-				{provide: NumberFormatPipe, useClass: NumberFormatPipe},
-				{provide: GeneralTranslatePipe, useClass: GeneralTranslatePipe}
-			]
-		};
-	}
-
 }
 

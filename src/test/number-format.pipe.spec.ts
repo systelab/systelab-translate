@@ -24,9 +24,7 @@ describe('Pipe: NumberFormatPipe', () => {
 				})
 			],
 			providers: [
-				DecimalPipe,
-				NumberFormatPipe
-			]
+				DecimalPipe]
 		});
 		i18nService = TestBed.get(I18nService);
 		decimalPipe = TestBed.get(DecimalPipe);
