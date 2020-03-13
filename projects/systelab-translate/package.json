@@ -1,0 +1,17 @@
+{
+  "name": "systelab-translate",
+  "homepage": "https://github.com/systelab/systelab-translate.git",
+  "version": "7.0.0",
+  "license": "MIT",
+  "keywords": [
+    "Angular",
+    "Angular-cli",
+    "NPM",
+    "Systelab",
+    "Translate"
+  ],
+  "peerDependencies": {
+    "@angular/common": "^8.2.14",
+    "@angular/core": "^8.2.14"
+  }
+}
