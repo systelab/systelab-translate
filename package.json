@@ -1,16 +1,5 @@
 {
   "name": "systelab-translate",
-  "homepage": "https://github.com/systelab/systelab-translate.git",
-  "version": "7.0.1",
-  "license": "MIT",
-  "keywords": [
-    "Angular",
-    "Angular-cli",
-    "NPM",
-    "Systelab",
-    "Translate"
-  ],
-  "private": false,
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -22,10 +11,6 @@
   "files": [
     "lib"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/systelab/systelab-translate.git"
-  },
   "dependencies": {
     "@angular/animations": "~9.0.6",
     "@angular/common": "~9.0.6",
@@ -63,6 +48,7 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.6.4"
+    "typescript": "~3.6.4",
+    "gulp": "^3.9.1"
   }
 }
