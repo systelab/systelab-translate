@@ -18,10 +18,10 @@ before_script:
   - npm install -g codecov
   - npm install -g codacy-coverage
   - npm install
-  - ng build
+  - ng build systelab-translate --prod
 
 script: 
-  - ng test --watch=false --code-coverage
+  - ng test systelab-translate --watch=false --code-coverage
 
 after_success:
   - cat coverage/lcov.info | codecov
