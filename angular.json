@@ -15,7 +15,12 @@
             "tsConfig": "projects/systelab-translate/tsconfig.lib.json",
             "project": "projects/systelab-translate/ng-package.json"
           }
-        },
+        ,          "configurations": {
+            "production": {
+              "tsConfig": "projects/systelab-translate/tsconfig.lib.prod.json"
+            }
+          }
+},
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
