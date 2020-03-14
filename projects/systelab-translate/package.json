@@ -1,12 +1,6 @@
 {
   "name": "systelab-translate",
-  "homepage": "https://github.com/systelab/systelab-translate.git",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/systelab/systelab-translate.git"
-  },
-  "version": "7.0.4",
-  "license": "MIT",
+  "description": "The internationalization (i18n) library for Systelab",
   "keywords": [
     "Angular",
     "Angular-cli",
@@ -14,10 +8,20 @@
     "Systelab",
     "Translate"
   ],
+  "version": "7.0.4",
+  "license": "MIT",
+  "homepage": "https://github.com/systelab/systelab-translate.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/systelab/systelab-translate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/systelab/systelab-translate/issues"
+  },
   "private": false,
   "peerDependencies": {
-    "@angular/common": "^9.0.6",
-    "@angular/core": "^9.0.6",
+    "@angular/common": ">=9.0.0",
+    "@angular/core": ">=9.0.0",
     "@ngx-translate/core": "^12.1.1",
     "@ngx-translate/http-loader": "^4.0.0",
     "date-fns": "^1.29.0"

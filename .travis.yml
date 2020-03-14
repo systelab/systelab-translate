@@ -18,14 +18,15 @@ before_script:
   - npm install
 
 script:
-  - ng build systelab-translate --prod
-  - ng test systelab-translate --watch=false --code-coverage
+  - npm run test
+  - npm run build
 
 after_success:
   - cat coverage/lcov.info | codecov
   - cat ./coverage/lcov.info | codacy-coverage
 
 before_deploy:
+  - cp README.md dist/systelab-translate
   - cd dist/systelab-translate
 
 deploy:
