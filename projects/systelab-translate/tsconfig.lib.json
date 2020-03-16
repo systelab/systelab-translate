@@ -3,17 +3,13 @@
   "compilerOptions": {
     "outDir": "../../out-tsc/lib",
     "target": "es2015",
-    "module": "es2015",
     "declaration": true,
     "inlineSources": true,
-    "importHelpers": true,
     "types": []
   },
   "angularCompilerOptions": {
     "skipTemplateCodegen": true,
     "strictMetadataEmit": true,
-    "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true,
     "enableResourceInlining": true
   },
   "exclude": [
