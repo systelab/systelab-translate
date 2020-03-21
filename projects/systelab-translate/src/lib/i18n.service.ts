@@ -64,7 +64,7 @@ export class I18nService {
 		return this.locale;
 	}
 
-	public getCurrentLanguage() {
+	public getCurrentLanguage(): string {
 		return this.translateService.currentLang;
 	}
 
@@ -72,11 +72,11 @@ export class I18nService {
 		return this.translateService.getBrowserLang();
 	}
 
-	public setTranslation(locale: string, translations: Object) {
+	public setTranslation(locale: string, translations: Object): void {
 		this.translateService.setTranslation(locale, translations, false);
 	}
 
-	public appendTranslation(locale: string, translations: Object) {
+	public appendTranslation(locale: string, translations: Object): void {
 		this.translateService.setTranslation(locale, translations, true);
 	}
 
@@ -143,19 +143,19 @@ export class I18nService {
 		return this.dateUtil.formatMonthAndYear(date);
 	}
 
-	public getDateFrom(date: Date) {
+	public getDateFrom(date: Date): Date {
 		return this.dateUtil.getDateFrom(date);
 	}
 
-	public getDateTo(date: Date) {
+	public getDateTo(date: Date): Date {
 		return this.dateUtil.getDateTo(date);
 	}
 
-	public getDateMidDay(date: Date) {
+	public getDateMidDay(date: Date): Date {
 		return this.dateUtil.getDateMidDay(date);
 	}
 
-	public getFirstDayOfWeek() {
+	public getFirstDayOfWeek(): number {
 		return this.dateUtil.getFirstDayOfWeek();
 	}
 

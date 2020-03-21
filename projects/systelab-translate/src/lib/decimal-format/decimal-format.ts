@@ -1,37 +1,12 @@
+// Code derived from: https://gist.github.com/oskansavli/822382
+
 export class DecimalFormat {
-	/**
-	 * @fieldOf DecimalFormat
-	 * @type String
-	 */
+
 	public prefix = '';
-	/**
-	 * @fieldOf DecimalFormat
-	 * @type String
-	 */
 	public suffix = '';
-	/**
-	 * @description Grouping size
-	 * @fieldOf DecimalFormat
-	 * @type String
-	 */
 	public comma = 0;
-	/**
-	 * @description Minimum integer digits to be displayed
-	 * @fieldOf DecimalFormat
-	 * @type Number
-	 */
 	public minInt = 1;
-	/**
-	 * @description Minimum fractional digits to be displayed
-	 * @fieldOf DecimalFormat
-	 * @type String
-	 */
 	public minFrac = 0;
-	/**
-	 * @description Maximum fractional digits to be displayed
-	 * @fieldOf DecimalFormat
-	 * @type String
-	 */
 	public maxFrac = 0;
 
 	constructor(formatStr: string) {

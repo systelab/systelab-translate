@@ -1,10 +1,12 @@
 {
   "name": "systelab-translate",
+  "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test --watch=false --browsers=ChromeHeadless",
+    "build": "ng build systelab-translate --prod",
+    "postbuild": "cp projects/systelab-translate/README.md dist/systelab-translate",
+    "test": "ng test --watch=false --code-coverage --browsers=ChromeHeadless",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
