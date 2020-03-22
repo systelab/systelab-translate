@@ -34,3 +34,20 @@ Library will be published at: https://www.npmjs.com/package/systelab-translate
 ## Documentation
 
 Read the [provided documentation](https://github.com/systelab/systelab-translate/blob/master/projects/systelab-translate/README.md) to use the library 
+
+# Breaking changes
+
+## Version 7
+Few changes where introduce in version 7 in order to standardize the library and support Angular 9.
+The following steps should be consider when migrating from version 6.
+
+1. When importing the module do not use .forRoot(); In Webstorm, replace in path:
+```
+- SystelabTranslateModule.forRoot\(\)
+- SystelabTranslateModule
+```
+2. When importing services and modules import them from systelab-translate root. In Webstorm, replace in path:
+```
+- from 'systelab-translate/lib.+ 
+- from 'systelab-translate';
+```
