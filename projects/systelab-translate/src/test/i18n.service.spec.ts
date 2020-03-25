@@ -1,8 +1,7 @@
-import { I18nService } from '../public-api';
+import { httpLoaderFactory, I18nService } from '../public-api';
 import { TestBed } from '@angular/core/testing';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { httpLoaderFactory } from '../public-api';
 
 describe('Translate Service', () => {
 	let service: I18nService;
@@ -10,7 +9,7 @@ describe('Translate Service', () => {
 	beforeEach(() => {
 
 		TestBed.configureTestingModule({
-			imports:   [
+			imports: [
 				HttpClientModule,
 				TranslateModule.forRoot({
 					loader: {
@@ -46,6 +45,20 @@ describe('Translate Service', () => {
 					.toBe('Día');
 				done();
 			})
+	});
+
+	it('Check the translation of a key asynchronously', (done) => {
+		service.use('en-US')
+			.subscribe(() => {
+					service.get('COMMON_DAY')
+						.subscribe((value) => {
+							expect(value)
+								.toBe('Day');
+							done();
+						})
+				},
+				(error) => {
+				})
 	});
 
 	it('Check the translation of an undefined key returns the key', (done) => {
@@ -104,24 +117,6 @@ describe('Translate Service', () => {
 			})
 	});
 
-	it('Check a simple number pattern', (done) => {
-		service.use('en-GB')
-			.subscribe(() => {
-				expect(service.formatNumber(12, '#.00'))
-					.toBe('12.00');
-				done();
-			})
-	});
-
-	it('Check a simple number pattern with locale', (done) => {
-		service.use('es-ES')
-			.subscribe(() => {
-				expect(service.formatNumber(12, '#.00', true))
-					.toBe('12,00');
-				done();
-			})
-	});
-
 	it('Check a key with one parameters', (done) => {
 		service.use('es-ES')
 			.subscribe(() => {
@@ -149,5 +144,37 @@ describe('Translate Service', () => {
 			})
 	});
 
+	it('Check new static bundles', (done) => {
+		service.use('es-ES')
+			.subscribe(() => {
+				service.setStaticBundles({'KEY': 'value'});
+				expect(service.instant('KEY',))
+					.toBe('value');
+				done();
+			})
+	});
+
+	it('Check new static bundles asynchronously', (done) => {
+		service.use('es-ES')
+			.subscribe(() => {
+				service.setStaticBundles({'KEY': 'value'});
+				service.get('KEY')
+					.subscribe((value) => {
+						expect(value)
+							.toBe('value');
+						done();
+					});
+			})
+	});
+
+	it('Check static bundles override', (done) => {
+		service.use('es-ES')
+			.subscribe(() => {
+				service.setStaticBundles({'COMMON_DAY': 'value'});
+				expect(service.instant('COMMON_DAY',))
+					.toBe('value');
+				done();
+			})
+	});
 
 });

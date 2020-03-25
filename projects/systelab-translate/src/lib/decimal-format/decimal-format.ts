@@ -107,7 +107,7 @@ export class DecimalFormat {
 		if (fracStr.length > maxFrac) { // round
 			//case 6143
 			var num2 = new Number('0.' + fracStr);
-			var num = (maxFrac == 0) ? Math.round(num2.valueOf()) : num.toFixed(maxFrac);
+			var num = (maxFrac == 0) ? Math.round(num2.valueOf()) : num2.toFixed(maxFrac);
 			// toFixed method has bugs on IE (0.7 --> 0)
 			fracStr = num.toString(10)
 				.substr(2);
