@@ -1,23 +1,28 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "downlevelIteration": true,
-    "importHelpers": true,
-    "module": "esnext",
+    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
+    "downlevelIteration": true,
     "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
     "target": "es2015",
-    "allowJs": true,
-    "typeRoots": [
-      "node_modules/@types"
-    ],
     "lib": [
-      "es2016",
+      "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "systelab-translate": [
+        "dist/systelab-translate"
+      ]
+    }
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
   }
 }
