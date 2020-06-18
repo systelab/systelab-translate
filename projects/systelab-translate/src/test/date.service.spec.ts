@@ -1,8 +1,7 @@
-import { I18nService } from '../public-api';
+import { httpLoaderFactory, I18nService } from '../public-api';
 import { TestBed } from '@angular/core/testing';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { httpLoaderFactory } from '../public-api';
 
 describe('Date Service', () => {
 	let service: I18nService;
@@ -10,7 +9,7 @@ describe('Date Service', () => {
 	beforeEach(() => {
 
 		TestBed.configureTestingModule({
-			imports:   [
+			imports: [
 				HttpClientModule,
 				TranslateModule.forRoot({
 					loader: {
@@ -27,7 +26,6 @@ describe('Date Service', () => {
 	afterEach(() => {
 		service = undefined;
 	});
-
 
 	it('Format a date', (done) => {
 		service.use('es-ES')
@@ -92,7 +90,6 @@ describe('Date Service', () => {
 			})
 	});
 
-
 	it('Format a time and a date and time in USA', (done) => {
 		service.use('en-US')
 			.subscribe(() => {
@@ -101,11 +98,11 @@ describe('Date Service', () => {
 				date.setHours(21);
 				date.setMinutes(0, 0, 0);
 				expect(service.formatTime(date))
-                    .toBe('09:00 pm');
+					.toBe('09:00 PM');
 				expect(service.formatDateTime(date))
-                    .toBe('1/28/16 09:00 pm');
+					.toBe('1/28/16 09:00 PM');
 				done();
-            });
+			});
 	});
 
 	it('Get dates at the begging of the day, at the end and at noon', (done) => {
@@ -121,41 +118,40 @@ describe('Date Service', () => {
 				expect(service.formatDateTime(service.getDateMidDay(date)))
 					.toBe('28/01/16 12:00');
 				done();
-            });
-    });
+			});
+	});
 
-    it('Format a date and time with AM/PM', (done) => {
-        service.use('es-ES')
-            .subscribe(() => {
-                const date = new Date();
-                date.setFullYear(2016, 0, 28);
-                date.setHours(21);
-                date.setMinutes(0, 0, 0);
-                expect(service.formatTime(date))
-                    .toBe('21:00');
-                expect(service.formatDateTime(date))
-                    .toBe('28/01/16 21:00');
-                expect(service.formatDateTime(date, false, true))
-                    .toBe('28/01/16 21:00:00');
-                done();
-            });
-    });
+	it('Format a date and time with AM/PM', (done) => {
+		service.use('es-ES')
+			.subscribe(() => {
+				const date = new Date();
+				date.setFullYear(2016, 0, 28);
+				date.setHours(21);
+				date.setMinutes(0, 0, 0);
+				expect(service.formatTime(date))
+					.toBe('21:00');
+				expect(service.formatDateTime(date))
+					.toBe('28/01/16 21:00');
+				expect(service.formatDateTime(date, false, true))
+					.toBe('28/01/16 21:00:00');
+				done();
+			});
+	});
 
-
-    it('Format a date and time in USA with AM/PM', (done) => {
-        service.use('en-US')
-            .subscribe(() => {
-                const date = new Date();
-                date.setFullYear(2016, 0, 28);
-                date.setHours(21);
-                date.setMinutes(0, 0, 0);
-                expect(service.formatTime(date))
-                    .toBe('09:00 pm');
-                expect(service.formatDateTime(date))
-                    .toBe('1/28/16 09:00 pm');
-                expect(service.formatDateTime(date, false, true))
-                    .toBe('1/28/16 09:00:00 pm');
-                done();
-            });
+	it('Format a date and time in USA with AM/PM', (done) => {
+		service.use('en-US')
+			.subscribe(() => {
+				const date = new Date();
+				date.setFullYear(2016, 0, 28);
+				date.setHours(21);
+				date.setMinutes(0, 0, 0);
+				expect(service.formatTime(date))
+					.toBe('09:00 PM');
+				expect(service.formatDateTime(date))
+					.toBe('1/28/16 09:00 PM');
+				expect(service.formatDateTime(date, false, true))
+					.toBe('1/28/16 09:00:00 PM');
+				done();
+			});
 	});
 });

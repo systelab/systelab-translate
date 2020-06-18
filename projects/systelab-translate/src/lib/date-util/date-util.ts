@@ -1,4 +1,5 @@
 import { format, setHours, setMilliseconds, setMinutes, setSeconds } from 'date-fns';
+import { ca, de, enGB, enUS, es, fr, gl, it, ja, ko, lt, nl, pl, pt, ptBR, ru, sk, th, zhCN } from 'date-fns/locale';
 
 export class DateUtil {
 
@@ -52,12 +53,12 @@ export class DateUtil {
 	}
 
 	public formatMonthAndYear(date: Date) {
-		return format(date, 'MMMM, YYYY', {locale: this.locale});
+		return format(date, 'MMMM, yyyy', {locale: this.convertSystelabLocaleToDateFnsLocale(this.locale)});
 	}
 
 	public getTimeFormat(withSeconds = false): string {
 		if (withSeconds) {
-			return this.locale === 'en-US' ? 'hh:mm:ss a' : 'HH:mm:ss'
+			return this.locale === 'en-US' ? 'hh:mm:ss a' : 'HH:mm:ss';
 		} else {
 			return this.locale === 'en-US' ? 'hh:mm a' : 'HH:mm';
 		}
@@ -67,45 +68,45 @@ export class DateUtil {
 		let stringDateFormat = '';
 		switch (this.locale) {
 			case 'en-US':
-				stringDateFormat = 'M/D/YY';
+				stringDateFormat = 'M/d/yy';
 				break;
 			case 'ko-KO':
-				stringDateFormat = 'YY. M. D';
+				stringDateFormat = 'yy. M. d';
 				break;
 			case 'pl-PL':
 			case 'lt-LT':
-				stringDateFormat = 'YY-MM-DD';
+				stringDateFormat = 'yy-MM-dd';
 				break;
 			case 'pt-PT':
 			case 'pt-BR':
 			case 'nl-NL':
-				stringDateFormat = 'DD-MM-YY';
+				stringDateFormat = 'dd-MM-yy';
 				break;
 			case 'sk-SK':
 			case 'ru-RU':
-				stringDateFormat = 'D.M.YY';
+				stringDateFormat = 'd.M.yy';
 				break;
 			case 'zh-ZH':
-				stringDateFormat = 'YY-M-D';
+				stringDateFormat = 'yy-M-d';
 				break;
 			case 'de-DE':
-				stringDateFormat = 'DD.MM.YY';
+				stringDateFormat = 'dd.MM.yy';
 				break;
 			case 'th-TH':
-				stringDateFormat = 'D/M/YY';
+				stringDateFormat = 'd/M/yy';
 				break;
 			case 'ja-JA':
-				stringDateFormat = 'YY/MM/DD';
+				stringDateFormat = 'yy/MM/dd';
 				break;
 			default:
-				stringDateFormat = 'DD/MM/YY';
+				stringDateFormat = 'dd/MM/yy';
 				break;
 		}
 		if (isFullYear) {
-			stringDateFormat = stringDateFormat.replace('YY', 'YYYY');
+			stringDateFormat = stringDateFormat.replace('yy', 'yyyy');
 			if (this.locale === 'en-US') {
 				stringDateFormat = stringDateFormat.replace('M', 'MM');
-				stringDateFormat = stringDateFormat.replace('D', 'DD');
+				stringDateFormat = stringDateFormat.replace('D', 'dd');
 			}
 		}
 		return stringDateFormat;
@@ -212,6 +213,83 @@ export class DateUtil {
 				return new Date(currentDateValue);
 			default:
 				return new Date(auxArray[1] + '/' + auxArray[0] + '/' + auxArray[2]);
+		}
+	}
+
+	public convertSystelabLocaleToDateFnsLocale(locale: string): Locale {
+		switch (locale) {
+			case 'es':
+			case 'es-ES':
+			case 'es-CL':
+			case 'es-MX':
+			case 'es-UY':
+			case 'es-AR':
+			case 'es-BO':
+			case 'es-CO':
+			case 'es-CR':
+			case 'es-DO':
+			case 'es-EC':
+			case 'es-SV':
+			case 'es-GT':
+			case 'es-HN':
+			case 'es-NI':
+			case 'es-PA':
+			case 'es-PY':
+			case 'es-PE':
+			case 'es-PR':
+			case 'es-VE':
+				return es;
+			case 'fr':
+			case 'fr-FR':
+				return fr;
+			case 'it':
+			case 'it-IT':
+				return it;
+			case 'en':
+			case 'en-US':
+				return enUS;
+			case 'en-GB':
+				return enGB;
+			case 'pt':
+				return pt;
+			case 'pt-BR':
+				return ptBR;
+			case 'ca':
+				return ca;
+			case 'gl':
+				return gl;
+			case 'lt':
+			case 'lt-LT':
+				return lt;
+			case 'pl':
+			case 'pl-PL':
+				return pl;
+			case 'sk':
+			case 'sk-SK':
+				return sk;
+			case 'ru':
+			case 'ru-RU':
+				return ru;
+			case 'zh':
+			case 'zh-CN':
+				return zhCN;
+			case 'de':
+			case 'de-DE':
+				return de;
+			case 'th':
+			case 'th-TH':
+				return th;
+			case 'ja':
+			case 'ja-JA':
+				return ja;
+			case 'ko':
+			case 'ko-KR':
+				return ko;
+			case 'nl':
+			case 'nl-NL':
+				return nl;
+			default:
+				return enUS;
 		}
 	}
 }
