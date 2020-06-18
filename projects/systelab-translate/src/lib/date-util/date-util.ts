@@ -216,7 +216,7 @@ export class DateUtil {
 		}
 	}
 
-	public convertSystelabLocaleToDateFnsLocale(locale: string): Locale {
+	private convertSystelabLocaleToDateFnsLocale(locale: string): Locale {
 		switch (locale) {
 			case 'es':
 			case 'es-ES':
