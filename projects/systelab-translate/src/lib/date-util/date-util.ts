@@ -1,5 +1,5 @@
 import { format, setHours, setMilliseconds, setMinutes, setSeconds } from 'date-fns';
-import { ca, de, enGB, enUS, es, fr, gl, it, ja, ko, lt, nl, pl, pt, ptBR, ru, sk, th, zhCN } from 'date-fns/locale';
+import { ca, de, enGB, enUS, es, fr, gl, it, ja, ko, lt, nl, pl, pt, ru, sk, th, zhCN } from 'date-fns/locale';
 
 export class DateUtil {
 
@@ -216,80 +216,17 @@ export class DateUtil {
 		}
 	}
 
-	private convertSystelabLocaleToDateFnsLocale(locale: string): Locale {
-		switch (locale) {
-			case 'es':
-			case 'es-ES':
-			case 'es-CL':
-			case 'es-MX':
-			case 'es-UY':
-			case 'es-AR':
-			case 'es-BO':
-			case 'es-CO':
-			case 'es-CR':
-			case 'es-DO':
-			case 'es-EC':
-			case 'es-SV':
-			case 'es-GT':
-			case 'es-HN':
-			case 'es-NI':
-			case 'es-PA':
-			case 'es-PY':
-			case 'es-PE':
-			case 'es-PR':
-			case 'es-VE':
-				return es;
-			case 'fr':
-			case 'fr-FR':
-				return fr;
-			case 'it':
-			case 'it-IT':
-				return it;
-			case 'en':
-			case 'en-US':
-				return enUS;
-			case 'en-GB':
-				return enGB;
-			case 'pt':
-				return pt;
-			case 'pt-BR':
-				return ptBR;
-			case 'ca':
-				return ca;
-			case 'gl':
-				return gl;
-			case 'lt':
-			case 'lt-LT':
-				return lt;
-			case 'pl':
-			case 'pl-PL':
-				return pl;
-			case 'sk':
-			case 'sk-SK':
-				return sk;
-			case 'ru':
-			case 'ru-RU':
-				return ru;
-			case 'zh':
-			case 'zh-CN':
-				return zhCN;
-			case 'de':
-			case 'de-DE':
-				return de;
-			case 'th':
-			case 'th-TH':
-				return th;
-			case 'ja':
-			case 'ja-JA':
-				return ja;
-			case 'ko':
-			case 'ko-KR':
-				return ko;
-			case 'nl':
-			case 'nl-NL':
-				return nl;
-			default:
-				return enUS;
-		}
+	private convertSystelabLocaleToDateFnsLocale(localeString: string): Locale {
+		const localeForSystelabLocale = new Map<string, Locale>([
+			['es', es], ['es-ES', es], ['es-CL', es], ['es-MX', es], ['es-UY', es], ['es-AR', es], ['es-BO', es],
+			['es-CO', es], ['es-CR', es], ['es-DO', es], ['es-EC', es], ['es-SV', es], ['es-GT', es], ['es-HN', es],
+			['es-NI', es], ['es-PA', es], ['es-PY', es], ['es-PE', es], ['es-PR', es], ['es-VE', es], ['fr', fr],
+			['fr-FR', fr], ['it', it], ['it-IT', it], ['en', enUS], ['en-US', enUS], ['en-GB', enGB], ['pt', pt],
+			['pt-BR', pt], ['ca', ca], ['gl', gl], ['lt', lt], ['lt-LT', lt], ['pl', pl], ['pl-PL', pl], ['sk', sk],
+			['sk-SK', sk], ['ru', ru], ['ru-RU', ru], ['zh', zhCN], ['zh-CN', zhCN], ['de', de], ['de-DE', de],
+			['th', th], ['th-TH', th], ['ja', ja], ['ja-JA', ja], ['ko', ko], ['ko-KR', ko], ['nl', nl], ['nl-NL', nl],
+		]);
+		const locale: Locale = localeForSystelabLocale.get(localeString)
+		return locale ? locale : enUS;
 	}
 }
