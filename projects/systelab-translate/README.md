@@ -178,10 +178,3 @@ public transform(value: number, precision?: string, units?: string, priorSymbol?
 ```
 This pipe can be used from any component through the method transform.
 
-# Breaking changes
-
-## Version 8
-
-date-fns is updated to 2.14. Check breaking changes here: https://date-fns.org/v2.14.0/docs/Change-Log
-
-In the library changes involved replacing DD, YY, YYY for dd, yy, yyyy. Also using date-fns locale object instead of an string.
