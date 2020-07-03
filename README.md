@@ -51,3 +51,9 @@ The following steps should be consider when migrating from version 6.
 - from 'systelab-translate/lib.+ 
 - from 'systelab-translate';
 ```
+
+## Version 8
+
+date-fns is updated to 2.14. Check breaking changes here: https://date-fns.org/v2.14.0/docs/Change-Log
+
+In the library changes involved replacing DD, YY, YYY for dd, yy, yyyy. Also using date-fns locale object instead of an string.
