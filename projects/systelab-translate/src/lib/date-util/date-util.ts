@@ -11,21 +11,40 @@ export class DateUtil {
 	}
 
 	public formatDate(date: Date): string {
+		if (!date) {
+			return undefined;
+		}
 		return format(date, this.getDateFormat());
 	}
 
 	public formatDateFullYear(date: Date): string {
+		if (!date) {
+			return undefined;
+		}
 		return format(date, this.getDateFormat(true));
 	}
 
 	public formatTime(date: Date, withSeconds?: boolean): string {
+		if (!date) {
+			return undefined;
+		}
 		return format(date, this.getTimeFormat(withSeconds));
 	}
 
 	public formatDateTime(date: Date, fullYear?: boolean, withSeconds?: boolean): string {
+		if (!date) {
+			return undefined;
+		}
 		const formatedDate = (fullYear) ? this.formatDateFullYear(date) : this.formatDate(date);
 		const formatedHour = this.formatTime(date, withSeconds);
 		return formatedDate + ' ' + formatedHour;
+	}
+
+	public formatMonthAndYear(date: Date) {
+		if (!date) {
+			return undefined;
+		}
+		return format(date, 'MMMM, yyyy', {locale: this.convertSystelabLocaleToDateFnsLocale(this.locale)});
 	}
 
 	public getDateFrom(date: Date) {
@@ -50,10 +69,6 @@ export class DateUtil {
 		d = setSeconds(d, 0);
 		d = setMilliseconds(d, 0);
 		return d;
-	}
-
-	public formatMonthAndYear(date: Date) {
-		return format(date, 'MMMM, yyyy', {locale: this.convertSystelabLocaleToDateFnsLocale(this.locale)});
 	}
 
 	public getTimeFormat(withSeconds = false): string {
