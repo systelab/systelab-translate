@@ -154,4 +154,25 @@ describe('Date Service', () => {
 				done();
 			});
 	});
+
+	it('Format an undefined date value', (done) => {
+		service.use('es-ES')
+			.subscribe(() => {
+				const date = undefined;
+				expect(service.formatDate(date))
+					.toBe(undefined);
+				expect(service.formatDateFullYear(date))
+					.toBe(undefined);
+				expect(service.formatTime(date))
+					.toBe(undefined);
+				expect(service.formatDateTime(date))
+					.toBe(undefined);
+				expect(service.formatMonthAndYear(date))
+					.toBe(undefined);
+				expect(service.formatDateFullYear(date))
+					.toBe(undefined);
+				done();
+			});
+	});
+
 });
