@@ -68,6 +68,10 @@ You can translate a key in your templates by using the 'translate' pipe:
 
 #### Provide the translation files
 
+systelab-translate library can be provided by json files stored in /i18n folder of an Angular project or by getting a json response from a restAPI call.
+
+###### i18n folder usage:
+
 In order to provide the translation files, you must include several properties files in the /i18n/language and /i18n/error folders.
 
 For the basic bundles, include a MessagesBundle_xx_XX.json file for each language and country (not mandatory).
@@ -77,6 +81,20 @@ For the error bundles, include a ErrorsBundle_xx_XX.json file for each language 
 This two files are mandatory if you are going to use the language.
 
 Sample files names are: MessageBundle_es.json, MessageBundle_en.json, MessageBundle_en_US.json or MessageBundle_pt_BR.json
+
+###### restAPI usage:
+
+In order to provide a json object to the library, Systelab-translate module shall be declared as a forRoot() sending the restAPI url like this:
+
+```javascript 
+  //store a valid restAPI url here
+  let _translationFilesUrl = './restAPI_URL_to_be_replaced';  
+
+  // Copy & Paste this at app.module -> imports declaration
+  SystelabTranslateModule.forRoot({
+      customUrl: _translationFilesUrl
+  })
+```
 
 Inside each file include a single line for each key and translation. For example:
 

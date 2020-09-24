@@ -7,73 +7,80 @@ import { Location } from '@angular/common';
 
 export class LocalizableTranslateStaticLoader implements TranslateLoader {
 
-	protected prefix = '';
+  protected prefix = '';
+  protected _url = null;
 
-	constructor(private http: HttpClient, private location: Location) {
+  constructor(private http: HttpClient, private location: Location, private url: string) {
 
-		if (!(window.location.pathname === '/' || window.location.pathname === '/context.html')) {
-			this.prefix = window.location.pathname;
-			if (this.prefix.endsWith('index.html')) {
-				// That's the case of Electron when starting from local file.
-				this.prefix = this.prefix.substr(0, this.prefix.length - 10);
-			}
-			if (this.prefix.endsWith('/')) {
-				this.prefix = this.prefix.substr(0, this.prefix.length - 1);
-			}
-			if (this.prefix.endsWith(this.location.path())) {
-				// When starting from an Angular application route
-				this.prefix = this.prefix.substr(0, this.prefix.length - this.location.path().length);
-			}
+    if (!(window.location.pathname === '/' || window.location.pathname === '/context.html')) {
+      this.prefix = window.location.pathname;
+      if (this.prefix.endsWith('index.html')) {
+        // That's the case of Electron when starting from local file.
+        this.prefix = this.prefix.substr(0, this.prefix.length - 10);
+      }
+      if (this.prefix.endsWith('/')) {
+        this.prefix = this.prefix.substr(0, this.prefix.length - 1);
+      }
+      if (this.prefix.endsWith(this.location.path())) {
+        // When starting from an Angular application route
+        this.prefix = this.prefix.substr(0, this.prefix.length - this.location.path().length);
+      }
 
-			this.prefix = (this.prefix !== '') ? this.prefix + '/' : '';
-		}
-	}
+      this.prefix = (this.prefix !== '') ? this.prefix + '/' : '';
+    }
 
-	public getTranslation(locale: string): Observable<any> {
-		const language: string = locale.split('-')[0];
-		const country: string = locale.split('-')[1];
+    this._url = url;
+  }
 
-		const languageAndCountry: string = language + '_' + country;
+  public getTranslation(locale: string): Observable<any> {
+    const language: string = locale.split('-')[0];
+    const country: string = locale.split('-')[1];
 
-		return observableForkJoin(
-			this.http.get(`${this.prefix}i18n/language/MessagesBundle_${language}.json`).pipe(
-				catchError(e => observableOf({}))),
-			this.http.get(`${this.prefix}i18n/language/MessagesBundle_${languageAndCountry}.json`).pipe(
-				catchError(e => observableOf({}))),
-			this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${language}.json`).pipe(
-				catchError(e => observableOf({}))),
-			this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${languageAndCountry}.json`).pipe(
-				catchError(e => observableOf({})))).pipe(
-			map((translations: any[]) => {
+    const languageAndCountry: string = language + '_' + country;
 
-				if (translations.length > 0) {
-					let bundles = translations[0];
-					for (let i = 1; i < translations.length; i++) {
-						bundles = this.mergeRecursive(bundles, translations[i]);
-					}
-					return bundles;
-				} else {
-					return observableOf(undefined);
-				}
-			}));
-	}
+    if (this._url != null) {
+      return this.http.get(`${this._url}`);
+    } else {
+      return observableForkJoin(
+        this.http.get(`${this.prefix}i18n/language/MessagesBundle_${language}.json`).pipe(
+          catchError(e => observableOf({}))),
+        this.http.get(`${this.prefix}i18n/language/MessagesBundle_${languageAndCountry}.json`).pipe(
+          catchError(e => observableOf({}))),
+        this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${language}.json`).pipe(
+          catchError(e => observableOf({}))),
+        this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${languageAndCountry}.json`).pipe(
+          catchError(e => observableOf({})))).pipe(
+        map((translations: any[]) => {
 
-	private mergeRecursive(obj1: any, obj2: any) {
-		for (const p in obj2) {
-			try {
-				// Property in destination object set; update its value.
-				if (obj2[p].constructor === Object) {
-					obj1[p] = this.mergeRecursive(obj1[p], obj2[p]);
-				} else {
-					obj1[p] = obj2[p];
-				}
-			} catch (e) {
-				// Property in destination object not set; create it and set its value.
-				obj1[p] = obj2[p];
-			}
-		}
-		return obj1;
-	}
+          if (translations.length > 0) {
+            let bundles = translations[0];
+            for (let i = 1; i < translations.length; i++) {
+              bundles = this.mergeRecursive(bundles, translations[i]);
+            }
+            return bundles;
+          } else {
+            return observableOf(undefined);
+          }
+        }));
+    }
+  }
+
+  private mergeRecursive(obj1: any, obj2: any) {
+    for (const p in obj2) {
+      try {
+        // Property in destination object set; update its value.
+        if (obj2[p].constructor === Object) {
+          obj1[p] = this.mergeRecursive(obj1[p], obj2[p]);
+        } else {
+          obj1[p] = obj2[p];
+        }
+      } catch (e) {
+        // Property in destination object not set; create it and set its value.
+        obj1[p] = obj2[p];
+      }
+    }
+    return obj1;
+  }
 
 }
 
