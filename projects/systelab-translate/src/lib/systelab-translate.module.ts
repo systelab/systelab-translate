@@ -15,7 +15,7 @@ export interface ISystelabTranslateModule {
   customUrl: string;
 }
 
-let _translationFilesUrl = null;
+export const _translationFilesUrl = null;
 
 @NgModule({
   imports:      [
