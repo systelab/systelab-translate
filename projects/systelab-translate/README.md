@@ -8,6 +8,19 @@ Library with I18N tools to speed up our Angular developments
 npm install systelab-translate --save
 ```
 
+## Importing the library 
+
+These lines should be added in app.module file
+```javascript 
+  // required var declaration
+  let _translationFilesUrl = null  
+
+  // required import declaration
+  SystelabTranslateModule.forRoot({
+      customUrl: _translationFilesUrl
+  })
+```
+
 ## How to use the library
 In order to use this library you must import the module SystelabTranslateModule. Remember to import SystelabTranslateModule.forRoot() in your application module.
 
@@ -84,16 +97,11 @@ Sample files names are: MessageBundle_es.json, MessageBundle_en.json, MessageBun
 
 ###### restAPI usage:
 
-In order to provide a json object to the library, Systelab-translate module shall be declared as a forRoot() sending the restAPI url like this:
+In order to provide a json object to the library, the declared var _translationFilesUrl in app.module shall be filled with a valid restAPI url:
 
-```javascript 
+```javascript
   //store a valid restAPI url here
-  let _translationFilesUrl = './restAPI_URL_to_be_replaced';  
-
-  // Copy & Paste this at app.module -> imports declaration
-  SystelabTranslateModule.forRoot({
-      customUrl: _translationFilesUrl
-  })
+  let _translationFilesUrl = './restAPI_URL_to_be_replaced';
 ```
 
 Inside each file include a single line for each key and translation. For example:
