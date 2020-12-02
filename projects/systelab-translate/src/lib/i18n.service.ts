@@ -143,6 +143,10 @@ export class I18nService {
 		return this.dateUtil.formatMonthAndYear(date);
 	}
 
+	public formatDateAndShortMonth(date: Date): string {
+		return this.dateUtil.formatDateAndShortMonth(date);
+	}
+
 	public getDateFrom(date: Date): Date {
 		return this.dateUtil.getDateFrom(date);
 	}
