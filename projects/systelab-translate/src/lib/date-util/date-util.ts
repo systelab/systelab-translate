@@ -47,6 +47,13 @@ export class DateUtil {
 		return format(date, 'MMMM, yyyy', {locale: this.convertSystelabLocaleToDateFnsLocale(this.locale)});
 	}
 
+	public formatDateAndShortMonth(date: Date) {
+		if (!date) {
+			return undefined;
+		}
+		return format(date, 'd MMM', {locale: this.convertSystelabLocaleToDateFnsLocale(this.locale)});
+	}
+
 	public getDateFrom(date: Date) {
 		let d: Date = setHours(date, 0);
 		d = setMinutes(d, 0);
