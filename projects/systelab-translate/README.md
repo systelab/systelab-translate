@@ -125,6 +125,11 @@ public formatMonthAndYear(date: Date): string
 Returns the month in text and the year.
 
 ```javascript
+public formatDateAndShortMonth(date: Date): string
+```
+Returns the day and the short month in text.
+
+```javascript
 public getDateFrom(date: Date)
 ```
 Returns the date at the beginning of the day.
