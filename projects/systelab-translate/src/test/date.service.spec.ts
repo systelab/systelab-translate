@@ -36,6 +36,8 @@ describe('Date Service', () => {
 					.toBe('28/01/16');
 				expect(service.formatDateFullYear(date))
 					.toBe('28/01/2016');
+				expect(service.formatDateAndShortMonth(date))
+					.toBe('28 ene');
 				done();
 			})
 	});
@@ -170,6 +172,8 @@ describe('Date Service', () => {
 				expect(service.formatMonthAndYear(date))
 					.toBe(undefined);
 				expect(service.formatDateFullYear(date))
+					.toBe(undefined);
+				expect(service.formatDateAndShortMonth(date))
 					.toBe(undefined);
 				done();
 			});
