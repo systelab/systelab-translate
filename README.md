@@ -18,6 +18,13 @@ git clone https://github.com/systelab/systelab-translate.git
 cd systelab-translate
 npm install
 ```
+## Test
+
+### Unit
+
+```bash
+ng test
+```
 
 ## Publish the library:
 
@@ -57,3 +64,11 @@ The following steps should be consider when migrating from version 6.
 date-fns is updated to 2.14. Check breaking changes here: https://date-fns.org/v2.14.0/docs/Change-Log
 
 In the library changes involved replacing DD, YY, YYY for dd, yy, yyyy. Also using date-fns locale object instead of an string.
+
+## Version 11
+
+There's few changes related to pipes:
+- Some pipes (decimal, percent, currency, date, etc) now explicitly state which types are accepted.
+- The slice pipe now returns null for the undefined input value, which is consistent with the behavior of most pipes.
+- The async pipe no longer claims to return undefined for an input that was typed as undefined. Note that the code actually returned null on undefined inputs
+- The uppercase and lowercase pipes no longer let falsy values through. They now map both null and undefined to null and raise an exception on invalid input (0, false, NaN). This matches other Angular pipes
