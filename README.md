@@ -1,4 +1,4 @@
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/904bf3dbdb5f4fed90ce79d9ac487ebc)](https://app.codacy.com/app/alfonsserra/systelab-translate?utm_source=github.com&utm_medium=referral&utm_content=systelab/systelab-translate&utm_campaign=badger)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/1c2c278d1be744d295f7ba885a00851c)](https://www.codacy.com/gh/systelab/systelab-translate/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=systelab/systelab-translate&amp;utm_campaign=Badge_Grade)
 [![Build Status](https://travis-ci.com/systelab/systelab-translate.svg?branch=master)](https://travis-ci.com/systelab/systelab-translate)
 [![codecov](https://codecov.io/gh/systelab/systelab-translate/branch/master/graph/badge.svg)](https://codecov.io/gh/systelab/systelab-translate)
 [![npm version](https://badge.fury.io/js/systelab-translate.svg)](https://badge.fury.io/js/systelab-translate)
