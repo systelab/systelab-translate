@@ -22,8 +22,8 @@ script:
   - npm run build
 
 after_success:
-  - cat coverage/systelab-translate/lcov.info | codecov
-  - cat ./coverage/systelab-translate/lcov.info | codacy-coverage
+  - cat coverage/lcov.info | codecov
+  - cat ./coverage/lcov.info | codacy-coverage
 
 before_deploy:
   - cd dist/systelab-translate
