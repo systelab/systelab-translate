@@ -1,5 +1,5 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/904bf3dbdb5f4fed90ce79d9ac487ebc)](https://app.codacy.com/app/alfonsserra/systelab-translate?utm_source=github.com&utm_medium=referral&utm_content=systelab/systelab-translate&utm_campaign=badger)
-[![Build Status](https://travis-ci.org/systelab/systelab-translate.svg?branch=master)](https://travis-ci.org/systelab/systelab-translate)
+[![Build Status](https://travis-ci.com/systelab/systelab-translate.svg?branch=master)](https://travis-ci.com/systelab/systelab-translate)
 [![codecov](https://codecov.io/gh/systelab/systelab-translate/branch/master/graph/badge.svg)](https://codecov.io/gh/systelab/systelab-translate)
 [![npm version](https://badge.fury.io/js/systelab-translate.svg)](https://badge.fury.io/js/systelab-translate)
 [![Known Vulnerabilities](https://snyk.io/test/github/systelab/systelab-translate/badge.svg?targetFile=package.json)](https://snyk.io/test/github/systelab/systelab-translate?targetFile=package.json)
