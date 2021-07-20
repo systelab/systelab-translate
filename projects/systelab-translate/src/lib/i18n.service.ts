@@ -176,7 +176,7 @@ export class I18nService {
 				minimumFractionDigits = sNumber.split('.')[1].length;
 			}
 			return Number(sNumber)
-				.toLocaleString(this.locale, {'minimumFractionDigits': minimumFractionDigits});
+				.toLocaleString(this.locale, { minimumFractionDigits });
 		}
 		return sNumber;
 	}

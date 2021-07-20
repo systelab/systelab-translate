@@ -1,6 +1,6 @@
 
-import {Observable, of as observableOf, forkJoin as observableForkJoin} from 'rxjs';
-import {catchError, map} from 'rxjs/operators';
+import { Observable, of as observableOf, forkJoin as observableForkJoin } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
@@ -35,17 +35,17 @@ export class LocalizableTranslateStaticLoader implements TranslateLoader {
 
 		const languageAndCountry: string = language + '_' + country;
 
-		return observableForkJoin(
+		return observableForkJoin([
 			this.http.get(`${this.prefix}i18n/language/MessagesBundle_${language}.json`).pipe(
-				catchError(e => observableOf({}))),
+				catchError(() => observableOf({}))),
 			this.http.get(`${this.prefix}i18n/language/MessagesBundle_${languageAndCountry}.json`).pipe(
-				catchError(e => observableOf({}))),
+				catchError(() => observableOf({}))),
 			this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${language}.json`).pipe(
-				catchError(e => observableOf({}))),
+				catchError(() => observableOf({}))),
 			this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${languageAndCountry}.json`).pipe(
-				catchError(e => observableOf({})))).pipe(
+				catchError(() => observableOf({}))),
+		]).pipe(
 			map((translations: any[]) => {
-
 				if (translations.length > 0) {
 					let bundles = translations[0];
 					for (let i = 1; i < translations.length; i++) {

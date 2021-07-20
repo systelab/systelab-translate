@@ -33,7 +33,7 @@ describe('Translate Service: Number Format', () => {
 				expect(service.formatNumber(12, '#.00'))
 					.toBe('12.00');
 				done();
-			})
+			});
 	});
 
 	it('Check a simple number pattern (Spanish)', (done) => {
@@ -42,7 +42,7 @@ describe('Translate Service: Number Format', () => {
 				expect(service.formatNumber(12, '#.00'))
 					.toBe('12.00');
 				done();
-			})
+			});
 	});
 
 	it('Check a simple number pattern for negative numbers', (done) => {
@@ -51,7 +51,7 @@ describe('Translate Service: Number Format', () => {
 				expect(service.formatNumber(-12, '#.00'))
 					.toBe('-12.00');
 				done();
-			})
+			});
 	});
 
 	it('Check a simple number pattern with rounding down', (done) => {
@@ -60,7 +60,7 @@ describe('Translate Service: Number Format', () => {
 				expect(service.formatNumber(12.1234, '#.00'))
 					.toBe('12.12');
 				done();
-			})
+			});
 	});
 
 	it('Check a simple number pattern with rounding up', (done) => {
@@ -69,7 +69,7 @@ describe('Translate Service: Number Format', () => {
 				expect(service.formatNumber(12.1278, '#.00'))
 					.toBe('12.13');
 				done();
-			})
+			});
 	});
 
 	it('Check a simple number pattern with rounding and no fraction', (done) => {
@@ -78,7 +78,7 @@ describe('Translate Service: Number Format', () => {
 				expect(service.formatNumber(12.78, '#'))
 					.toBe('13');
 				done();
-			})
+			});
 	});
 
 	it('Check a simple number pattern with locale', (done) => {
@@ -87,6 +87,6 @@ describe('Translate Service: Number Format', () => {
 				expect(service.formatNumber(12, '#.00', true))
 					.toBe('12,00');
 				done();
-			})
+			});
 	});
 });

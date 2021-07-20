@@ -6,7 +6,7 @@ export class DateUtil {
 	constructor(protected locale: string) {
 	}
 
-	public setLocale(lang: string) {
+	public setLocale(lang: string): void {
 		this.locale = lang;
 	}
 
@@ -40,21 +40,21 @@ export class DateUtil {
 		return formatedDate + ' ' + formatedHour;
 	}
 
-	public formatMonthAndYear(date: Date) {
+	public formatMonthAndYear(date: Date): string {
 		if (!date) {
 			return undefined;
 		}
 		return format(date, 'MMMM, yyyy', {locale: this.convertSystelabLocaleToDateFnsLocale(this.locale)});
 	}
 
-	public formatDateAndShortMonth(date: Date) {
+	public formatDateAndShortMonth(date: Date): string {
 		if (!date) {
 			return undefined;
 		}
 		return format(date, 'd MMM', {locale: this.convertSystelabLocaleToDateFnsLocale(this.locale)});
 	}
 
-	public getDateFrom(date: Date) {
+	public getDateFrom(date: Date): Date {
 		let d: Date = setHours(date, 0);
 		d = setMinutes(d, 0);
 		d = setSeconds(d, 0);
@@ -62,7 +62,7 @@ export class DateUtil {
 		return d;
 	}
 
-	public getDateTo(date: Date) {
+	public getDateTo(date: Date): Date {
 		let d: Date = setHours(date, 23);
 		d = setMinutes(d, 59);
 		d = setSeconds(d, 59);
@@ -70,7 +70,7 @@ export class DateUtil {
 		return d;
 	}
 
-	public getDateMidDay(date: Date) {
+	public getDateMidDay(date: Date): Date {
 		let d: Date = setHours(date, 12);
 		d = setMinutes(d, 0);
 		d = setSeconds(d, 0);
