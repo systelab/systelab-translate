@@ -12,7 +12,10 @@ export class NumberFormatPipe implements PipeTransform {
 	constructor(protected i18nService: I18nService, protected decimalPipe: DecimalPipe) {
 	}
 
-	public transform(value: number, precision?: string, units?: string, priorSymbol?: string, defaultSymbolWhenNull?: string, ...args: string[]): string {
+	public transform(
+		value: number, precision?: string,
+		units?: string, priorSymbol?: string,
+		defaultSymbolWhenNull?: string, ...args: string[]): string {
 
 		if (value || value === 0) {
 			if (!precision) {

@@ -130,22 +130,22 @@ public formatDateAndShortMonth(date: Date): string
 Returns the day and the short month in text.
 
 ```javascript
-public getDateFrom(date: Date)
+public getDateFrom(date: Date): Date
 ```
 Returns the date at the beginning of the day.
 
 ```javascript
-public getDateTo(date: Date)
+public getDateTo(date: Date): Date
 ```
 Returns the date at the end of the day.
 
 ```javascript
-public getDateMidDay(date: Date)
+public getDateMidDay(date: Date): Date
 ```
 Returns the date at noon.
 
 ```javascript
-public getFirstDayOfWeek()
+public getFirstDayOfWeek(): number
 ```
 Returns a 0 if the first day of the week for the locale is Sunday. Returs 1 if is Monday.
 

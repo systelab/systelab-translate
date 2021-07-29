@@ -1,4 +1,4 @@
-import { ModuleWithProviders, NgModule, Type } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { LocalizableTranslateStaticLoader } from './LocalizableTranslateStaticLoader';
 import { GeneralTranslatePipe } from './translate.pipe';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -7,7 +7,7 @@ import { NumberFormatPipe } from './number-format.pipe';
 import { DecimalPipe, Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 // AoT requires an exported function for factories
-export function httpLoaderFactory(http: HttpClient, location: Location) {
+export function httpLoaderFactory(http: HttpClient, location: Location): LocalizableTranslateStaticLoader {
 	return new LocalizableTranslateStaticLoader(http, location);
 }
 
