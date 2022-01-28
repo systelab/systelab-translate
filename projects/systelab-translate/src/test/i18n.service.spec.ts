@@ -177,4 +177,23 @@ describe('Translate Service', () => {
 			});
 	});
 
+	it('Check get the current language', (done) => {
+		service.use('es-ES')
+			.subscribe(() => {
+				expect(service.getCurrentLanguage())
+					.toBe('es-ES');
+				done();
+			});
+	});
+
+	it('should throw an error if the key is not provided', (done) => {
+		service.use('es-ES')
+			.subscribe(() => {
+				service.setStaticBundles({ COMMON_DAY: 'value' });
+				expect( function(){ service.instant('',); } )
+					.toThrow(new Error("Parameter \"key\" required"));
+				done();
+			});
+	});
+
 });
