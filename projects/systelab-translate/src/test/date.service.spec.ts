@@ -39,7 +39,7 @@ describe('Date Service', () => {
 				expect(service.formatDateAndShortMonth(date))
 					.toBe('28 ene');
 				done();
-			})
+			});
 	});
 
 	it('Format a date in USA', (done) => {
@@ -52,7 +52,7 @@ describe('Date Service', () => {
 				expect(service.formatDateFullYear(date))
 					.toBe('01/28/2016');
 				done();
-			})
+			});
 	});
 
 	it('Parse a date', (done) => {
@@ -63,7 +63,7 @@ describe('Date Service', () => {
 				expect(service.formatDateFullYear(service.parseDate('28/01/2016')))
 					.toBe('28/01/2016');
 				done();
-			})
+			});
 	});
 
 	it('Parse a date in USA', (done) => {
@@ -74,7 +74,7 @@ describe('Date Service', () => {
 				expect(service.formatDateFullYear(service.parseDate('01/28/2016')))
 					.toBe('01/28/2016');
 				done();
-			})
+			});
 	});
 
 	it('Format a time and a date and time', (done) => {
@@ -89,7 +89,7 @@ describe('Date Service', () => {
 				expect(service.formatDateTime(date))
 					.toBe('28/01/16 21:00');
 				done();
-			})
+			});
 	});
 
 	it('Format a time and a date and time in USA', (done) => {
