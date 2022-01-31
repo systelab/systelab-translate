@@ -202,6 +202,10 @@ describe('Translate Service', () => {
 				service.setStaticBundles({ COMMON_DAY: 'value' });
 				expect(() => service.instant('',))
 					.toThrow(new Error('Parameter "key" required'));
+				expect(() => service.instant(undefined as any,))
+					.toThrow(new Error('Parameter "key" required'));
+				expect(() => service.instant(null as any,))
+					.toThrow(new Error('Parameter "key" required'));
 				done();
 			});
 	});
@@ -212,6 +216,47 @@ describe('Translate Service', () => {
 				const myNumber = 3.1;
 				expect(service.formatNumber(myNumber, '#.00',true))
 					.toBe('3,10');
+				done();
+			});
+	});
+
+	it('Should allow to change the default language', (done) => {
+		service.use('en-US')
+			.subscribe(() => {
+				expect(service.instant('COMMON_DAY'))
+					.toBe('Day');
+				done();
+			});
+	});
+
+	it('Should merge translations using appendTranslation method', (done: Function) => {
+		service.use('en-GB')
+			.subscribe(() => {
+				service.appendTranslation('en-GB', {'TEST': {'sub1': 'value1'}});
+				service.appendTranslation('en-GB', {'TEST': {'sub2': 'value2'}});
+				expect(service.instant('TEST'))
+					.toEqual({'sub1': 'value1', 'sub2': 'value2'});
+				done();
+			});
+	});
+
+	it('Should override translations using setTranslation method', (done: Function) => {
+		service.use('en-GB')
+			.subscribe(() => {
+				service.setTranslation('en-GB', {'TEST': {'sub1': 'value1'}});
+				service.setTranslation('en-GB', {'TEST': {'sub2': 'value2'}});
+				expect(service.instant('TEST'))
+					.toEqual({'sub2': 'value2'});
+				done();
+			});
+	});
+
+	it('Should be able to get translations with nested keys', (done: Function) => {
+		service.use('es-ES')
+			.subscribe(() => {
+				service.setTranslation('es-ES',  {'TEST': {'TEST1': 'This is a test'}, 'TEST2': {'TEST2': {'TEST2': 'This is another test'}}});
+				expect(service.instant('TEST.TEST1'))
+					.toEqual('This is a test');
 				done();
 			});
 	});
