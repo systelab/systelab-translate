@@ -183,12 +183,12 @@ describe('Translate Service', () => {
 	});
 
 	it('Should be able to get an array translations', (done) => {
-		const translations = { Key1: 'Value1', Key2: 'Value2' };
+		const translations = { key1: 'Value1', key2: 'Value2' };
 
 		service.use('es-ES')
 			.subscribe(() => {
 				service.setTranslation('es-ES', translations);
-				expect(service.instant(['Key1', 'Key2']))
+				expect(service.instant(['key1', 'key2']))
 					.toEqual(translations);
 				done();
 			});
@@ -197,8 +197,8 @@ describe('Translate Service', () => {
 	it('Should return an empty value', (done) => {
 		service.use('en-US')
 			.subscribe(() => {
-				service.setTranslation('en-US', { Empty: '' });
-				expect(service.instant('Empty'))
+				service.setTranslation('en-US', { empty: '' });
+				expect(service.instant('empty'))
 					.toBe('');
 				done();
 			});
@@ -267,7 +267,7 @@ describe('Translate Service', () => {
 			});
 	});
 
-	it('Should override translations using setTranslation method', (done: Function) => {
+	it('Should override translations using setTranslation method', (done) => {
 		service.use('en-GB')
 			.subscribe(() => {
 				service.setTranslation('en-GB', {test: {sub1: 'value1'}});
@@ -278,7 +278,7 @@ describe('Translate Service', () => {
 			});
 	});
 
-	it('Should be able to get translations with nested keys', (done: Function) => {
+	it('Should be able to get translations with nested keys', (done) => {
 		service.use('es-ES')
 			.subscribe(() => {
 				service.setTranslation('es-ES',  {test: {test1: 'This is a test'}, test2: {test2: 'This is another test'}});
