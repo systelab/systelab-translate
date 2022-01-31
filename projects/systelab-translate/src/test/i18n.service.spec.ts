@@ -183,10 +183,13 @@ describe('Translate Service', () => {
 	});
 
 	it('Should be able to get an array translations', (done) => {
+		const translations = { Key1: 'Value1', Key2: 'Value2' };
+
 		service.use('es-ES')
 			.subscribe(() => {
-				expect(service.instant(['COMMON_DAY', 'COMMON_YEAR']))
-					.toEqual({ COMMON_DAY: 'Día', COMMON_YEAR: 'Año' });
+				service.setTranslation('es-ES', translations);
+				expect(service.instant(['Key1', 'Key2']))
+					.toEqual(translations);
 				done();
 			});
 	});
@@ -194,8 +197,8 @@ describe('Translate Service', () => {
 	it('Should return an empty value', (done) => {
 		service.use('en-US')
 			.subscribe(() => {
-				service.setTranslation('en-US', { EMPTY: '' });
-				expect(service.instant('EMPTY'))
+				service.setTranslation('en-US', { Empty: '' });
+				expect(service.instant('Empty'))
 					.toBe('');
 				done();
 			});
@@ -253,13 +256,13 @@ describe('Translate Service', () => {
 			});
 	});
 
-	it('Should merge translations using appendTranslation method', (done: Function) => {
+	it('Should merge translations using appendTranslation method', (done) => {
 		service.use('en-GB')
 			.subscribe(() => {
-				service.appendTranslation('en-GB', {'TEST': {'sub1': 'value1'}});
-				service.appendTranslation('en-GB', {'TEST': {'sub2': 'value2'}});
-				expect(service.instant('TEST'))
-					.toEqual({'sub1': 'value1', 'sub2': 'value2'});
+				service.appendTranslation('en-GB', {test: {sub1: 'value1'}});
+				service.appendTranslation('en-GB', {test: {sub2: 'value2'}});
+				expect(service.instant('test'))
+					.toEqual({sub1: 'value1', sub2: 'value2'});
 				done();
 			});
 	});
@@ -267,10 +270,10 @@ describe('Translate Service', () => {
 	it('Should override translations using setTranslation method', (done: Function) => {
 		service.use('en-GB')
 			.subscribe(() => {
-				service.setTranslation('en-GB', {'TEST': {'sub1': 'value1'}});
-				service.setTranslation('en-GB', {'TEST': {'sub2': 'value2'}});
-				expect(service.instant('TEST'))
-					.toEqual({'sub2': 'value2'});
+				service.setTranslation('en-GB', {test: {sub1: 'value1'}});
+				service.setTranslation('en-GB', {test: {sub2: 'value2'}});
+				expect(service.instant('test'))
+					.toEqual({sub2: 'value2'});
 				done();
 			});
 	});
@@ -278,8 +281,8 @@ describe('Translate Service', () => {
 	it('Should be able to get translations with nested keys', (done: Function) => {
 		service.use('es-ES')
 			.subscribe(() => {
-				service.setTranslation('es-ES',  {'TEST': {'TEST1': 'This is a test'}, 'TEST2': {'TEST2': {'TEST2': 'This is another test'}}});
-				expect(service.instant('TEST.TEST1'))
+				service.setTranslation('es-ES',  {test: {test1: 'This is a test'}, test2: {test2: 'This is another test'}});
+				expect(service.instant('test.test1'))
 					.toEqual('This is a test');
 				done();
 			});
