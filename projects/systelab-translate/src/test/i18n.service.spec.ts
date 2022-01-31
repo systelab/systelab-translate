@@ -186,12 +186,32 @@ describe('Translate Service', () => {
 			});
 	});
 
+	it('Should be able to get the browserLang', (done) => {
+		service.use('es-ES')
+			.subscribe(() => {
+				const browserLang = service.getBrowserLang();
+				expect(typeof browserLang === 'string')
+					.toBeTruthy();
+				done();
+			});
+	});
+
 	it('should throw an error if the key is not provided', (done) => {
 		service.use('es-ES')
 			.subscribe(() => {
 				service.setStaticBundles({ COMMON_DAY: 'value' });
 				expect( function(){ service.instant('',); } )
 					.toThrow(new Error("Parameter \"key\" required"));
+				done();
+			});
+	});
+
+	it('should format a number based on the decimal format and locale parameters', (done) => {
+		service.use('es-ES')
+			.subscribe(() => {
+				const myNumber = 3.1;
+				expect(service.formatNumber(myNumber, '#.00',true))
+					.toBe('3,10');
 				done();
 			});
 	});
