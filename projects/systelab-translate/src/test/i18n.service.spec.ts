@@ -200,8 +200,8 @@ describe('Translate Service', () => {
 		service.use('es-ES')
 			.subscribe(() => {
 				service.setStaticBundles({ COMMON_DAY: 'value' });
-				expect( function(){ service.instant('',); } )
-					.toThrow(new Error("Parameter \"key\" required"));
+				expect(() => service.instant('',))
+					.toThrow(new Error('Parameter "key" required'));
 				done();
 			});
 	});
