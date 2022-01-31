@@ -140,6 +140,26 @@ describe('Translate Service', () => {
 			});
 	});
 
+	it('Check a key added on the fly with one parameter', (done) => {
+		service.use('es-ES')
+			.subscribe(() => {
+				service.setStaticBundles({ USER_AGE_AND_GENDER: 'User gender is {{USER_GENDER}}' });
+				expect(service.instant('USER_AGE_AND_GENDER', {USER_GENDER: 'Male'} ))
+					.toBe('User gender is Male');
+				done();
+			});
+	});
+
+	it('Check a key added on the fly with empty parameters', (done) => {
+		service.use('es-ES')
+			.subscribe(() => {
+				service.setStaticBundles({ USER_AGE_AND_GENDER: 'User gender is {{USER_GENDER}}' });
+				expect(service.instant('USER_AGE_AND_GENDER', '' ))
+					.toBe('User gender is ');
+				done();
+			});
+	});
+
 	it('Check a key with multiple named not sorted parameters', (done) => {
 		service.use('es-ES')
 			.subscribe(() => {
@@ -233,6 +253,16 @@ describe('Translate Service', () => {
 					.toThrow(new Error('Parameter "key" required'));
 				expect(() => service.instant(null as any,))
 					.toThrow(new Error('Parameter "key" required'));
+				done();
+			});
+	});
+
+	it('should format a number based on the decimal format', (done) => {
+		service.use('en-US')
+			.subscribe(() => {
+				const myNumber = 3.1;
+				expect(service.formatNumber(myNumber, '#.00'))
+					.toBe('3.10');
 				done();
 			});
 	});
