@@ -27,6 +27,11 @@ describe('Translate Service', () => {
 		service = undefined;
 	});
 
+	it('Is defined', () => {
+		expect(service).toBeDefined();
+		expect(service instanceof I18nService).toBeTruthy();
+	});
+
 	it('Check the translation of a key in english', (done) => {
 		service.use('en-US')
 			.subscribe(() => {
@@ -173,6 +178,25 @@ describe('Translate Service', () => {
 				service.setStaticBundles({ COMMON_DAY: 'value' });
 				expect(service.instant('COMMON_DAY',))
 					.toBe('value');
+				done();
+			});
+	});
+
+	it('Should be able to get an array translations', (done) => {
+		service.use('es-ES')
+			.subscribe(() => {
+				expect(service.instant(['COMMON_DAY', 'COMMON_YEAR']))
+					.toEqual({ COMMON_DAY: 'Día', COMMON_YEAR: 'Año' });
+				done();
+			});
+	});
+
+	it('Should return an empty value', (done) => {
+		service.use('en-US')
+			.subscribe(() => {
+				service.setTranslation('en-US', { EMPTY: '' });
+				expect(service.instant('EMPTY'))
+					.toBe('');
 				done();
 			});
 	});
