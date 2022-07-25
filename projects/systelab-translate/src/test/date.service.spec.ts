@@ -45,12 +45,14 @@ describe('Date Service', () => {
 	it('Format a date in USA', (done) => {
 		service.use('en-US')
 			.subscribe(() => {
-				const date = new Date();
-				date.setFullYear(2016, 0, 28);
+				const date = getExampleDate();
+				const dateWith1DigitDay = getExampleDate(true);
 				expect(service.formatDate(date))
 					.toBe('1/28/16');
 				expect(service.formatDateFullYear(date))
 					.toBe('01/28/2016');
+				expect(service.formatDateFullYear(dateWith1DigitDay))
+					.toBe('05/01/2016');
 				done();
 			});
 	});
@@ -80,10 +82,7 @@ describe('Date Service', () => {
 	it('Format a time and a date and time', (done) => {
 		service.use('es-ES')
 			.subscribe(() => {
-				const date = new Date();
-				date.setFullYear(2016, 0, 28);
-				date.setHours(21);
-				date.setMinutes(0, 0, 0);
+				const date = getExampleDateTime();
 				expect(service.formatTime(date))
 					.toBe('21:00');
 				expect(service.formatDateTime(date))
@@ -95,10 +94,7 @@ describe('Date Service', () => {
 	it('Format a time and a date and time in USA', (done) => {
 		service.use('en-US')
 			.subscribe(() => {
-				const date = new Date();
-				date.setFullYear(2016, 0, 28);
-				date.setHours(21);
-				date.setMinutes(0, 0, 0);
+				const date = getExampleDateTime();
 				expect(service.formatTime(date))
 					.toBe('09:00 PM');
 				expect(service.formatDateTime(date))
@@ -110,8 +106,7 @@ describe('Date Service', () => {
 	it('Get dates at the begging of the day, at the end and at noon', (done) => {
 		service.use('es-ES')
 			.subscribe(() => {
-				const date = new Date();
-				date.setFullYear(2016, 0, 28);
+				const date = getExampleDate();
 				date.setHours(21);
 				expect(service.formatDateTime(service.getDateFrom(date)))
 					.toBe('28/01/16 00:00');
@@ -126,10 +121,7 @@ describe('Date Service', () => {
 	it('Format a date and time with AM/PM', (done) => {
 		service.use('es-ES')
 			.subscribe(() => {
-				const date = new Date();
-				date.setFullYear(2016, 0, 28);
-				date.setHours(21);
-				date.setMinutes(0, 0, 0);
+				const date = getExampleDateTime();
 				expect(service.formatTime(date))
 					.toBe('21:00');
 				expect(service.formatDateTime(date))
@@ -143,16 +135,16 @@ describe('Date Service', () => {
 	it('Format a date and time in USA with AM/PM', (done) => {
 		service.use('en-US')
 			.subscribe(() => {
-				const date = new Date();
-				date.setFullYear(2016, 0, 28);
-				date.setHours(21);
-				date.setMinutes(0, 0, 0);
+				const date = getExampleDateTime();
+				const dateWithOneDigitDay = getExampleDateTime(true);
 				expect(service.formatTime(date))
 					.toBe('09:00 PM');
 				expect(service.formatDateTime(date))
 					.toBe('1/28/16 09:00 PM');
 				expect(service.formatDateTime(date, false, true))
 					.toBe('1/28/16 09:00:00 PM');
+				expect(service.formatDateTime(dateWithOneDigitDay, false, true))
+					.toBe('5/1/16 09:00:00 PM');
 				done();
 			});
 	});
@@ -180,3 +172,18 @@ describe('Date Service', () => {
 	});
 
 });
+
+function getExampleDate(oneDigitDay = false): Date {
+	const date = new Date();
+	const day = oneDigitDay ? 1 : 28;
+	const month = oneDigitDay ? 4 : 0;
+	date.setFullYear(2016, month, day);
+	return date;
+}
+
+function getExampleDateTime(oneDigitDay = false): Date {
+	const date = getExampleDate(oneDigitDay);
+	date.setHours(21);
+	date.setMinutes(0, 0, 0);
+	return date;
+}
