@@ -3,6 +3,21 @@ import { TestBed } from '@angular/core/testing';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
+const getExampleDate = (oneDigitDay = false): Date => {
+	const date = new Date();
+	const day = oneDigitDay ? 1 : 28;
+	const month = oneDigitDay ? 4 : 0;
+	date.setFullYear(2016, month, day);
+	return date;
+}
+
+const getExampleDateTime = (oneDigitDay = false): Date => {
+	const date = getExampleDate(oneDigitDay);
+	date.setHours(21);
+	date.setMinutes(0, 0, 0);
+	return date;
+}
+
 describe('Date Service', () => {
 	let service: I18nService;
 
@@ -172,18 +187,3 @@ describe('Date Service', () => {
 	});
 
 });
-
-function getExampleDate(oneDigitDay = false): Date {
-	const date = new Date();
-	const day = oneDigitDay ? 1 : 28;
-	const month = oneDigitDay ? 4 : 0;
-	date.setFullYear(2016, month, day);
-	return date;
-}
-
-function getExampleDateTime(oneDigitDay = false): Date {
-	const date = getExampleDate(oneDigitDay);
-	date.setHours(21);
-	date.setMinutes(0, 0, 0);
-	return date;
-}
