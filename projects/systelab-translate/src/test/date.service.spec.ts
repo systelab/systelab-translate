@@ -9,14 +9,14 @@ const getExampleDate = (oneDigitDay = false): Date => {
 	const month = oneDigitDay ? 4 : 0;
 	date.setFullYear(2016, month, day);
 	return date;
-}
+};
 
 const getExampleDateTime = (oneDigitDay = false): Date => {
 	const date = getExampleDate(oneDigitDay);
 	date.setHours(21);
 	date.setMinutes(0, 0, 0);
 	return date;
-}
+};
 
 describe('Date Service', () => {
 	let service: I18nService;
