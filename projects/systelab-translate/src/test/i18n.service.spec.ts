@@ -333,7 +333,7 @@ describe('Translate Service', () => {
 				});
 	});
 
-	it('Check the translation of a key in spanish', (done) => {
+	it('Check using reloadLanguage the translation of a key in spanish', (done) => {
 		service.use('es-ES')
 			.pipe(
 				switchMap(()=>service.reloadLanguage('es-ES'))

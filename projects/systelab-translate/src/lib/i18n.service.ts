@@ -38,7 +38,7 @@ export class I18nService {
 		return this.translateService.getBrowserLang();
 	}
 
-	public reloadLanguage(lang:string): Observable<any> {
+	public reloadLanguage(lang: string): Observable<any> {
 		return this.translateService.reloadLang(lang);
 	}
 
