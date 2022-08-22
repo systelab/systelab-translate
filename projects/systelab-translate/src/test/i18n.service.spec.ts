@@ -2,6 +2,7 @@ import { httpLoaderFactory, I18nService } from '../public-api';
 import { TestBed } from '@angular/core/testing';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { switchMap } from 'rxjs/operators';
 
 describe('Translate Service', () => {
 	let service: I18nService;
@@ -318,4 +319,29 @@ describe('Translate Service', () => {
 			});
 	});
 
+	it('Check using reloadLanguage the translation of a key in english', (done) => {
+		service.use('en-US')
+			.pipe(
+				switchMap(()=>service.reloadLanguage('en-US'))
+			)
+			.subscribe(() => {
+					expect(service.instant('COMMON_DAY'))
+						.toBe('Day');
+					done();
+				},
+				(error) => {
+				});
+	});
+
+	it('Check the translation of a key in spanish', (done) => {
+		service.use('es-ES')
+			.pipe(
+				switchMap(()=>service.reloadLanguage('es-ES'))
+			)
+			.subscribe(() => {
+				expect(service.instant('COMMON_DAY'))
+					.toBe('Día');
+				done();
+			});
+	});
 });
