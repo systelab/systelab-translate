@@ -38,6 +38,10 @@ export class I18nService {
 		return this.translateService.getBrowserLang();
 	}
 
+	public reloadLanguage(lang: string): Observable<any> {
+		return this.translateService.reloadLang(lang);
+	}
+
 	public setTranslation(locale: string, translations: Object): void {
 		this.translateService.setTranslation(locale, translations, false);
 	}

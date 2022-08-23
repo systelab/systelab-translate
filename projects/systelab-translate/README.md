@@ -29,6 +29,12 @@ If you want to get the browser language, call the method:
 this.i18nService.getBrowserLang()
 ```
 
+If you want to force reloading a language
+
+```javascript
+ this.i18nService.reloadLanguage('en-US').subscribe(() => console.log('Translations for American English reloaded.'));
+```
+
 ### Translate
 
 There are two convenient methods to set or append new keys to an specific locale:
