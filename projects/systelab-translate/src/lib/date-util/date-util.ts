@@ -86,12 +86,12 @@ export class DateUtil {
 		}
 	}
 
-	public getDateFormat(isFullYear = false): string {
-		return this.getLocalizedStringDateFormat(this.locale, isFullYear);
+	public getDateFormat(fullDateFormat = false): string {
+		return this.getLocalizedStringDateFormat(this.locale, fullDateFormat);
 	}
 
-	public getDateFormatForDatePicker(isFullYear = false): string {
-		return this.getLocalizedDateFormatForDatePicker(this.locale, isFullYear);
+	public getDateFormatForDatePicker(fullDateFormat = false): string {
+		return this.getLocalizedDateFormatForDatePicker(this.locale, fullDateFormat);
 	}
 
 	public getFirstDayOfWeek(): number {
@@ -160,15 +160,15 @@ export class DateUtil {
 			['sk-SK', sk], ['ru', ru], ['ru-RU', ru], ['zh', zhCN], ['zh-CN', zhCN], ['de', de], ['de-DE', de],
 			['th', th], ['th-TH', th], ['ja', ja], ['ja-JA', ja], ['ko', ko], ['ko-KR', ko], ['nl', nl], ['nl-NL', nl],
 		]);
-		const locale: Locale = localeForSystelabLocale.get(localeString)
+		const locale: Locale = localeForSystelabLocale.get(localeString);
 		return locale ? locale : enUS;
 	}
 
-	private getLocalizedStringDateFormat(locale: string, isFullYear = false): string {
-		const year = isFullYear ? 'yyyy' : 'yy';
+	private getLocalizedStringDateFormat(locale: string, fullDateFormat = false): string {
+		const year = fullDateFormat ? 'yyyy' : 'yy';
 		switch (locale) {
 			case 'en-US':
-				return isFullYear ? `MM/dd/${year}` : `M/d/${year}`;
+				return fullDateFormat ? `MM/dd/${year}` : `M/d/${year}`;
 			case 'ko-KO':
 				return `${year}. M. d`;
 			case 'pl-PL':
@@ -194,11 +194,11 @@ export class DateUtil {
 		}
 	}
 
-	private getLocalizedDateFormatForDatePicker(locale: string, isFullYear = false): string {
-		const year = isFullYear ? 'yy' : 'y';
+	private getLocalizedDateFormatForDatePicker(locale: string, fullDateFormat = false): string {
+		const year = fullDateFormat ? 'yy' : 'y';
 		switch (locale) {
 			case 'en-US':
-				return isFullYear ? `mm/dd/${year}` : `m/d/${year}`;
+				return fullDateFormat ? `mm/dd/${year}` : `m/d/${year}`;
 			case 'ko-KO':
 				return `${year}. m. d`;
 			case 'pl-PL':
