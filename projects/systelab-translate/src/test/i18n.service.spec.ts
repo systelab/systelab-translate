@@ -40,7 +40,7 @@ describe('Translate Service', () => {
 					.toBe('Day');
 				done();
 			},
-				(error) => {
+				() => {
 				});
 	});
 
@@ -329,7 +329,7 @@ describe('Translate Service', () => {
 						.toBe('Day');
 					done();
 				},
-				(error) => {
+				() => {
 				});
 	});
 
