@@ -19,6 +19,16 @@ const getExampleDateTime = (oneDigitDay = false): Date => {
 	return date;
 };
 
+const expectGetDateFormatForDatePicker = (locale: string, expectedDateFormat: string): void => {
+	const dateUtil = new DateUtil(locale);
+	expect(dateUtil.getDateFormatForDatePicker()).toBe(expectedDateFormat);
+};
+
+const expectGetDateFormat = (locale: string, expectedDateFormat: string): void => {
+	const dateUtil = new DateUtil(locale);
+	expect(dateUtil.getDateFormat()).toBe(expectedDateFormat);
+};
+
 describe('Date Service', () => {
 	let service: I18nService;
 
@@ -59,54 +69,40 @@ describe('Date Service', () => {
 	});
 
 	it('Format a date for Datepicker', done => {
-		const expectations = {
-			'en-US': 'm/d/y',
-			'ko-KO': 'y. m. d',
-			'pl-PL': 'y-mm-dd',
-			'lt-LT': 'y-mm-dd',
-			'pt-PT': 'dd-mm-y',
-			'pt-BR': 'dd-mm-y',
-			'nl-NL': 'dd-mm-y',
-			'sk-SK': 'd.m.y',
-			'ru-RU': 'd.m.y',
-			'zh-CN': 'y-m-d',
-			'de-DE': 'dd.mm.y',
-			'th-TH': 'd/m/y',
-			'ja-JA': 'y/mm/dd',
-			'es-ES': 'dd/mm/y',
-			'ca-ES': 'dd/mm/y',
-		};
-		const dateUtil = new DateUtil('en-US');
-		Object.keys(expectations).forEach(key => {
-			dateUtil.setLocale(key);
-			expect(dateUtil.getDateFormatForDatePicker()).toBe(expectations[key]);
-		});
+		expectGetDateFormatForDatePicker('en-US', 'm/d/y');
+		expectGetDateFormatForDatePicker('ko-KO', 'y. m. d');
+		expectGetDateFormatForDatePicker('pl-PL', 'y-mm-dd');
+		expectGetDateFormatForDatePicker('lt-LT', 'y-mm-dd');
+		expectGetDateFormatForDatePicker('pt-PT', 'dd-mm-y');
+		expectGetDateFormatForDatePicker('pt-BR', 'dd-mm-y');
+		expectGetDateFormatForDatePicker('nl-NL', 'dd-mm-y');
+		expectGetDateFormatForDatePicker('sk-SK', 'd.m.y');
+		expectGetDateFormatForDatePicker('ru-RU', 'd.m.y');
+		expectGetDateFormatForDatePicker('zh-CN', 'y-m-d');
+		expectGetDateFormatForDatePicker('de-DE', 'dd.mm.y');
+		expectGetDateFormatForDatePicker('th-TH', 'd/m/y');
+		expectGetDateFormatForDatePicker('ja-JA', 'y/mm/dd');
+		expectGetDateFormatForDatePicker('es-ES', 'dd/mm/y');
+		expectGetDateFormatForDatePicker('ca-ES', 'dd/mm/y');
 		done();
 	});
 
 	it('Localized String Date Format', done => {
-		const expectations = {
-			'en-US': 'M/d/yy',
-			'ko-KO': 'yy. M. d',
-			'pl-PL': 'yy-MM-dd',
-			'lt-LT': 'yy-MM-dd',
-			'pt-PT': 'dd-MM-yy',
-			'pt-BR': 'dd-MM-yy',
-			'nl-NL': 'dd-MM-yy',
-			'sk-SK': 'd.M.yy',
-			'ru-RU': 'd.M.yy',
-			'zh-ZH': 'yy-M-d',
-			'de-DE': 'dd.MM.yy',
-			'th-TH': 'd/M/yy',
-			'ja-JA': 'yy/MM/dd',
-			'es-ES': 'dd/MM/yy',
-			'ca-ES': 'dd/MM/yy',
-		};
-		const dateUtil = new DateUtil('en-US');
-		Object.keys(expectations).forEach(key => {
-			dateUtil.setLocale(key);
-			expect(dateUtil.getDateFormat()).toBe(expectations[key]);
-		});
+		expectGetDateFormat('en-US', 'M/d/yy');
+		expectGetDateFormat('ko-KO', 'yy. M. d');
+		expectGetDateFormat('pl-PL', 'yy-MM-dd');
+		expectGetDateFormat('lt-LT', 'yy-MM-dd');
+		expectGetDateFormat('pt-PT', 'dd-MM-yy');
+		expectGetDateFormat('pt-BR', 'dd-MM-yy');
+		expectGetDateFormat('nl-NL', 'dd-MM-yy');
+		expectGetDateFormat('sk-SK', 'd.M.yy');
+		expectGetDateFormat('ru-RU', 'd.M.yy');
+		expectGetDateFormat('zh-ZH', 'yy-M-d');
+		expectGetDateFormat('de-DE', 'dd.MM.yy');
+		expectGetDateFormat('th-TH', 'd/M/yy');
+		expectGetDateFormat('ja-JA', 'yy/MM/dd');
+		expectGetDateFormat('es-ES', 'dd/MM/yy');
+		expectGetDateFormat('ca-ES', 'dd/MM/yy');
 		done();
 	});
 
