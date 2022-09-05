@@ -2,6 +2,7 @@ import { httpLoaderFactory, I18nService } from '../public-api';
 import { TestBed } from '@angular/core/testing';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {DateUtil} from '../lib/date-util/date-util';
 
 const getExampleDate = (oneDigitDay = false): Date => {
 	const date = new Date();
@@ -55,6 +56,58 @@ describe('Date Service', () => {
 					.toBe('28 ene');
 				done();
 			});
+	});
+
+	it('Format a date for Datepicker', done => {
+		const expectations = {
+			'en-US': 'm/d/y',
+			'ko-KO': 'y. m. d',
+			'pl-PL': 'y-mm-dd',
+			'lt-LT': 'y-mm-dd',
+			'pt-PT': 'dd-mm-y',
+			'pt-BR': 'dd-mm-y',
+			'nl-NL': 'dd-mm-y',
+			'sk-SK': 'd.m.y',
+			'ru-RU': 'd.m.y',
+			'zh-CN': 'y-m-d',
+			'de-DE': 'dd.mm.y',
+			'th-TH': 'd/m/y',
+			'ja-JA': 'y/mm/dd',
+			'es-ES': 'dd/mm/y',
+			'ca-ES': 'dd/mm/y',
+		};
+		const dateUtil = new DateUtil('en-US');
+		Object.keys(expectations).forEach(key => {
+			dateUtil.setLocale(key);
+			expect(dateUtil.getDateFormatForDatePicker()).toBe(expectations[key]);
+		});
+		done();
+	});
+
+	it('Localized String Date Format', done => {
+		const expectations = {
+			'en-US': 'M/d/yy',
+			'ko-KO': 'yy. M. d',
+			'pl-PL': 'yy-MM-dd',
+			'lt-LT': 'yy-MM-dd',
+			'pt-PT': 'dd-MM-yy',
+			'pt-BR': 'dd-MM-yy',
+			'nl-NL': 'dd-MM-yy',
+			'sk-SK': 'd.M.yy',
+			'ru-RU': 'd.M.yy',
+			'zh-ZH': 'yy-M-d',
+			'de-DE': 'dd.MM.yy',
+			'th-TH': 'd/M/yy',
+			'ja-JA': 'yy/MM/dd',
+			'es-ES': 'dd/MM/yy',
+			'ca-ES': 'dd/MM/yy',
+		};
+		const dateUtil = new DateUtil('en-US');
+		Object.keys(expectations).forEach(key => {
+			dateUtil.setLocale(key);
+			expect(dateUtil.getDateFormat()).toBe(expectations[key]);
+		});
+		done();
 	});
 
 	it('Format a date in USA', (done) => {
