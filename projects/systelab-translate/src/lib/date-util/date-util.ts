@@ -35,9 +35,9 @@ export class DateUtil {
 		if (!date) {
 			return undefined;
 		}
-		const formatedDate = (fullYear) ? this.formatDateFullYear(date) : this.formatDate(date);
-		const formatedHour = this.formatTime(date, withSeconds);
-		return formatedDate + ' ' + formatedHour;
+		const formattedDate = (fullYear) ? this.formatDateFullYear(date) : this.formatDate(date);
+		const formattedHour = this.formatTime(date, withSeconds);
+		return formattedDate + ' ' + formattedHour;
 	}
 
 	public formatMonthAndYear(date: Date): string {
@@ -86,100 +86,12 @@ export class DateUtil {
 		}
 	}
 
-	public getDateFormat(isFullYear = false): string {
-		let stringDateFormat = '';
-		switch (this.locale) {
-			case 'en-US':
-				stringDateFormat = 'M/d/yy';
-				break;
-			case 'ko-KO':
-				stringDateFormat = 'yy. M. d';
-				break;
-			case 'pl-PL':
-			case 'lt-LT':
-				stringDateFormat = 'yy-MM-dd';
-				break;
-			case 'pt-PT':
-			case 'pt-BR':
-			case 'nl-NL':
-				stringDateFormat = 'dd-MM-yy';
-				break;
-			case 'sk-SK':
-			case 'ru-RU':
-				stringDateFormat = 'd.M.yy';
-				break;
-			case 'zh-ZH':
-				stringDateFormat = 'yy-M-d';
-				break;
-			case 'de-DE':
-				stringDateFormat = 'dd.MM.yy';
-				break;
-			case 'th-TH':
-				stringDateFormat = 'd/M/yy';
-				break;
-			case 'ja-JA':
-				stringDateFormat = 'yy/MM/dd';
-				break;
-			default:
-				stringDateFormat = 'dd/MM/yy';
-				break;
-		}
-		if (isFullYear) {
-			stringDateFormat = stringDateFormat.replace('yy', 'yyyy');
-			if (this.locale === 'en-US') {
-				stringDateFormat = stringDateFormat.replace('M', 'MM');
-				stringDateFormat = stringDateFormat.replace('D', 'dd');
-			}
-		}
-		return stringDateFormat;
+	public getDateFormat(fullDateFormat = false): string {
+		return this.getLocalizedStringDateFormat(this.locale, fullDateFormat);
 	}
 
-	public getDateFormatForDatePicker(isFullYear = false): string {
-		let stringDateFormat = '';
-		switch (this.locale) {
-			case 'en-US':
-				stringDateFormat = 'm/d/y';
-				break;
-			case 'ko-KO':
-				stringDateFormat = 'y. m. d';
-				break;
-			case 'pl-PL':
-			case 'lt-LT':
-				stringDateFormat = 'y-mm-dd';
-				break;
-			case 'pt-PT':
-			case 'pt-BR':
-			case 'nl-NL':
-				stringDateFormat = 'dd-mm-y';
-				break;
-			case 'sk-SK':
-			case 'ru-RU':
-				stringDateFormat = 'd.m.y';
-				break;
-			case 'zh-CN':
-				stringDateFormat = 'y-m-d';
-				break;
-			case 'de-DE':
-				stringDateFormat = 'dd.mm.y';
-				break;
-			case 'th-TH':
-				stringDateFormat = 'd/m/y';
-				break;
-			case 'ja-JA':
-				stringDateFormat = 'y/mm/dd';
-				break;
-			default:
-				stringDateFormat = 'dd/mm/y';
-				break;
-		}
-		if (isFullYear) {
-			stringDateFormat = stringDateFormat.replace('y', 'yy');
-			if (this.locale === 'en-US') {
-				stringDateFormat = stringDateFormat.replace('m', 'mm');
-				stringDateFormat = stringDateFormat.replace('d', 'dd');
-			}
-		}
-		return stringDateFormat;
+	public getDateFormatForDatePicker(fullDateFormat = false): string {
+		return this.getLocalizedDateFormatForDatePicker(this.locale, fullDateFormat);
 	}
 
 	public getFirstDayOfWeek(): number {
@@ -248,7 +160,67 @@ export class DateUtil {
 			['sk-SK', sk], ['ru', ru], ['ru-RU', ru], ['zh', zhCN], ['zh-CN', zhCN], ['de', de], ['de-DE', de],
 			['th', th], ['th-TH', th], ['ja', ja], ['ja-JA', ja], ['ko', ko], ['ko-KR', ko], ['nl', nl], ['nl-NL', nl],
 		]);
-		const locale: Locale = localeForSystelabLocale.get(localeString)
+		const locale: Locale = localeForSystelabLocale.get(localeString);
 		return locale ? locale : enUS;
+	}
+
+	private getLocalizedStringDateFormat(locale: string, fullDateFormat = false): string {
+		const year = fullDateFormat ? 'yyyy' : 'yy';
+		switch (locale) {
+			case 'en-US':
+				return fullDateFormat ? `MM/dd/${year}` : `M/d/${year}`;
+			case 'ko-KO':
+				return `${year}. M. d`;
+			case 'pl-PL':
+			case 'lt-LT':
+				return `${year}-MM-dd`;
+			case 'pt-PT':
+			case 'pt-BR':
+			case 'nl-NL':
+				return `dd-MM-${year}`;
+			case 'sk-SK':
+			case 'ru-RU':
+				return `d.M.${year}`;
+			case 'zh-ZH':
+				return `${year}-M-d`;
+			case 'de-DE':
+				return `dd.MM.${year}`;
+			case 'th-TH':
+				return `d/M/${year}`;
+			case 'ja-JA':
+				return `${year}/MM/dd`;
+			default:
+				return `dd/MM/${year}`;
+		}
+	}
+
+	private getLocalizedDateFormatForDatePicker(locale: string, fullDateFormat = false): string {
+		const year = fullDateFormat ? 'yy' : 'y';
+		switch (locale) {
+			case 'en-US':
+				return fullDateFormat ? `mm/dd/${year}` : `m/d/${year}`;
+			case 'ko-KO':
+				return `${year}. m. d`;
+			case 'pl-PL':
+			case 'lt-LT':
+				return `${year}-mm-dd`;
+			case 'pt-PT':
+			case 'pt-BR':
+			case 'nl-NL':
+				return `dd-mm-${year}`;
+			case 'sk-SK':
+			case 'ru-RU':
+				return `d.m.${year}`;
+			case 'zh-CN':
+				return `${year}-m-d`;
+			case 'de-DE':
+				return `dd.mm.${year}`;
+			case 'th-TH':
+				return `d/m/${year}`;
+			case 'ja-JA':
+				return `${year}/mm/dd`;
+			default:
+				return `dd/mm/${year}`;
+		}
 	}
 }
