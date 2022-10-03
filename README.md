@@ -80,7 +80,7 @@ The following steps should be consider when migrating from version 6.
 -   [Typed Angular Forms](https://angular.io/guide/typed-forms)
 -   Streamlined page title accessibility
 -   Extended developer diagnostics
--   Catch the invalid “Banana in a box” error on your two-way data bindings: writing **([])** instead of **[()]**
+-   Catch the invalid “Banana in a box” error on your two-way data bindings
 -   Catch nullish coalescing on non-nullable values in Angular templates
 -   Bind to protected component members directly from the templates
 -   Optional injectors in Embedded Views
