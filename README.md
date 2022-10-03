@@ -80,7 +80,7 @@ The following steps should be consider when migrating from version 6.
 -   [Typed Angular Forms](https://angular.io/guide/typed-forms)
 -   Streamlined page title accessibility
 -   Extended developer diagnostics
--   Catch the invalid “Banana in a box” error on your two-way data bindings: writing _([])_ instead of _[()]_
+-   Catch the invalid “Banana in a box” error on your two-way data bindings: writing **([])** instead of **[()]**
 -   Catch nullish coalescing on non-nullable values in Angular templates
 -   Bind to protected component members directly from the templates
 -   Optional injectors in Embedded Views
@@ -93,7 +93,6 @@ The following steps should be consider when migrating from version 6.
 IE11 support has been deprecated due to the upgrade to Angular 12
 
 Use of [Ivy](https://angular.io/guide/ivy), applications that uses this library have to use Angular 12 and Ivy rendering.
-
 
 Added --noImplicitOverride flag to allow override methods and get error for unintentionally overrides 
 https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-3.html#override-and-the---noimplicitoverride-flag
