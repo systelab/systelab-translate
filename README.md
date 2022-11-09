@@ -46,7 +46,7 @@ Read the [provided documentation](https://github.com/systelab/systelab-translate
 Few changes where introduce in version 7 in order to standardize the library and support Angular 9.
 The following steps should be consider when migrating from version 6.
 
- 1.  When importing the module do not use .forRoot(); In Webstorm, replace in path:
+ 1. When importing the module do not use .forRoot(); In Webstorm, replace in path:
 ```javascript
 - SystelabTranslateModule.forRoot\(\)
 - SystelabTranslateModule
