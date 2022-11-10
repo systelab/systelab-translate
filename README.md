@@ -51,7 +51,7 @@ The following steps should be consider when migrating from version 6.
 - SystelabTranslateModule.forRoot\(\)
 - SystelabTranslateModule
 ```
-2.  When importing services and modules import them from systelab-translate root. In Webstorm, replace in path:
+2. When importing services and modules import them from systelab-translate root. In Webstorm, replace in path:
 ```javascript
 - from 'systelab-translate/lib.+
 - from 'systelab-translate';
