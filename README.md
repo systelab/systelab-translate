@@ -101,7 +101,7 @@ There's few changes related to pipes:
 -  Some pipes (decimal, percent, currency, date, etc) now explicitly state which types are accepted.
 -  The slice pipe now returns null for the undefined input value, which is consistent with the behavior of most pipes.
 -  The async pipe no longer claims to return undefined for an input that was typed as undefined. Note that the code actually returned null on undefined inputs
--  The uppercase and lowercase pipes no longer let falsy values through. They now map both null and undefined to null and raise an exception on invalid input (0, false, NaN). This matches other Angular pipes.
+-  The uppercase and lowercase pipes no longer let falsy values through. They now map both null and undefined to null and raise an exception on invalid input (0, false, NaN). This matches other Angular pipes
 
 ### Version 8
 
