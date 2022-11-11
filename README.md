@@ -38,7 +38,7 @@ Library will be published at: https://www.npmjs.com/package/systelab-translate
 
 ## Documentation
 
-Read the [provided documentation](https://github.com/systelab/systelab-translate/blob/master/projects/systelab-translate/README.md) to use the library.
+Read the [provided documentation](https://github.com/systelab/systelab-translate/blob/master/projects/systelab-translate/README.md) to use the library
 
 ## Breaking changes
 
