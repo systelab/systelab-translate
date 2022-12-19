@@ -19,10 +19,10 @@
   },
   "private": false,
   "peerDependencies": {
-    "@angular/common": ">=14.0.0 <15.0.0",
-    "@angular/core": ">=14.0.0 <15.0.0",
-    "@ngx-translate/core": ">=13.0.0 <14.0.0",
-    "@ngx-translate/http-loader": ">=6.0.0 <7.0.0",
+    "@angular/common": ">=15.0.0 <16.0.0",
+    "@angular/core": ">=15.0.0 <16.0.0",
+    "@ngx-translate/core": ">=14.0.0 <15.0.0",
+    "@ngx-translate/http-loader": ">=7.0.0 <8.0.0",
     "date-fns": ">=2.0.0 <3.0.0"
   }
 }
