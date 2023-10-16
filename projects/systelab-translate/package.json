@@ -1,5 +1,7 @@
 {
   "name": "systelab-translate",
+  "version": "16.0.1",
+  "license": "MIT",
   "description": "The internationalization (i18n) library for Systelab",
   "keywords": [
     "Angular",
@@ -7,8 +9,6 @@
     "Translate",
     "i18n"
   ],
-  "version": "15.0.0",
-  "license": "MIT",
   "homepage": "https://github.com/systelab/systelab-translate.git",
   "repository": {
     "type": "git",
