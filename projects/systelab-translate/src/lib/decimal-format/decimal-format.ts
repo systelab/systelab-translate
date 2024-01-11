@@ -111,7 +111,7 @@ export class DecimalFormat {
 			// toFixed method has bugs on IE (0.7 --> 0)
 			fracStr = num.toString(10)
 				.substr(2);
-			var c = (num >= 1) ? 1 : 0; //carry
+			var c = (Number(num) >= 1) ? 1 : 0; //carry
 			var x, i = intStr.length - 1;
 			while (c) { //increment intStr
 				if (i == -1) {
