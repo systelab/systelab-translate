@@ -24,7 +24,7 @@
     "date-fns": "2.30.0",
     "rxjs": "7.8.1",
     "tslib": "^2.1.0",
-    "zone.js": "0.13.3"
+    "zone.js": "0.14.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "16.2.6",
