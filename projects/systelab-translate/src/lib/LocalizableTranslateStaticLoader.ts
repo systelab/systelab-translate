@@ -30,8 +30,8 @@ export class LocalizableTranslateStaticLoader implements TranslateLoader {
 
 	public getTranslation(locale: string): Observable<any> {
 		// If the execution is from testing the http access can be avoided with mock translations
-		if (globalThis.jasmine?.translations) {
-			return observableOf(globalThis.jasmine?.translations);
+		if (globalThis.jasmine && globalThis.jasmine['translations']) {
+			return observableOf(globalThis.jasmine['translations']);
 		}
 
 		const language: string = locale.split('-')[0];
