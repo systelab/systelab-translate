@@ -191,9 +191,9 @@ This pipe can be used from any component through the method transform.
 
 ### Mock translations for testing
 The translations can be passed from jasmine tests to avoid http access. In test.ts add this:
-It can be an empty array to test only the keys.
+It can be an empty object to test only the keys.
 
 ```javascript
-jasmine['translations'] = translationsArray;
+jasmine['translations'] = translationsObject;
 ```
 
