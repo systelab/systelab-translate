@@ -1,6 +1,6 @@
 {
   "name": "systelab-translate",
-  "version": "17.0.0",
+  "version": "17.0.1",
   "license": "MIT",
   "description": "The internationalization (i18n) library for Systelab",
   "keywords": [
