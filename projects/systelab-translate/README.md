@@ -188,3 +188,12 @@ Returns the value rounded to 2 decimals, % as units and < as the previous symbol
 public transform(value: number, precision?: string, units?: string, priorSymbol?: string, defaultSymbolWhenNull?): string
 ```
 This pipe can be used from any component through the method transform.
+
+### Mock translations for testing
+The translations can be passed from jasmine tests to avoid http access. In test.ts add this:
+It can be an empty object to test only the keys.
+
+```javascript
+jasmine['translations'] = translationsObject;
+```
+

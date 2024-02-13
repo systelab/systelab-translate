@@ -10,7 +10,6 @@ export class LocalizableTranslateStaticLoader implements TranslateLoader {
 	protected prefix = '';
 
 	constructor(private http: HttpClient, private location: Location) {
-
 		if (!(window.location.pathname === '/' || window.location.pathname === '/context.html')) {
 			this.prefix = window.location.pathname;
 			if (this.prefix.endsWith('index.html')) {
@@ -30,6 +29,11 @@ export class LocalizableTranslateStaticLoader implements TranslateLoader {
 	}
 
 	public getTranslation(locale: string): Observable<any> {
+		// If the execution is from testing the http access can be avoided with mock translations
+		if (globalThis.jasmine && globalThis.jasmine['translations']) {
+			return observableOf(globalThis.jasmine['translations']);
+		}
+
 		const language: string = locale.split('-')[0];
 		const country: string = locale.split('-')[1];
 

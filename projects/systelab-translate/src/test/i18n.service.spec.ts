@@ -344,4 +344,38 @@ describe('Translate Service', () => {
 				done();
 			});
 	});
+
+	describe('Mocking translations for testing', ()=> {
+		beforeAll(()=> {
+			jasmine['translations'] = {
+				'COMMON_DAY': 'Mock Day'
+			};
+		});
+
+		afterAll(()=>{
+			delete jasmine['translations'];
+		});
+
+		it('Check the translation of a key in mocked translation', (done) => {
+			service.use('en-US')
+				.subscribe(() => {
+						expect(service.instant('COMMON_DAY'))
+							.toBe('Mock Day');
+						done();
+					},
+					() => {
+					});
+		});
+
+		it('Check the translation of a not existing key in mocked translation', (done) => {
+			service.use('en-US')
+				.subscribe(() => {
+						expect(service.instant('NO_TRANSLATION'))
+							.toBe('NO_TRANSLATION');
+						done();
+					},
+					() => {
+					});
+		});
+	});
 });
