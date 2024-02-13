@@ -348,13 +348,13 @@ describe('Translate Service', () => {
 	describe('Mocking translations for testing', ()=> {
 		beforeAll(()=> {
 			jasmine['translations'] = {
-				COMMON_DAY: 'Mock Day'
+				'COMMON_DAY': 'Mock Day'
 			};
 		});
 
 		afterAll(()=>{
 			delete jasmine['translations'];
-		})
+		});
 
 		it('Check the translation of a key in mocked translation', (done) => {
 			service.use('en-US')
