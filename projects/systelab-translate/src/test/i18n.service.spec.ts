@@ -1,7 +1,7 @@
 import { httpLoaderFactory, I18nService } from '../public-api';
 import { TestBed } from '@angular/core/testing';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { switchMap } from 'rxjs/operators';
 
 describe('Translate Service', () => {
@@ -10,17 +10,15 @@ describe('Translate Service', () => {
 	beforeEach(() => {
 
 		TestBed.configureTestingModule({
-			imports: [
-				HttpClientModule,
-				TranslateModule.forRoot({
-					loader: {
-						provide: TranslateLoader,
-						useFactory: httpLoaderFactory,
-						deps: [HttpClient]
-					}
-				})
-			]
-		});
+    imports: [TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: httpLoaderFactory,
+                deps: [HttpClient]
+            }
+        })],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+});
 		service = TestBed.get(I18nService);
 	});
 

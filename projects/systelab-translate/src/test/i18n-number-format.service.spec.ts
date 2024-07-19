@@ -1,7 +1,7 @@
 import { httpLoaderFactory, I18nService } from '../public-api';
 import { TestBed } from '@angular/core/testing';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('Translate Service: Number Format', () => {
 	let service: I18nService;
@@ -9,17 +9,15 @@ describe('Translate Service: Number Format', () => {
 	beforeEach(() => {
 
 		TestBed.configureTestingModule({
-			imports: [
-				HttpClientModule,
-				TranslateModule.forRoot({
-					loader: {
-						provide:    TranslateLoader,
-						useFactory: httpLoaderFactory,
-						deps:       [HttpClient]
-					}
-				})
-			]
-		});
+    imports: [TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: httpLoaderFactory,
+                deps: [HttpClient]
+            }
+        })],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+});
 		service = TestBed.get(I18nService);
 	});
 

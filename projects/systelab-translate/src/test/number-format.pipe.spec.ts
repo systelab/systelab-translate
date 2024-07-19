@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { httpLoaderFactory } from '../public-api';
 import { NumberFormatPipe } from '../public-api';
 import { I18nService } from '../public-api';
@@ -13,19 +13,18 @@ describe('Pipe: NumberFormatPipe', () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			imports:   [
-				HttpClientModule,
-				TranslateModule.forRoot({
-					loader: {
-						provide:    TranslateLoader,
-						useFactory: httpLoaderFactory,
-						deps:       [HttpClient]
-					}
-				})
-			],
-			providers: [
-				DecimalPipe]
-		});
+    imports: [TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: httpLoaderFactory,
+                deps: [HttpClient]
+            }
+        })],
+    providers: [
+        DecimalPipe,
+        provideHttpClient(withInterceptorsFromDi())
+    ]
+});
 		i18nService = TestBed.get(I18nService);
 		decimalPipe = TestBed.get(DecimalPipe);
 		pipe = TestBed.get(NumberFormatPipe);
