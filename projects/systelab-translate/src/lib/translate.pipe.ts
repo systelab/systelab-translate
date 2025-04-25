@@ -3,7 +3,8 @@ import { Injectable, Pipe, PipeTransform } from '@angular/core';
 import { I18nService } from './i18n.service';
 
 @Pipe({
-	name: 'translate'
+    name: 'translate',
+    standalone: false
 })
 @Injectable({
 	providedIn: 'root'

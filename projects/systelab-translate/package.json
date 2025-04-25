@@ -1,6 +1,6 @@
 {
   "name": "systelab-translate",
-  "version": "18.0.0",
+  "version": "19.0.0",
   "license": "MIT",
   "description": "The internationalization (i18n) library for Systelab",
   "keywords": [
@@ -19,8 +19,8 @@
   },
   "private": false,
   "peerDependencies": {
-    "@angular/common": "^18.0.0",
-    "@angular/core": "^18.0.0",
+    "@angular/common": "^19.0.0",
+    "@angular/core": "^19.0.0",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
     "date-fns": "^2.30.0"
