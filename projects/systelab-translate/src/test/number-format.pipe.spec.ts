@@ -25,9 +25,9 @@ describe('Pipe: NumberFormatPipe', () => {
         provideHttpClient(withInterceptorsFromDi())
     ]
 });
-		i18nService = TestBed.get(I18nService);
-		decimalPipe = TestBed.get(DecimalPipe);
-		pipe = TestBed.get(NumberFormatPipe);
+		i18nService = TestBed.inject(I18nService);
+		decimalPipe = TestBed.inject(DecimalPipe);
+		pipe = TestBed.inject(NumberFormatPipe);
 	});
 
 	afterEach(() => {

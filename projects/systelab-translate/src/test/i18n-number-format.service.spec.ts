@@ -18,7 +18,7 @@ describe('Translate Service: Number Format', () => {
         })],
     providers: [provideHttpClient(withInterceptorsFromDi())]
 });
-		service = TestBed.get(I18nService);
+		service = TestBed.inject(I18nService);
 	});
 
 	afterEach(() => {
