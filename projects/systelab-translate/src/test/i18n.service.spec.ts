@@ -247,11 +247,11 @@ describe('Translate Service', () => {
 			.subscribe(() => {
 				service.setStaticBundles({ COMMON_DAY: 'value' });
 				expect(() => service.instant('',))
-					.toThrow(new Error('Parameter "key" required'));
+					.toThrow(new Error('Parameter "key" is required and cannot be empty'));
 				expect(() => service.instant(undefined as any,))
-					.toThrow(new Error('Parameter "key" required'));
+					.toThrow(new Error('Parameter "key" is required and cannot be empty'));
 				expect(() => service.instant(null as any,))
-					.toThrow(new Error('Parameter "key" required'));
+					.toThrow(new Error('Parameter "key" is required and cannot be empty'));
 				done();
 			});
 	});
