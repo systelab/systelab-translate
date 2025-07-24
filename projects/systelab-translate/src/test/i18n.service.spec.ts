@@ -19,7 +19,7 @@ describe('Translate Service', () => {
         })],
     providers: [provideHttpClient(withInterceptorsFromDi())]
 });
-		service = TestBed.get(I18nService);
+		service = TestBed.inject(I18nService);
 	});
 
 	afterEach(() => {
@@ -122,7 +122,7 @@ describe('Translate Service', () => {
 	});
 
 	it('Check a key with one parameters', (done) => {
-		service.use('es-ES')
+		service.use('en-US')
 			.subscribe(() => {
 				expect(service.instant('USER_GENDER', { USER_GENDER: 'Male' }))
 					.toBe('User gender is Male');
@@ -131,7 +131,7 @@ describe('Translate Service', () => {
 	});
 
 	it('Check a key with multiple named parameters', (done) => {
-		service.use('es-ES')
+		service.use('en-US')
 			.subscribe(() => {
 				expect(service.instant('USER_AGE_AND_GENDER', { USER_AGE: 24, USER_GENDER: 'Male' }))
 					.toBe('User age is 24 and gender is Male');
@@ -140,7 +140,7 @@ describe('Translate Service', () => {
 	});
 
 	it('Check a key added on the fly with one parameter', (done) => {
-		service.use('es-ES')
+		service.use('en-US')
 			.subscribe(() => {
 				service.setStaticBundles({ USER_AGE_AND_GENDER: 'User gender is {{USER_GENDER}}' });
 				expect(service.instant('USER_AGE_AND_GENDER', {USER_GENDER: 'Male'} ))
@@ -150,7 +150,7 @@ describe('Translate Service', () => {
 	});
 
 	it('Check a key added on the fly with empty parameters', (done) => {
-		service.use('es-ES')
+		service.use('en-US')
 			.subscribe(() => {
 				service.setStaticBundles({ USER_AGE_AND_GENDER: 'User gender is {{USER_GENDER}}' });
 				expect(service.instant('USER_AGE_AND_GENDER', '' ))
@@ -160,7 +160,7 @@ describe('Translate Service', () => {
 	});
 
 	it('Check a key with multiple named not sorted parameters', (done) => {
-		service.use('es-ES')
+		service.use('en-US')
 			.subscribe(() => {
 				expect(service.instant('USER_AGE_AND_GENDER', { USER_GENDER: 'Male', USER_AGE: 24 }))
 					.toBe('User age is 24 and gender is Male');
@@ -169,7 +169,7 @@ describe('Translate Service', () => {
 	});
 
 	it('Check new static bundles', (done) => {
-		service.use('es-ES')
+		service.use('en-US')
 			.subscribe(() => {
 				service.setStaticBundles({ KEY: 'value' });
 				expect(service.instant('KEY',))
@@ -179,7 +179,7 @@ describe('Translate Service', () => {
 	});
 
 	it('Check new static bundles asynchronously', (done) => {
-		service.use('es-ES')
+		service.use('en-US')
 			.subscribe(() => {
 				service.setStaticBundles({ KEY: 'value' });
 				service.get('KEY')
@@ -247,11 +247,11 @@ describe('Translate Service', () => {
 			.subscribe(() => {
 				service.setStaticBundles({ COMMON_DAY: 'value' });
 				expect(() => service.instant('',))
-					.toThrow(new Error('Parameter "key" required'));
+					.toThrow(new Error('Parameter "key" is required and cannot be empty'));
 				expect(() => service.instant(undefined as any,))
-					.toThrow(new Error('Parameter "key" required'));
+					.toThrow(new Error('Parameter "key" is required and cannot be empty'));
 				expect(() => service.instant(null as any,))
-					.toThrow(new Error('Parameter "key" required'));
+					.toThrow(new Error('Parameter "key" is required and cannot be empty'));
 				done();
 			});
 	});
