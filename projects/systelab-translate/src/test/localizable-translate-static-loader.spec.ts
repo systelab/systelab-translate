@@ -4,7 +4,7 @@ import { Location as AngularLocation } from '@angular/common';
 
 // Test-specific subclass that allows controlling window.location.pathname
 class TestableLoader extends LocalizableTranslateStaticLoader {
-	private mockPathname: string = '/';
+	private mockPathname= '/';
 
 	constructor(http: HttpClient, location: AngularLocation) {
 		super(http, location);
@@ -15,6 +15,11 @@ class TestableLoader extends LocalizableTranslateStaticLoader {
 		this.mockPathname = pathname;
 		// Recalculate the prefix based on the mock pathname
 		this.calculatePrefix();
+	}
+
+	// Override the method that uses window.location.pathname
+	protected getWindowLocationPathname(): string {
+		return this.mockPathname;
 	}
 
 	// Calculate the prefix similar to what the parent class would do
@@ -32,11 +37,6 @@ class TestableLoader extends LocalizableTranslateStaticLoader {
 		} else {
 			this['prefix'] = '/';
 		}
-	}
-
-	// Override the method that uses window.location.pathname
-	protected getWindowLocationPathname(): string {
-		return this.mockPathname;
 	}
 }
 
