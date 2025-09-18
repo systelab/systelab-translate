@@ -1,4 +1,5 @@
-import { forkJoin as observableForkJoin, Observable, of as observableOf } from 'rxjs';
+
+import { Observable, of as observableOf, forkJoin as observableForkJoin } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
@@ -8,7 +9,7 @@ export class LocalizableTranslateStaticLoader implements TranslateLoader {
 
 	protected prefix = '';
 
-	constructor(private http: HttpClient, private location: Location) {
+	constructor(private http: HttpClient, protected location: Location) {
 		if (!(window.location.pathname === '/' || window.location.pathname === '/context.html')) {
 			this.prefix = window.location.pathname;
 			if (this.prefix.endsWith('index.html')) {
