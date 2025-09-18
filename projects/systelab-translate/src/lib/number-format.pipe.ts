@@ -3,7 +3,8 @@ import { I18nService } from './i18n.service';
 import { DecimalPipe } from '@angular/common';
 
 @Pipe({
-	name: 'numberformat'
+    name: 'numberformat',
+    standalone: false
 })
 @Injectable({
 	providedIn: 'root'
