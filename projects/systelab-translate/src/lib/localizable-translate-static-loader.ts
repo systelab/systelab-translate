@@ -1,5 +1,4 @@
-
-import { Observable, of as observableOf, forkJoin as observableForkJoin } from 'rxjs';
+import { forkJoin as observableForkJoin, Observable, of as observableOf } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
@@ -10,8 +9,8 @@ export class LocalizableTranslateStaticLoader implements TranslateLoader {
 	protected prefix = '';
 
 	constructor(private http: HttpClient, protected location: Location) {
-		if (!(window.location.pathname === '/' || window.location.pathname === '/context.html')) {
-			this.prefix = window.location.pathname;
+		if (!(this.getWindowPathname() === '/' || this.getWindowPathname() === '/context.html')) {
+			this.prefix = this.getWindowPathname();
 			if (this.prefix.endsWith('index.html')) {
 				// That's the case of Electron when starting from local file.
 				this.prefix = this.prefix.slice(0, this.prefix.length - 10);
@@ -80,6 +79,10 @@ export class LocalizableTranslateStaticLoader implements TranslateLoader {
 			}
 		}
 		return obj1;
+	}
+
+	private getWindowPathname(): string {
+		return window.location.pathname;
 	}
 
 }
