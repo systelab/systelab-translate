@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { LocalizableTranslateStaticLoader } from './LocalizableTranslateStaticLoader';
+import { LocalizableTranslateStaticLoader } from './localizable-translate-static-loader';
 import { GeneralTranslatePipe } from './translate.pipe';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
