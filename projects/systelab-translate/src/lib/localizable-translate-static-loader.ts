@@ -1,5 +1,4 @@
-
-import { Observable, of as observableOf, forkJoin as observableForkJoin } from 'rxjs';
+import { forkJoin as observableForkJoin, Observable, of as observableOf } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
@@ -9,19 +8,22 @@ export class LocalizableTranslateStaticLoader implements TranslateLoader {
 
 	protected prefix = '';
 
-	constructor(private http: HttpClient, private location: Location) {
-		if (!(window.location.pathname === '/' || window.location.pathname === '/context.html')) {
-			this.prefix = window.location.pathname;
+	constructor(private http: HttpClient, protected location: Location) {
+		if (!(this.getWindowPathname() === '/' || this.getWindowPathname() === '/context.html')) {
+			this.prefix = this.getWindowPathname();
 			if (this.prefix.endsWith('index.html')) {
 				// That's the case of Electron when starting from local file.
-				this.prefix = this.prefix.substr(0, this.prefix.length - 10);
+				this.prefix = this.prefix.slice(0, this.prefix.length - 10);
 			}
 			if (this.prefix.endsWith('/')) {
-				this.prefix = this.prefix.substr(0, this.prefix.length - 1);
+				this.prefix = this.prefix.slice(0, this.prefix.length - 1);
 			}
-			if (this.prefix.endsWith(this.location.path())) {
+			// Check if the URL contains parameters (i.e.: identity provider redirection) and remove them
+			const routePath = this.location.path() ? this.location.path()
+				.split('?')[0] : undefined;
+			if (routePath && this.prefix.endsWith(routePath)) {
 				// When starting from an Angular application route
-				this.prefix = this.prefix.substr(0, this.prefix.length - this.location.path().length);
+				this.prefix = this.prefix.slice(0, this.prefix.length - routePath.length);
 			}
 
 			this.prefix = (this.prefix !== '') ? this.prefix + '/' : '';
@@ -77,6 +79,10 @@ export class LocalizableTranslateStaticLoader implements TranslateLoader {
 			}
 		}
 		return obj1;
+	}
+
+	private getWindowPathname(): string {
+		return window.location.pathname;
 	}
 
 }
