@@ -1,6 +1,8 @@
 import { LocalizableTranslateStaticLoader } from '../public-api';
 import { HttpClient } from '@angular/common/http';
 import { Location as AngularLocation } from '@angular/common';
+import { of } from 'rxjs';
+import { TestBed } from '@angular/core/testing';
 
 describe('LocalizableTranslateStaticLoader Constructor', () => {
 	let httpMock: HttpClient;
@@ -20,7 +22,7 @@ describe('LocalizableTranslateStaticLoader Constructor', () => {
 		LocalizableTranslateStaticLoader.prototype['getWindowPathname'] = originalGetPathname;
 	});
 
-	function createLoader(pathname: string, locationPath: string | null = null): LocalizableTranslateStaticLoader {
+	function createLoader(pathname: string, locationPath: string | null = null, manifestFile: string | null = null): LocalizableTranslateStaticLoader {
 		// Mock location.path()
 		if (locationPath === null) {
 			locationMock.path.and.returnValue('');
@@ -31,7 +33,11 @@ describe('LocalizableTranslateStaticLoader Constructor', () => {
 		// Add a mock method to the class prototype to return our test pathname
 		LocalizableTranslateStaticLoader.prototype['getWindowPathname'] = () => pathname;
 
-		return new LocalizableTranslateStaticLoader(httpMock, locationMock);
+		if(manifestFile === null) {
+			return new LocalizableTranslateStaticLoader(httpMock, locationMock);
+		} else {
+			return new LocalizableTranslateStaticLoader(httpMock, locationMock, manifestFile);
+		}
 	}
 
 	describe('special root paths', () => {
@@ -126,5 +132,82 @@ describe('LocalizableTranslateStaticLoader Constructor', () => {
 			expect(loader['prefix'])
 				.toBe('/app/');
 		});
+	});
+
+	describe('getTranslation with manifest file', () => {
+		it('should use default manifest file when none is provided', () => {
+			const loader = new LocalizableTranslateStaticLoader(httpMock, locationMock, 'manifest.json');
+			expect(loader['manifestFile'])
+				.toBe('manifest.json');
+		});
+
+		it('should use provided manifest file name', () => {
+			const customManifest = 'custom-manifest.json';
+			const loader = new LocalizableTranslateStaticLoader(httpMock, locationMock, customManifest);
+			expect(loader['manifestFile'])
+				.toBe(customManifest);
+		});
+
+		it('should fetch and return bundle if manifest contains MessagesBundle_language', (done) => {
+			httpMock.get = jasmine.createSpy().and.callFake((url: string) => {
+				if (url.endsWith('manifest.json')) {
+					return of({ 'MessagesBundle_en': 'bundle-en.json' });
+				}
+				if (url.endsWith('bundle-en.json')) {
+					return of({ key: 'value' });
+				}
+				return of({});
+			});
+			const loader = new LocalizableTranslateStaticLoader(httpMock, locationMock);
+			(loader as any).getBundlesByManifestFile('en', 'en-US').subscribe(result => {
+				expect(result).toEqual({ key: 'value' });
+				done();
+			});
+		});
+
+		it('should fetch and return bundle if manifest contains MessagesBundle_languageAndCountry', (done) => {
+			httpMock.get = jasmine.createSpy().and.callFake((url: string) => {
+				if (url.endsWith('manifest.json')) {
+					return of({ 'MessagesBundle_en-US': 'bundle-en-US.json' });
+				}
+				if (url.endsWith('bundle-en-US.json')) {
+					return of({ key: 'us-value' });
+				}
+				return of({});
+			});
+			const loader = new LocalizableTranslateStaticLoader(httpMock, locationMock);
+			(loader as any).getBundlesByManifestFile('en', 'en-US').subscribe(result => {
+				expect(result).toEqual({ key: 'us-value' });
+				done();
+			});
+		});
+
+		it('should return an empty object if fetching bundle file fails', (done) => {
+			httpMock.get = jasmine.createSpy().and.callFake((url: string) => {
+				if (url.endsWith('manifest.json')) {
+					return of({ 'MessagesBundle_en': 'bundle-en.json' });
+				}
+				if (url.endsWith('bundle-en.json')) {
+					return { pipe: () => of({}) }; // Simula error y catchError
+				}
+				return of({});
+			});
+			const loader = new LocalizableTranslateStaticLoader(httpMock, locationMock);
+			(loader as any).getBundlesByManifestFile('en', 'en-US').subscribe(result => {
+				expect(result).toEqual({});
+				done();
+			});
+		});
+
+		it('should return an empty object if fetching manifest file fails', (done) => {
+			httpMock.get = jasmine.createSpy().and.returnValue({ pipe: () => of({}) });
+			const loader = new LocalizableTranslateStaticLoader(httpMock, locationMock);
+			(loader as any).getBundlesByManifestFile('en', 'en-US').subscribe(result => {
+				expect(result).toEqual({});
+				done();
+			});
+		});
+
+
 	});
 });
