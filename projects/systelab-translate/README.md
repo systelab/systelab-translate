@@ -91,6 +91,22 @@ Inside each file include a single line for each key and translation. For example
 "COMMON_CODE": "Code to display",
 ```
 
+#### Provide a manifest.json for the translation files
+In order to provide the translation files, you must include a manifest.json file in the /i18n/language and /i18n/error folders.
+This file must include the mapping between the file name and the real file with a hash to avoid browser caching.
+For example:
+
+```json
+{
+  "MessagesBundle_ca": "MessagesBundle_ca.8129f37c.json",
+  "MessagesBundle_en": "MessagesBundle_en.c0bb6f6e.json",
+  "MessagesBundle_es": "MessagesBundle_es.27ec13f7.json",
+  "MessagesBundle_it": "MessagesBundle_it.cb758ccc.json",
+  "MessagesBundle_pt": "MessagesBundle_pt.40e09b1f.json"
+}
+```
+
+
 ### Working with dates
 
 The are some convenient methods to work with dates:
