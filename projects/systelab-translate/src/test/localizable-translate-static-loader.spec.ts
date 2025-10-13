@@ -2,7 +2,6 @@ import { LocalizableTranslateStaticLoader } from '../public-api';
 import { HttpClient } from '@angular/common/http';
 import { Location as AngularLocation } from '@angular/common';
 import { of } from 'rxjs';
-import { TestBed } from '@angular/core/testing';
 
 describe('LocalizableTranslateStaticLoader Constructor', () => {
 	let httpMock: HttpClient;
@@ -22,7 +21,8 @@ describe('LocalizableTranslateStaticLoader Constructor', () => {
 		LocalizableTranslateStaticLoader.prototype['getWindowPathname'] = originalGetPathname;
 	});
 
-	function createLoader(pathname: string, locationPath: string | null = null, manifestFile: string | null = null): LocalizableTranslateStaticLoader {
+	function createLoader(pathname: string, locationPath: string | null = null,
+						  manifestFile: string | null = null): LocalizableTranslateStaticLoader {
 		// Mock location.path()
 		if (locationPath === null) {
 			locationMock.path.and.returnValue('');

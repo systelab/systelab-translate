@@ -74,7 +74,7 @@ export class LocalizableTranslateStaticLoader implements TranslateLoader {
 					}
 					return this.http.get(`${this.prefix}i18n/language/${fileName}`)
 						.pipe(
-							catchError(() => observableOf({})))
+							catchError(() => observableOf({})));
 				}),
 				catchError(() => observableOf({})));
 	}
