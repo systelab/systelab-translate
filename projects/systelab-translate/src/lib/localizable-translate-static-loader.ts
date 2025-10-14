@@ -1,5 +1,5 @@
 import { forkJoin as observableForkJoin, Observable, of as observableOf } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
@@ -8,7 +8,7 @@ export class LocalizableTranslateStaticLoader implements TranslateLoader {
 
 	protected prefix = '';
 
-	constructor(private http: HttpClient, protected location: Location) {
+	constructor(private http: HttpClient, protected location: Location, private manifestFile: string = 'manifest.json') {
 		if (!(this.getWindowPathname() === '/' || this.getWindowPathname() === '/context.html')) {
 			this.prefix = this.getWindowPathname();
 			if (this.prefix.endsWith('index.html')) {
@@ -40,28 +40,67 @@ export class LocalizableTranslateStaticLoader implements TranslateLoader {
 		const country: string = locale.split('-')[1];
 
 		const languageAndCountry: string = language + '_' + country;
-
 		return observableForkJoin([
-			this.http.get(`${this.prefix}i18n/language/MessagesBundle_${language}.json`).pipe(
-				catchError(() => observableOf({}))),
-			this.http.get(`${this.prefix}i18n/language/MessagesBundle_${languageAndCountry}.json`).pipe(
-				catchError(() => observableOf({}))),
-			this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${language}.json`).pipe(
-				catchError(() => observableOf({}))),
-			this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${languageAndCountry}.json`).pipe(
-				catchError(() => observableOf({}))),
-		]).pipe(
-			map((translations: any[]) => {
-				if (translations.length > 0) {
-					let bundles = translations[0];
-					for (let i = 1; i < translations.length; i++) {
-						bundles = this.mergeRecursive(bundles, translations[i]);
+			this.getMessageBundleByLanguage(language),
+			this.getMessageBundleByLanguageAndCountry(languageAndCountry),
+			this.getErrorBundleByLanguage(language),
+			this.getErrorBundleByLanguageAndCountry(languageAndCountry),
+			this.getBundlesByManifestFile(language, languageAndCountry),
+		])
+			.pipe(
+				map((translations: any[]) => {
+					if (translations.length > 0) {
+						let bundles = translations[0];
+						for (let i = 1; i < translations.length; i++) {
+							bundles = this.mergeRecursive(bundles, translations[i]);
+						}
+						return bundles;
+					} else {
+						return observableOf(undefined);
 					}
-					return bundles;
-				} else {
-					return observableOf(undefined);
-				}
-			}));
+				}));
+	}
+
+	private getBundlesByManifestFile(language: string, languageAndCountry: string) {
+		return this.http.get<{ [key: string]: string }>(`${this.prefix}i18n/language/${this.manifestFile}`)
+			.pipe(
+				switchMap(manifest => {
+					if (!manifest) {
+						return observableOf({});
+					}
+					const fileName = manifest[`MessagesBundle_${language}`] || manifest[`MessagesBundle_${languageAndCountry}`];
+					if (!fileName) {
+						return observableOf({});
+					}
+					return this.http.get(`${this.prefix}i18n/language/${fileName}`)
+						.pipe(
+							catchError(() => observableOf({})));
+				}),
+				catchError(() => observableOf({})));
+	}
+
+	private getErrorBundleByLanguageAndCountry(languageAndCountry: string) {
+		return this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${languageAndCountry}.json`)
+			.pipe(
+				catchError(() => observableOf({})));
+	}
+
+	private getErrorBundleByLanguage(language: string) {
+		return this.http.get(`${this.prefix}i18n/error/ErrorsBundle_${language}.json`)
+			.pipe(
+				catchError(() => observableOf({})));
+	}
+
+	private getMessageBundleByLanguageAndCountry(languageAndCountry: string) {
+		return this.http.get(`${this.prefix}i18n/language/MessagesBundle_${languageAndCountry}.json`)
+			.pipe(
+				catchError(() => observableOf({})));
+	}
+
+	private getMessageBundleByLanguage(language: string) {
+		return this.http.get(`${this.prefix}i18n/language/MessagesBundle_${language}.json`)
+			.pipe(
+				catchError(() => observableOf({})));
 	}
 
 	private mergeRecursive(obj1: any, obj2: any) {
