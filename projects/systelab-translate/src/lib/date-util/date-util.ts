@@ -1,4 +1,4 @@
-import { format, setHours, setMilliseconds, setMinutes, setSeconds } from 'date-fns';
+import { format, Locale, setHours, setMilliseconds, setMinutes, setSeconds } from 'date-fns';
 import { ca, de, enGB, enUS, es, fr, gl, it, ja, ko, lt, nl, pl, pt, ru, sk, th, zhCN } from 'date-fns/locale';
 
 export class DateUtil {
