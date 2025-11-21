@@ -1,7 +1,7 @@
 
 import {of as observableOf,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslationObject } from '@ngx-translate/core';
 
 import { DecimalFormat } from './decimal-format/decimal-format'
 import { DateUtil } from './date-util/date-util';
@@ -42,11 +42,11 @@ export class I18nService {
 		return this.translateService.reloadLang(lang);
 	}
 
-	public setTranslation(locale: string, translations: Object): void {
+	public setTranslation(locale: string, translations: TranslationObject): void {
 		this.translateService.setTranslation(locale, translations, false);
 	}
 
-	public appendTranslation(locale: string, translations: Object): void {
+	public appendTranslation(locale: string, translations: TranslationObject): void {
 		this.translateService.setTranslation(locale, translations, true);
 	}
 
